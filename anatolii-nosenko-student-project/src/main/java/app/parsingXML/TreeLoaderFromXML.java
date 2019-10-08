@@ -84,7 +84,7 @@ public class TreeLoaderFromXML {
         }
 
         if (!(node instanceof Text)) {
-            currentItem.setTegName(node.getNodeName());
+            currentItem.setTagName(node.getNodeName());
         } else {
             currentItem.setContent(node.getTextContent());
             return;

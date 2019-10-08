@@ -10,7 +10,7 @@ import java.util.TreeMap;
  */
 public class Item {
     private final int uniqueId;
-    private String tegName;
+    private String tagName;
     private final Map<String, String> attributes;
     private String content;
 
@@ -41,15 +41,23 @@ public class Item {
     }
 
     public void setContent(String content) {
+        if (tagName != null) {
+            throw new AppException("Can't add content, tag name already assigned." +
+                "You should create new item, without tag name.");
+        }
         this.content = content;
     }
 
-    public String getTegName() {
-        return tegName;
+    public String getTagName() {
+        return tagName;
     }
 
-    public void setTegName(String tegName) {
-        this.tegName = tegName;
+    public void setTagName(String tagName) {
+        if (content != null) {
+            throw new AppException("Can't set tag name, content already assigned." +
+                "You should create new item, without content.");
+        }
+        this.tagName = tagName;
     }
 
     public Map<String, String> getAttributes() {

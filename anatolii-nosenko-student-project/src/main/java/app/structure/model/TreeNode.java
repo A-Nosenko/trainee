@@ -2,6 +2,7 @@ package app.structure.model;
 
 import static app.literals.Constants.NEW_LINE;
 import static app.literals.Constants.NULL_ELEMENT;
+import app.structure.exception.AppException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +25,10 @@ public class TreeNode {
     }
 
     boolean add(TreeNode treeNode) {
+        if (item.getContent() != null) {
+            throw new AppException("Item content already assigned. "
+                + "Can't add child node here, item must be without text content.");
+        }
         treeNode.parentTreeNode = this;
         return childTreeNodes.add(treeNode);
     }

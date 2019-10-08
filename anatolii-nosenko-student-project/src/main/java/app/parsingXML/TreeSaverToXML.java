@@ -47,9 +47,9 @@ public class TreeSaverToXML {
             return NULL_ELEMENT;
         }
         StringBuilder builder = new StringBuilder();
-        if (treeNode.getItem().getTegName() != null) {
+        if (treeNode.getItem().getTagName() != null) {
             builder.append(START_TEG);
-            builder.append(treeNode.getItem().getTegName());
+            builder.append(treeNode.getItem().getTagName());
 
             for (Map.Entry<String, String> entry : treeNode.getItem().getAttributes().entrySet()) {
                 builder.append(SPACE);
@@ -69,9 +69,9 @@ public class TreeSaverToXML {
                 builder.append(save(childTreeNode)); // Recursion to pass child nodes.
             }
         }
-        if (treeNode.getItem().getTegName() != null) {
+        if (treeNode.getItem().getTagName() != null) {
             builder.append(CLOSE_START_TEG);
-            builder.append(treeNode.getItem().getTegName());
+            builder.append(treeNode.getItem().getTagName());
             builder.append(END_TEG);
         }
         return builder.toString();

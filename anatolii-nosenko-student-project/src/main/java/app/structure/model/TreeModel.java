@@ -44,7 +44,7 @@ public class TreeModel {
      * @param parent  Parent node item.
      * @param current Item to add in tree.
      * @return True if tree contains node with parent item
-     * and addition was done. False if method can't find parent node.
+     *         and addition was done. False if method can't find parent node.
      */
     public boolean add(Item parent, Item current) throws AppException {
         if (parent == null || current == null) {
