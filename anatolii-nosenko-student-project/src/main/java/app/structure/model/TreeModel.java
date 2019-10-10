@@ -5,11 +5,18 @@ import app.structure.exception.AppException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * Custom Tree structure.
+ */
 public class TreeModel {
     private final Map<String, String> declarationMap = new LinkedHashMap<>();
     private TreeNode root;
     private Searcher searcher;
 
+    /**
+     * Constructor applies realisation of Searcher to find nodes in the Tree.
+     * @param searcher Searcher implementation.
+     */
     public TreeModel(Searcher searcher) {
         this.searcher = searcher;
     }
@@ -31,7 +38,6 @@ public class TreeModel {
 
     /**
      * Base node item establishment.
-     *
      * @param item Root node content.
      */
     public void add(Item item) {
@@ -40,7 +46,6 @@ public class TreeModel {
 
     /**
      * Method to add element as child tree node.
-     *
      * @param parent  Parent node item.
      * @param current Item to add in tree.
      * @return True if tree contains node with parent item
@@ -58,7 +63,8 @@ public class TreeModel {
             throw new AppException("Can't add child node, target is null!");
         }
         if (!targetTreeNode.add(new TreeNode(current))) {
-            throw new AppException("Can't add child in target node with element " + targetTreeNode.getItem());
+            throw new AppException("Can't add child in target node with element "
+                .concat(targetTreeNode.getItem().toString()));
         }
         return true;
     }

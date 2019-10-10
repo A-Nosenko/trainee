@@ -6,18 +6,24 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * Class to represent XML element.
+ * Class to represent element. Fit to hold XML.
+ * Item object have unique id and data.
+ * If object have content value, it can't have tag name and attributes.
+ * May have only content or tag name with attributes.
  */
 public class Item {
-    private final int uniqueId;
+    private final long uniqueId;
     private String tagName;
     private final Map<String, String> attributes;
     private String content;
 
+    /**
+     * Item gets generated unique id in the constructor.
+     */
     public Item() {
         this.uniqueId = IdGenerator.getInstance().getNext();
         attributes = new TreeMap<>();
-        System.out.println("Created " + this.toString());
+        System.out.println("Created ".concat(this.toString()));
     }
 
     public String getAttribute(String key) {
@@ -31,7 +37,10 @@ public class Item {
 
     public String setAttribute(String key, String value) {
         if (key == null || value == null) {
-            throw new AppException("key = " + key + " value = " + value);
+            throw new AppException("key = ".concat(key).concat(" value = ").concat(value));
+        }
+        if (content != null) {
+            throw new AppException("Can't add attribute here, content must be null.");
         }
         return attributes.put(key, value);
     }
@@ -42,8 +51,15 @@ public class Item {
 
     public void setContent(String content) {
         if (tagName != null) {
-            throw new AppException("Can't add content, tag name already assigned." +
-                "You should create new item, without tag name.");
+            throw new AppException(
+                "Can't add content, tag name already assigned. You should create new item, without tag name."
+            );
+        }
+
+        if (attributes.size() > 0) {
+            throw new AppException(
+                "Can't add content, attribute already added. You should create new item, without attributes."
+            );
         }
         this.content = content;
     }
@@ -54,8 +70,8 @@ public class Item {
 
     public void setTagName(String tagName) {
         if (content != null) {
-            throw new AppException("Can't set tag name, content already assigned." +
-                "You should create new item, without content.");
+            throw new AppException("Can't set tag name, content already assigned. You should create new item, without content."
+            );
         }
         this.tagName = tagName;
     }
@@ -64,7 +80,7 @@ public class Item {
         return attributes;
     }
 
-    public int getUniqueId() {
+    public long getUniqueId() {
         return uniqueId;
     }
 
@@ -82,7 +98,7 @@ public class Item {
 
     @Override
     public int hashCode() {
-        return uniqueId;
+        return (int) uniqueId;
     }
 
     @Override

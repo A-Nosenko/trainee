@@ -1,6 +1,20 @@
 package app.literals;
 
-public class Constants {
+/**
+ * Class to hold literals.
+ */
+public final class Constants {
+
+    private Constants() {}
+
+    public static final String[][] XML_SPECIAL_SYMBOLS = {
+        {"&", "&amp;"},
+        {"<", "&lt;"},
+        {">", "&gt;"},
+        {"'", "&apos;"},
+        {"\"", "&quot;"}
+    };
+
     public static final String NEW_LINE = "\n";
     public static final String EQUALS = "=";
     public static final String SPACE = " ";

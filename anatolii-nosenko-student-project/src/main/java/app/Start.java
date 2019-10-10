@@ -1,8 +1,14 @@
 package app;
 
-import app.structure.exception.AppException;
-
+/**
+ * Class to launch application.
+ */
 public class Start {
-    public static void main(String[] args) throws AppException {
+
+    /**
+     * Entry point.
+     * @param args Command line arguments.
+     */
+    public static void main(String[] args) {
     }
 }

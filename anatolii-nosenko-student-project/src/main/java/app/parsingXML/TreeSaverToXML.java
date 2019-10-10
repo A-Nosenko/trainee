@@ -4,8 +4,11 @@ import static app.literals.Constants.END_DECLARATION;
 import static app.literals.Constants.NULL_ELEMENT;
 import static app.literals.Constants.TEG_BOUNDS;
 import static app.literals.Constants.TEG_BOUNDS_TO_NEXT_LINE;
+import static app.literals.Constants.XML_SPECIAL_SYMBOLS;
 import app.structure.model.TreeNode;
 import app.structure.model.TreeModel;
+import java.util.Map;
+
 import static app.literals.Constants.CLOSE_START_TEG;
 import static app.literals.Constants.END_TEG;
 import static app.literals.Constants.EQUALS;
@@ -14,13 +17,17 @@ import static app.literals.Constants.QUOTE;
 import static app.literals.Constants.SPACE;
 import static app.literals.Constants.START_DECLARATION;
 import static app.literals.Constants.START_TEG;
-import java.util.Map;
 
 /**
  * Class to recursive saving TreeModel in XML text file using StringBuilder.
  */
 public class TreeSaverToXML {
 
+    /**
+     * Method saves TreeModel to XML.
+     * @param model TreeModel object to save.
+     * @return XML format text.
+     */
     public String save(TreeModel model) {
         StringBuilder builder = new StringBuilder();
         if (!model.getDeclarationMap().isEmpty()) {
@@ -83,10 +90,10 @@ public class TreeSaverToXML {
         }
 
         return source
-            .replace("&", "&amp;")
-            .replace("<", "&lt;")
-            .replace(">", "&gt;")
-            .replace("'", "&apos;")
-            .replace("\"", "&quot;");
+            .replace(XML_SPECIAL_SYMBOLS[0][0], XML_SPECIAL_SYMBOLS[0][1])
+            .replace(XML_SPECIAL_SYMBOLS[1][0], XML_SPECIAL_SYMBOLS[1][1])
+            .replace(XML_SPECIAL_SYMBOLS[2][0], XML_SPECIAL_SYMBOLS[2][1])
+            .replace(XML_SPECIAL_SYMBOLS[3][0], XML_SPECIAL_SYMBOLS[3][1])
+            .replace(XML_SPECIAL_SYMBOLS[4][0], XML_SPECIAL_SYMBOLS[4][1]);
     }
 }
