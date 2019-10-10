@@ -25,9 +25,11 @@ public class TreeNode {
     }
 
     boolean add(TreeNode treeNode) {
+        if (item.getTagName() == null) {
+            throw new AppException("Tag name didn't assigned. Can't add child node here, teg name must be assigned.");
+        }
         if (item.getContent() != null) {
-            throw new AppException("Item content already assigned. "
-                + "Can't add child node here, item must be without text content.");
+            throw new AppException("Item content already assigned. Can't add child node here, item must be without text content.");
         }
         treeNode.parentTreeNode = this;
         return childTreeNodes.add(treeNode);

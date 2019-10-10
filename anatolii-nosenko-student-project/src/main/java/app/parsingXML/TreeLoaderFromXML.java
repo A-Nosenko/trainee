@@ -25,6 +25,12 @@ public class TreeLoaderFromXML {
 
     private TreeModel treeModel;
 
+    /**
+     * Method reads XML file to TreeModel object.
+     * @param inputXML File to read.
+     * @param model TreeModel object to fill.
+     * @return TreeModel object filled content of file.
+     */
     public TreeModel load(File inputXML, TreeModel model) {
         if (inputXML == null) {
             throw new AppException("Illegal argument! inputXML is null.");

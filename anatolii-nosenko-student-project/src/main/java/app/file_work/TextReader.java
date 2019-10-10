@@ -6,8 +6,16 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Class to read text files.
+ */
 public class TextReader {
 
+    /**
+     * Method reads text file content.
+     * @param file File to read.
+     * @return Text file content.
+     */
     public String read(File file) {
         if (file == null || !file.exists() || !file.canRead()) {
             return null;

@@ -5,9 +5,16 @@ import static app.literals.Constants.EXCEPTION_CONTENT;
 import static app.literals.Constants.EXCEPTION_MARKER;
 import static app.literals.Constants.NEW_LINE;
 
+/**
+ * Custom unchecked exception to wrap checked exception.
+ */
 public class AppException extends RuntimeException {
     private final String message;
 
+    /**
+     * Custom exception constructor to format message.
+     * @param message Message about error.
+     */
     public AppException(String message) {
         StringBuilder builder = new StringBuilder();
         builder.append(NEW_LINE);

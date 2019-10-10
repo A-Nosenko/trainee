@@ -1,14 +1,19 @@
 package app.structure.utils;
 
-public class IdGenerator {
-
-    private int id;
-
+/**
+ * Class to generate unique ids.
+ */
+public final class IdGenerator {
+    private long id;
     private static IdGenerator idGenerator;
 
     private IdGenerator() {
     }
 
+    /**
+     * Method to obtain IdGenerator instance.
+     * @return IdGenerator singleton object.
+     */
     public static IdGenerator getInstance() {
         if (idGenerator == null) {
             idGenerator = new IdGenerator();
@@ -16,7 +21,11 @@ public class IdGenerator {
         return idGenerator;
     }
 
-    public int getNext() {
+    /**
+     * Method to generate unique ids.
+     * @return unique id.
+     */
+    public long getNext() {
         return ++id;
     }
 }
