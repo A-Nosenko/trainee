@@ -11,24 +11,22 @@ public class DepthFirstSearcher implements Searcher {
     private TreeNode result;
 
     @Override
-    public TreeNode find(TreeNode treeNode, Item item) {
+    public TreeNode find(TreeNode treeNode, long itemId) {
         if (treeNode == null) {
             throw new AppException("Null treeNode!");
-        } else if (item == null) {
-            throw new AppException("Null item!");
         }
 
         result = null;
         System.out.print(treeNode.getItem().getUniqueId() + " => ");
 
-        if (treeNode.getItem().equals(item)) {
+        if (treeNode.getItem().getUniqueId() == itemId) {
             System.out.println();
             result = treeNode;
             return result;
         }
 
         for (TreeNode child : treeNode.getChildTreeNodes()) {
-            find(child, item);
+            find(child, itemId);
         }
 
         return result;

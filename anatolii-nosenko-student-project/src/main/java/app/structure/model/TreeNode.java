@@ -6,15 +6,29 @@ import app.structure.exception.AppException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TreeNode {
+/**
+ * Abstract node of the TreeModel.
+ */
+public abstract class TreeNode {
     private Item item;
     private TreeNode parentTreeNode;
     private final List<TreeNode> childTreeNodes;
 
-    TreeNode(Item item) {
+    public TreeNode(Item item) {
         this.item = item;
         this.childTreeNodes = new ArrayList<>();
     }
+
+    /**
+     * Method to initialize child nodes.
+     *
+     * @param datasource         Source to fetch data, it may be Connection to database
+     *                           or other datasource to fetch child nodes items.
+     * @param lazyInitialisation Boolean flag to start initialize next child nodes.
+     *                           if lazyInitialisation is true, next child nodes will not
+     *                           be initialized.
+     */
+    public abstract void initChildNodes(Object datasource, boolean lazyInitialisation);
 
     TreeNode getRoot() {
         if (parentTreeNode == null) {

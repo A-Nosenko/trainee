@@ -36,8 +36,8 @@ public class Item {
     }
 
     public String setAttribute(String key, String value) {
-        if (key == null || value == null) {
-            throw new AppException("key = ".concat(key).concat(" value = ").concat(value));
+        if (key == null) {
+            throw new AppException("key = ".concat(key));
         }
         if (content != null) {
             throw new AppException("Can't add attribute here, content must be null.");

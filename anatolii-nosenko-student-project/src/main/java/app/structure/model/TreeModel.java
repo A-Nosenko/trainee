@@ -1,5 +1,9 @@
 package app.structure.model;
 
+import static app.literals.Constants.DEFAULT_ENCODING;
+import static app.literals.Constants.DEFAULT_VERSION;
+import static app.literals.Constants.ENCODING;
+import static app.literals.Constants.VERSION;
 import app.structure.search.Searcher;
 import app.structure.exception.AppException;
 import java.util.LinkedHashMap;
@@ -15,10 +19,13 @@ public class TreeModel {
 
     /**
      * Constructor applies realisation of Searcher to find nodes in the Tree.
+     *
      * @param searcher Searcher implementation.
      */
     public TreeModel(Searcher searcher) {
         this.searcher = searcher;
+        declarationMap.put(VERSION, DEFAULT_VERSION);
+        declarationMap.put(ENCODING, DEFAULT_ENCODING);
     }
 
     public TreeNode getRoot() {
@@ -38,34 +45,41 @@ public class TreeModel {
 
     /**
      * Base node item establishment.
-     * @param item Root node content.
+     *
+     * @param treeNode Root tree node.
      */
-    public void add(Item item) {
-        root = new TreeNode(item);
+    public void add(TreeNode treeNode) {
+        root = treeNode;
     }
 
     /**
      * Method to add element as child tree node.
-     * @param parent  Parent node item.
-     * @param current Item to add in tree.
+     *
+     * @param parentId Parent node item id.
+     * @param treeNode Node to add in tree.
      * @return True if tree contains node with parent item
-     *         and addition was done. False if method can't find parent node.
+     * and addition was done. False if method can't find parent node.
      */
-    public boolean add(Item parent, Item current) throws AppException {
-        if (parent == null || current == null) {
+    public boolean add(long parentId, TreeNode treeNode) {
+        if (treeNode == null) {
             return false;
         }
-        if (parent.getContent() != null) {
+
+        TreeNode parent = searcher.find(root, parentId);
+
+        if (parent == null || parent.getItem() == null) {
+            return false;
+        }
+
+        if (parent.getItem().getContent() != null) {
             throw new AppException("Content already assigned, can't add child element!");
         }
-        TreeNode targetTreeNode = searcher.find(root, parent);
-        if (targetTreeNode == null) {
-            throw new AppException("Can't add child node, target is null!");
-        }
-        if (!targetTreeNode.add(new TreeNode(current))) {
+
+        if (!parent.add(treeNode)) {
             throw new AppException("Can't add child in target node with element "
-                .concat(targetTreeNode.getItem().toString()));
+                .concat(parent.getItem().toString()));
         }
+
         return true;
     }
 
@@ -76,7 +90,7 @@ public class TreeModel {
             root = null;
             return true;
         }
-        TreeNode node = searcher.find(root, item);
+        TreeNode node = searcher.find(root, item.getUniqueId());
         TreeNode parent = node.getParentTreeNode();
         return parent.remove(node);
     }

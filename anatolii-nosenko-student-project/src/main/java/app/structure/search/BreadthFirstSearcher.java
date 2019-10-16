@@ -11,11 +11,9 @@ import java.util.Queue;
  */
 public class BreadthFirstSearcher implements Searcher {
     @Override
-    public TreeNode find(TreeNode treeNode, Item item) {
+    public TreeNode find(TreeNode treeNode, long itemId) {
         if (treeNode == null) {
             throw new AppException("Null treeNode!");
-        } else if (item == null) {
-            throw new AppException("Null item!");
         }
 
         TreeNode current;
@@ -25,7 +23,7 @@ public class BreadthFirstSearcher implements Searcher {
             current = queue.poll();
             if (current != null && current.getItem() != null) {
                 System.out.print(current.getItem().getUniqueId() + " => ");
-                if (current.getItem().equals(item)) {
+                if (current.getItem().getUniqueId() == itemId) {
                     System.out.println();
                     return current;
                 }

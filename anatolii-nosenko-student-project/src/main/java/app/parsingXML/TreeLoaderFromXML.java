@@ -7,6 +7,7 @@ import static app.literals.Constants.VERSION;
 import app.structure.exception.AppException;
 import app.structure.model.Item;
 import app.structure.model.TreeModel;
+import app.structure.model.base_node.TreeNodeBase;
 import java.io.File;
 import java.io.IOException;
 import javax.xml.parsers.DocumentBuilder;
@@ -84,9 +85,9 @@ public class TreeLoaderFromXML {
         }
         Item currentItem = new Item();
         if (parent == null) {
-            treeModel.add(currentItem);
+            treeModel.add(new TreeNodeBase(currentItem));
         } else {
-            treeModel.add(parent, currentItem);
+            treeModel.add(parent.getUniqueId(), new TreeNodeBase(currentItem));
         }
 
         if (!(node instanceof Text)) {
