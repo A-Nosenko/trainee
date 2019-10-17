@@ -43,6 +43,10 @@ public class TreeModel {
         this.searcher = searcher;
     }
 
+    public Searcher getSearcher() {
+        return searcher;
+    }
+
     /**
      * Base node item establishment.
      *

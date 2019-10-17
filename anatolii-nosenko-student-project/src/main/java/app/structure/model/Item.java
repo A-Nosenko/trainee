@@ -70,9 +70,10 @@ public class Item {
 
     public void setTagName(String tagName) {
         if (content != null) {
-            throw new AppException("Can't set tag name, content already assigned. You should create new item, without content."
-            );
+            throw new AppException(
+                "Can't set tag name, content already assigned. You should create new item, without content.");
         }
+        System.out.println("id: ".concat(String.valueOf(getUniqueId())).concat(" Tag name: ").concat(tagName));
         this.tagName = tagName;
     }
 
