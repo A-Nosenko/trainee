@@ -8,7 +8,7 @@ import java.util.List;
 
 class ForeignKeyDatabaseTreeNode extends DBTreeNode {
 
-    public ForeignKeyDatabaseTreeNode(Item item) {
+    ForeignKeyDatabaseTreeNode(Item item) {
         super(item);
         item.setTagName(FOREIGN_KEY);
     }

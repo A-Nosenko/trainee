@@ -8,7 +8,7 @@ import java.util.List;
 
 class TriggerDatabaseTreeNode extends DBTreeNode {
 
-    public TriggerDatabaseTreeNode(Item item) {
+    TriggerDatabaseTreeNode(Item item) {
         super(item);
         item.setTagName(TRIGGER);
     }

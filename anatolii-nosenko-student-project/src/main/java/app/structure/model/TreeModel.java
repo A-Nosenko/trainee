@@ -5,7 +5,7 @@ import static app.literals.Constants.DEFAULT_VERSION;
 import static app.literals.Constants.ENCODING;
 import static app.literals.Constants.VERSION;
 import app.structure.search.Searcher;
-import app.structure.exception.AppException;
+import app.exception.AppException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -28,6 +28,11 @@ public class TreeModel {
         declarationMap.put(ENCODING, DEFAULT_ENCODING);
     }
 
+    /**
+     * Recursive method to get tree root.
+     *
+     * @return Root node.
+     */
     public TreeNode getRoot() {
         if (root != null) {
             return root.getRoot();
@@ -87,6 +92,12 @@ public class TreeModel {
         return true;
     }
 
+    /**
+     * Method to remove node with specific item from tree.
+     *
+     * @param item Item of node to remove.
+     * @return true, if deletion completed, or false otherwise.
+     */
     public boolean remove(Item item) {
         if (root == null) {
             return false;

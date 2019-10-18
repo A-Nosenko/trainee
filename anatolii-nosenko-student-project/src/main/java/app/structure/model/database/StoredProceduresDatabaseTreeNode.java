@@ -22,7 +22,7 @@ class StoredProceduresDatabaseTreeNode extends DBTreeNode {
         List<TreeNode> treeNodes = new ArrayList<>();
         List<Map<String, String>> procedures = QueryManager
             .getInstance()
-            .getDatabaseProcedures(getItem().getAttribute(DATABASE_NAME), connection);
+            .getDatabaseStoredProcedures(getItem().getAttribute(DATABASE_NAME), connection);
         for (Map<String, String> procedure : procedures) {
             Item procedureItem = new Item();
             for (Map.Entry<String, String> entry : procedure.entrySet()) {

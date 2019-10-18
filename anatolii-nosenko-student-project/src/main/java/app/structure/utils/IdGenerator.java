@@ -12,6 +12,7 @@ public final class IdGenerator {
 
     /**
      * Method to obtain IdGenerator instance.
+     *
      * @return IdGenerator singleton object.
      */
     public static IdGenerator getInstance() {
@@ -23,6 +24,7 @@ public final class IdGenerator {
 
     /**
      * Method to generate unique ids.
+     *
      * @return unique id.
      */
     public long getNext() {

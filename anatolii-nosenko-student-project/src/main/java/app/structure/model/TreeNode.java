@@ -2,7 +2,7 @@ package app.structure.model;
 
 import static app.literals.Constants.NEW_LINE;
 import static app.literals.Constants.NULL_ELEMENT;
-import app.structure.exception.AppException;
+import app.exception.AppException;
 import java.util.ArrayList;
 import java.util.List;
 

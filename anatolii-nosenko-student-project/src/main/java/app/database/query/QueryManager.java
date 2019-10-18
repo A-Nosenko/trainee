@@ -6,7 +6,7 @@ import static app.literals.Constants.FUNCTION_ATTRIBUTES;
 import static app.literals.Constants.STORED_PROCEDURE_ATTRIBUTES;
 import static app.literals.Constants.TRIGGER_ATTRIBUTES;
 import static app.literals.Constants.VIEW_ATTRIBUTES;
-import app.structure.exception.AppException;
+import app.exception.AppException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -151,7 +151,7 @@ public final class QueryManager {
      * @param connection   Connection to database server.
      * @return List of maps with stored procedure attributes.
      */
-    public List<Map<String, String>> getDatabaseProcedures(String databaseName, Connection connection) {
+    public List<Map<String, String>> getDatabaseStoredProcedures(String databaseName, Connection connection) {
         builder = new StringBuilder();
         builder.append("SHOW PROCEDURE STATUS where Db = \'");
         builder.append(databaseName);

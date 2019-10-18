@@ -6,11 +6,13 @@ import app.structure.model.TreeNode;
 import app.structure.model.database.RootDatabasesTreeNode;
 import app.structure.search.Searcher;
 import java.sql.Connection;
+import org.apache.log4j.Logger;
 
 /**
  * Class to load database structure to TreeModel object.
  */
 public class DatabaseLoader {
+    private static final Logger LOGGER = Logger.getLogger(DatabaseLoader.class.getName());
 
     private final Connection connection;
 
@@ -25,6 +27,7 @@ public class DatabaseLoader {
      * @return TreeModel with the database structure.
      */
     public TreeModel loadNodesInfoFromDB(Searcher searcher) {
+        LOGGER.info("Loading database structure into the tree...");
 
         TreeModel tree = new TreeModel(searcher);
         tree.add(new RootDatabasesTreeNode(new Item()));
@@ -41,6 +44,8 @@ public class DatabaseLoader {
      * @return Tree with opened specific node.
      */
     public TreeModel nodesLazyLoading(TreeModel treeModel, long itemId) {
+        LOGGER.info("Lazy loading the node with item id = ".concat(String.valueOf(itemId)));
+
         TreeNode node = treeModel.getSearcher().find(treeModel.getRoot(), itemId);
         node.initChildNodes(connection, true);
         return treeModel;

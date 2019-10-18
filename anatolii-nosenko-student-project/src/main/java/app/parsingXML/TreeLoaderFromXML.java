@@ -4,7 +4,7 @@ import static app.literals.Constants.ENCODING;
 import static app.literals.Constants.STANDALONE;
 import static app.literals.Constants.STANDALONE_YES;
 import static app.literals.Constants.VERSION;
-import app.structure.exception.AppException;
+import app.exception.AppException;
 import app.structure.model.Item;
 import app.structure.model.TreeModel;
 import app.structure.model.base_node.TreeNodeBase;
@@ -13,6 +13,7 @@ import java.io.IOException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -23,13 +24,15 @@ import org.xml.sax.SAXException;
  * Class to read XML using DOM parser.
  */
 public class TreeLoaderFromXML {
+    private static final Logger LOGGER = Logger.getLogger(TreeLoaderFromXML.class.getName());
 
     private TreeModel treeModel;
 
     /**
      * Method reads XML file to TreeModel object.
+     *
      * @param inputXML File to read.
-     * @param model TreeModel object to fill.
+     * @param model    TreeModel object to fill.
      * @return TreeModel object filled content of file.
      */
     public TreeModel load(File inputXML, TreeModel model) {
@@ -39,6 +42,9 @@ public class TreeLoaderFromXML {
         if (model == null) {
             throw new AppException("Illegal argument! model is null.");
         }
+        LOGGER.info("Reading XML file "
+            .concat(inputXML.toString())
+            .concat(" to TreeModel object."));
         treeModel = model;
         Document document;
         try {

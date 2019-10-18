@@ -13,7 +13,7 @@ import java.util.Map;
 
 class TriggersDatabaseTreeNode extends DBTreeNode {
 
-    public TriggersDatabaseTreeNode(Item item) {
+    TriggersDatabaseTreeNode(Item item) {
         super(item);
         item.setTagName(TRIGGERS);
     }

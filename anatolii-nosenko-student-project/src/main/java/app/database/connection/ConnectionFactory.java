@@ -1,19 +1,23 @@
 package app.database.connection;
 
-import app.structure.exception.AppException;
+import app.exception.AppException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import org.apache.log4j.Logger;
 
 /**
  * Class to provide database connection.
  */
 public final class ConnectionFactory {
+    private static final Logger LOGGER = Logger.getLogger(ConnectionFactory.class.getName());
 
-    private ConnectionFactory() {}
+    private ConnectionFactory() {
+    }
 
     /**
      * Method to create database connection.
+     *
      * @param props Connection properties.
      * @return Connection to database.
      */
@@ -26,6 +30,9 @@ public final class ConnectionFactory {
         } catch (ClassNotFoundException | SQLException e) {
             throw new AppException(e.getMessage());
         }
+
+        LOGGER.info(props);
+
         return connection;
     }
 }

@@ -1,7 +1,6 @@
 package app.structure.search;
 
-import app.structure.exception.AppException;
-import app.structure.model.Item;
+import app.exception.AppException;
 import app.structure.model.TreeNode;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -22,9 +21,7 @@ public class BreadthFirstSearcher implements Searcher {
         do {
             current = queue.poll();
             if (current != null && current.getItem() != null) {
-                System.out.print(current.getItem().getUniqueId() + " => ");
                 if (current.getItem().getUniqueId() == itemId) {
-                    System.out.println();
                     return current;
                 }
             }

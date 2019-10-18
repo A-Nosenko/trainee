@@ -1,6 +1,6 @@
 package app.structure.model;
 
-import app.structure.exception.AppException;
+import app.exception.AppException;
 import app.structure.utils.IdGenerator;
 import java.util.Map;
 import java.util.TreeMap;
@@ -23,9 +23,14 @@ public class Item {
     public Item() {
         this.uniqueId = IdGenerator.getInstance().getNext();
         attributes = new TreeMap<>();
-        System.out.println("Created ".concat(this.toString()));
     }
 
+    /**
+     * Method to get attribute value via key.
+     *
+     * @param key Attribute key.
+     * @return Attribute value.
+     */
     public String getAttribute(String key) {
         for (Map.Entry<String, String> entry : attributes.entrySet()) {
             if (entry.getKey().equals(key)) {
@@ -35,6 +40,14 @@ public class Item {
         return null;
     }
 
+    /**
+     * Method to add new attribute. Item must be without content.
+     *
+     * @param key   Attribute key.
+     * @param value Attribute value.
+     * @return Old attribute value, if item already contains attribute
+     * with specific key, or null, if key is new.
+     */
     public String setAttribute(String key, String value) {
         if (key == null) {
             throw new AppException("key = ".concat(key));
@@ -49,6 +62,11 @@ public class Item {
         return content;
     }
 
+    /**
+     * Adding String content to item. Item must be without tegName and attributes.
+     *
+     * @param content Content value.
+     */
     public void setContent(String content) {
         if (tagName != null) {
             throw new AppException(
@@ -68,12 +86,16 @@ public class Item {
         return tagName;
     }
 
+    /**
+     * Adding tagName to item. Item must be without content.
+     *
+     * @param tagName Tag name.
+     */
     public void setTagName(String tagName) {
         if (content != null) {
             throw new AppException(
                 "Can't set tag name, content already assigned. You should create new item, without content.");
         }
-        System.out.println("id: ".concat(String.valueOf(getUniqueId())).concat(" Tag name: ").concat(tagName));
         this.tagName = tagName;
     }
 

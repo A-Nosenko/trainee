@@ -39,7 +39,7 @@ public final class Constants {
 
     public static final String EXCEPTION_BORDER = "\t";
     public static final String EXCEPTION_MARKER =
-        "#######################################################################";
+        "======================================================================";
     public static final String EXCEPTION_CONTENT =
         "Exception: ";
 

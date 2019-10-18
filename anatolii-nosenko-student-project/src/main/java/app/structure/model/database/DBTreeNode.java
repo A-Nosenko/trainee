@@ -1,6 +1,6 @@
 package app.structure.model.database;
 
-import app.structure.exception.AppException;
+import app.exception.AppException;
 import app.structure.model.Item;
 import app.structure.model.TreeNode;
 import java.sql.Connection;
@@ -11,7 +11,7 @@ import java.util.List;
  */
 abstract class DBTreeNode extends TreeNode {
 
-    public DBTreeNode(Item item) {
+    DBTreeNode(Item item) {
         super(item);
     }
 

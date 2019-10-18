@@ -1,7 +1,6 @@
 package app.structure.search;
 
-import app.structure.exception.AppException;
-import app.structure.model.Item;
+import app.exception.AppException;
 import app.structure.model.TreeNode;
 
 /**
@@ -17,7 +16,6 @@ public class DepthFirstSearcher implements Searcher {
         }
 
         result = null;
-        System.out.print(treeNode.getItem().getUniqueId() + " => ");
 
         if (treeNode.getItem().getUniqueId() == itemId) {
             System.out.println();

@@ -17,18 +17,22 @@ import static app.literals.Constants.QUOTE;
 import static app.literals.Constants.SPACE;
 import static app.literals.Constants.START_DECLARATION;
 import static app.literals.Constants.START_TEG;
+import org.apache.log4j.Logger;
 
 /**
  * Class to recursive saving TreeModel in XML text file using StringBuilder.
  */
 public class TreeSaverToXML {
+    private static final Logger LOGGER = Logger.getLogger(TreeSaverToXML.class.getName());
 
     /**
      * Method saves TreeModel to XML.
+     *
      * @param model TreeModel object to save.
      * @return XML format text.
      */
     public String save(TreeModel model) {
+        LOGGER.info("Converting TreeModel object to XML String");
         StringBuilder builder = new StringBuilder();
         if (!model.getDeclarationMap().isEmpty()) {
             builder.append(START_TEG);
