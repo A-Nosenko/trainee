@@ -16,7 +16,7 @@ abstract class DBTreeNode extends TreeNode {
     }
 
     @Override
-    public void initChildNodes(Object datasource, boolean lazyInitialisation) {
+    public List<TreeNode> initChildNodes(Object datasource, boolean lazyInitialisation) {
 
         if (!(datasource instanceof Connection)) {
             throw new AppException("Can't fetch child tree nodes, connection expected.");
@@ -32,6 +32,8 @@ abstract class DBTreeNode extends TreeNode {
                 treeNode.initChildNodes(datasource, false);
             }
         }
+
+        return this.getChildTreeNodes();
     }
 
     abstract List<TreeNode> fetchChildNodes(Connection connection);

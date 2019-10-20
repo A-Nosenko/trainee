@@ -1,6 +1,6 @@
 package app.structure.model.database;
 
-import static app.literals.Constants.FOREIGN_KEY;
+import app.literals.Constants;
 import app.structure.model.Item;
 import app.structure.model.TreeNode;
 import java.sql.Connection;
@@ -10,7 +10,7 @@ class ForeignKeyDatabaseTreeNode extends DBTreeNode {
 
     ForeignKeyDatabaseTreeNode(Item item) {
         super(item);
-        item.setTagName(FOREIGN_KEY);
+        item.setTagName(Constants.FOREIGN_KEY);
     }
 
     @Override

@@ -1,7 +1,6 @@
 package app.structure.model.database;
 
-import static app.literals.Constants.DATABASE_NAME;
-import static app.literals.Constants.FUNCTIONS;
+import app.literals.Constants;
 import app.database.query.QueryManager;
 import app.structure.model.Item;
 import app.structure.model.TreeNode;
@@ -14,7 +13,7 @@ class FunctionsDatabaseTreeNode extends DBTreeNode {
 
     FunctionsDatabaseTreeNode(Item item) {
         super(item);
-        item.setTagName(FUNCTIONS);
+        item.setTagName(Constants.FUNCTIONS);
     }
 
     @Override
@@ -22,7 +21,7 @@ class FunctionsDatabaseTreeNode extends DBTreeNode {
         List<TreeNode> treeNodes = new ArrayList<>();
         List<Map<String, String>> functions = QueryManager
             .getInstance()
-            .getDatabaseFunctions(getItem().getAttribute(DATABASE_NAME), connection);
+            .getDatabaseFunctions(getItem().getAttribute(Constants.DATABASE_NAME), connection);
         for (Map<String, String> function : functions) {
             Item functionItem = new Item();
             for (Map.Entry<String, String> entry : function.entrySet()) {

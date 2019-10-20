@@ -1,9 +1,6 @@
 package app.structure.model.database;
 
-import static app.literals.Constants.COLUMN;
-import static app.literals.Constants.COLUMN_ATTRIBUTES;
-import static app.literals.Constants.DATABASE_NAME;
-import static app.literals.Constants.TABLE_NAME;
+import app.literals.Constants;
 import app.database.query.QueryManager;
 import app.structure.model.Item;
 import app.structure.model.TreeNode;
@@ -16,7 +13,7 @@ class ColumnDatabaseTreeNode extends DBTreeNode {
 
     ColumnDatabaseTreeNode(Item item) {
         super(item);
-        item.setTagName(COLUMN);
+        item.setTagName(Constants.COLUMN);
     }
 
     @Override
@@ -24,12 +21,8 @@ class ColumnDatabaseTreeNode extends DBTreeNode {
         Map<String, String> attributes = QueryManager
             .getInstance()
             .getForeignKeyAttributes(
-                getItem().getAttribute(DATABASE_NAME), getItem().getAttribute(TABLE_NAME),
-                getItem().getAttribute(COLUMN_ATTRIBUTES[0]), connection);
-
-        if (attributes == null) {
-            return null;
-        }
+                getItem().getAttribute(Constants.DATABASE_NAME), getItem().getAttribute(Constants.TABLE_NAME),
+                getItem().getAttribute(Constants.COLUMN_ATTRIBUTES[0]), connection);
 
         Item foreignKeyItem = new Item();
         for (Map.Entry<String, String> entry : attributes.entrySet()) {

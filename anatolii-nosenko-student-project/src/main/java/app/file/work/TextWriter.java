@@ -1,4 +1,4 @@
-package app.file_work;
+package app.file.work;
 
 import app.exception.AppException;
 import java.io.File;
@@ -34,7 +34,7 @@ public class TextWriter {
         try (Writer writer = new FileWriter(file)) {
             LOGGER.info("Writing to file ".concat(file.toString()));
             writer.write(content);
-        } catch (IOException e) {
+        } catch (IOException | NullPointerException e) {
             throw new AppException(e.getMessage());
         }
     }

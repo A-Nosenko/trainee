@@ -1,9 +1,6 @@
 package app.structure.model;
 
-import static app.literals.Constants.DEFAULT_ENCODING;
-import static app.literals.Constants.DEFAULT_VERSION;
-import static app.literals.Constants.ENCODING;
-import static app.literals.Constants.VERSION;
+import app.literals.Constants;
 import app.structure.search.Searcher;
 import app.exception.AppException;
 import java.util.LinkedHashMap;
@@ -24,8 +21,8 @@ public class TreeModel {
      */
     public TreeModel(Searcher searcher) {
         this.searcher = searcher;
-        declarationMap.put(VERSION, DEFAULT_VERSION);
-        declarationMap.put(ENCODING, DEFAULT_ENCODING);
+        declarationMap.put(Constants.VERSION, Constants.DEFAULT_VERSION);
+        declarationMap.put(Constants.ENCODING, Constants.DEFAULT_ENCODING);
     }
 
     /**
@@ -66,8 +63,7 @@ public class TreeModel {
      *
      * @param parentId Parent node item id.
      * @param treeNode Node to add in tree.
-     * @return True if tree contains node with parent item
-     * and addition was done. False if method can't find parent node.
+     * @return True if tree contains node with parent item and addition was done. False if method can't find parent node.
      */
     public boolean add(long parentId, TreeNode treeNode) {
         if (treeNode == null) {
@@ -80,32 +76,26 @@ public class TreeModel {
             return false;
         }
 
-        if (parent.getItem().getContent() != null) {
-            throw new AppException("Content already assigned, can't add child element!");
-        }
-
-        if (!parent.add(treeNode)) {
-            throw new AppException("Can't add child in target node with element "
-                .concat(parent.getItem().toString()));
-        }
-
-        return true;
+        return parent.add(treeNode);
     }
 
     /**
      * Method to remove node with specific item from tree.
      *
-     * @param item Item of node to remove.
+     * @param itemId Item id of node to remove.
      * @return true, if deletion completed, or false otherwise.
      */
-    public boolean remove(Item item) {
+    public boolean removeNode(long itemId) {
         if (root == null) {
             return false;
-        } else if (root.getItem().equals(item)) {
+        } else if (root.getItem().getUniqueId() == itemId) {
             root = null;
             return true;
         }
-        TreeNode node = searcher.find(root, item.getUniqueId());
+        TreeNode node = searcher.find(root, itemId);
+        if (node == null) {
+            return false;
+        }
         TreeNode parent = node.getParentTreeNode();
         return parent.remove(node);
     }

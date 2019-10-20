@@ -1,6 +1,6 @@
 package app.structure.model.database;
 
-import static app.literals.Constants.FUNCTION;
+import app.literals.Constants;
 import app.structure.model.Item;
 import app.structure.model.TreeNode;
 import java.sql.Connection;
@@ -10,7 +10,7 @@ class FunctionDatabaseTreeNode extends DBTreeNode {
 
     FunctionDatabaseTreeNode(Item item) {
         super(item);
-        item.setTagName(FUNCTION);
+        item.setTagName(Constants.FUNCTION);
     }
 
     @Override

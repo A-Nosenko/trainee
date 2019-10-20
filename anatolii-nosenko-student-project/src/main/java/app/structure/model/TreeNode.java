@@ -1,7 +1,6 @@
 package app.structure.model;
 
-import static app.literals.Constants.NEW_LINE;
-import static app.literals.Constants.NULL_ELEMENT;
+import app.literals.Constants;
 import app.exception.AppException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +13,7 @@ public abstract class TreeNode {
     private TreeNode parentTreeNode;
     private final List<TreeNode> childTreeNodes;
 
-    public TreeNode(Item item) {
+    protected TreeNode(Item item) {
         this.item = item;
         this.childTreeNodes = new ArrayList<>();
     }
@@ -27,10 +26,16 @@ public abstract class TreeNode {
      * @param lazyInitialisation Boolean flag to start initialize next child nodes.
      *                           if lazyInitialisation is true, next child nodes will not
      *                           be initialized.
+     * @return List of child tree nodes.
      */
-    public abstract void initChildNodes(Object datasource, boolean lazyInitialisation);
+    public abstract List<TreeNode> initChildNodes(Object datasource, boolean lazyInitialisation);
 
-    TreeNode getRoot() {
+    /**
+     * Method to get tree root from any tree node.
+     *
+     * @return Tree root.
+     */
+    public TreeNode getRoot() {
         if (parentTreeNode == null) {
             return this;
         } else {
@@ -42,9 +47,7 @@ public abstract class TreeNode {
         if (item.getTagName() == null) {
             throw new AppException("Tag name didn't assigned. Can't add child node here, teg name must be assigned.");
         }
-        if (item.getContent() != null) {
-            throw new AppException("Item content already assigned. Can't add child node here, item must be without text content.");
-        }
+
         treeNode.parentTreeNode = this;
         return childTreeNodes.add(treeNode);
     }
@@ -53,16 +56,12 @@ public abstract class TreeNode {
         return childTreeNodes.remove(treeNode);
     }
 
-    public TreeNode getParentTreeNode() {
+    TreeNode getParentTreeNode() {
         return parentTreeNode;
     }
 
     public Item getItem() {
         return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
     }
 
     public List<TreeNode> getChildTreeNodes() {
@@ -74,16 +73,12 @@ public abstract class TreeNode {
         StringBuilder builder = new StringBuilder();
         if (item != null) {
             builder.append(item);
-            builder.append(NEW_LINE);
+            builder.append(Constants.NEW_LINE);
         } else {
-            builder.append(NULL_ELEMENT);
+            builder.append(Constants.NULL_ELEMENT);
         }
         for (TreeNode next : childTreeNodes) {
-            if (next != null) {
-                builder.append(next.toString());
-            } else {
-                builder.append(NULL_ELEMENT);
-            }
+            builder.append(next.toString());
         }
         return builder.toString();
     }

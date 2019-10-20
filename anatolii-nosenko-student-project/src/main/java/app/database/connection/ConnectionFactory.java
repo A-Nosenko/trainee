@@ -22,12 +22,16 @@ public final class ConnectionFactory {
      * @return Connection to database.
      */
     public static Connection getConnection(Props props) {
+        if (props == null) {
+            return null;
+        }
+
         Connection connection;
         try {
             Class.forName(props.getDriverClassName());
             connection = DriverManager.getConnection(
                 props.getUrl(), props.getUsername(), props.getPassword());
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (ClassNotFoundException | SQLException | NullPointerException e) {
             throw new AppException(e.getMessage());
         }
 

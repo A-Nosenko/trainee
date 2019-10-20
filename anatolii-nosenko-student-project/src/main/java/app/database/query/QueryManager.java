@@ -1,16 +1,12 @@
 package app.database.query;
 
-import static app.literals.Constants.COLUMN_ATTRIBUTES;
-import static app.literals.Constants.FOREIGN_KEY_ATTRIBUTES;
-import static app.literals.Constants.FUNCTION_ATTRIBUTES;
-import static app.literals.Constants.STORED_PROCEDURE_ATTRIBUTES;
-import static app.literals.Constants.TRIGGER_ATTRIBUTES;
-import static app.literals.Constants.VIEW_ATTRIBUTES;
 import app.exception.AppException;
+import app.literals.Constants;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -66,24 +62,29 @@ public final class QueryManager {
     /**
      * Method to fetch table DDL script.
      *
-     * @param tableName  Table name.
-     * @param connection Connection to database server.
+     * @param databaseName Database name.
+     * @param tableName    Table name.
+     * @param connection   Connection to database server.
      * @return Script to create table.
      */
-    public String getTableDDL(String tableName, Connection connection) {
+    public String getTableDDL(String databaseName, String tableName, Connection connection) {
         String result = null;
-        try {
-            builder = new StringBuilder();
-            builder.append("SHOW CREATE TABLE ");
-            builder.append(tableName);
-            PreparedStatement statement = connection.prepareStatement(builder.toString());
+
+        makeQuery("USE ".concat(databaseName), connection);
+
+        builder = new StringBuilder();
+        builder.append("SHOW CREATE TABLE ");
+        builder.append(tableName);
+
+        try (PreparedStatement statement = connection.prepareStatement(builder.toString())) {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 result = resultSet.getString(2);
             }
-        } catch (Exception e) {
+        } catch (SQLException | NullPointerException e) {
             throw new AppException(e.getMessage());
         }
+
         return result;
     }
 
@@ -97,13 +98,12 @@ public final class QueryManager {
      */
     private List<String> getStringLines(String query, Connection connection) {
         List<String> result = new ArrayList<>();
-        try {
-            PreparedStatement statement = connection.prepareStatement(query);
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 result.add(resultSet.getString(1));
             }
-        } catch (Exception e) {
+        } catch (SQLException | NullPointerException e) {
             throw new AppException(e.getMessage());
         }
         return result;
@@ -125,7 +125,7 @@ public final class QueryManager {
         builder.append(".");
         builder.append(tableName);
 
-        return getMapsOfArguments(builder.toString(), COLUMN_ATTRIBUTES, connection);
+        return getMapsOfArguments(builder.toString(), Constants.COLUMN_ATTRIBUTES, connection);
     }
 
     /**
@@ -141,7 +141,7 @@ public final class QueryManager {
         builder.append(tableName);
         builder.append("\'");
 
-        return getMapsOfArguments(builder.toString(), VIEW_ATTRIBUTES, connection);
+        return getMapsOfArguments(builder.toString(), Constants.VIEW_ATTRIBUTES, connection);
     }
 
     /**
@@ -157,7 +157,7 @@ public final class QueryManager {
         builder.append(databaseName);
         builder.append("\'");
 
-        return getMapsOfArguments(builder.toString(), STORED_PROCEDURE_ATTRIBUTES, connection);
+        return getMapsOfArguments(builder.toString(), Constants.STORED_PROCEDURE_ATTRIBUTES, connection);
     }
 
     /**
@@ -173,7 +173,7 @@ public final class QueryManager {
         builder.append(databaseName);
         builder.append("\'");
 
-        return getMapsOfArguments(builder.toString(), FUNCTION_ATTRIBUTES, connection);
+        return getMapsOfArguments(builder.toString(), Constants.FUNCTION_ATTRIBUTES, connection);
     }
 
     /**
@@ -198,7 +198,7 @@ public final class QueryManager {
         builder.append(columnName);
         builder.append("\'");
 
-        return getMapOfArguments(builder.toString(), FOREIGN_KEY_ATTRIBUTES, connection);
+        return getMapOfArguments(builder.toString(), Constants.FOREIGN_KEY_ATTRIBUTES, connection);
     }
 
     /**
@@ -219,7 +219,7 @@ public final class QueryManager {
         builder.append(tableName);
         builder.append("\'");
 
-        return getMapsOfArguments(builder.toString(), TRIGGER_ATTRIBUTES, connection);
+        return getMapsOfArguments(builder.toString(), Constants.TRIGGER_ATTRIBUTES, connection);
     }
 
     /**
@@ -237,13 +237,13 @@ public final class QueryManager {
         builder.append(databaseName);
         builder.append(".");
         builder.append(tableName);
-        try {
-            PreparedStatement statement = connection.prepareStatement(builder.toString());
+
+        try (PreparedStatement statement = connection.prepareStatement(builder.toString())) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 result++;
             }
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             throw new AppException(e.getMessage());
         }
 
@@ -251,9 +251,9 @@ public final class QueryManager {
     }
 
     private void makeQuery(String query, Connection connection) {
-        try {
-            connection.createStatement().executeQuery(query);
-        } catch (SQLException e) {
+        try (Statement statement = connection.createStatement()) {
+            statement.executeQuery(query);
+        } catch (SQLException | NullPointerException e) {
             throw new AppException(e.getMessage());
         }
     }
@@ -261,8 +261,7 @@ public final class QueryManager {
     private List<Map<String, String>> getMapsOfArguments(String query, String[] arguments,
                                                          Connection connection) {
         List<Map<String, String>> result = new ArrayList<>();
-        try {
-            PreparedStatement statement = connection.prepareStatement(query);
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Map<String, String> map = new HashMap<>();
@@ -272,7 +271,7 @@ public final class QueryManager {
                 }
                 result.add(map);
             }
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             throw new AppException(e.getMessage());
         }
 
@@ -281,21 +280,18 @@ public final class QueryManager {
 
     private Map<String, String> getMapOfArguments(String query, String[] arguments,
                                                   Connection connection) {
-        try {
-            PreparedStatement statement = connection.prepareStatement(query);
+        Map<String, String> map = new HashMap<>();
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                Map<String, String> map = new HashMap<>();
                 for (String attribute : arguments) {
                     map.put(attribute.replace(" ", "_"),
                         resultSet.getString(attribute));
                 }
-                return map;
             }
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             throw new AppException(e.getMessage());
         }
-
-        return null;
+        return map;
     }
 }

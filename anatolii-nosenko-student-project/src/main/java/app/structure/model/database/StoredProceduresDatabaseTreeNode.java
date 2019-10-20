@@ -1,7 +1,6 @@
 package app.structure.model.database;
 
-import static app.literals.Constants.DATABASE_NAME;
-import static app.literals.Constants.STORED_PROCEDURES;
+import app.literals.Constants;
 import app.database.query.QueryManager;
 import app.structure.model.Item;
 import app.structure.model.TreeNode;
@@ -14,7 +13,7 @@ class StoredProceduresDatabaseTreeNode extends DBTreeNode {
 
     StoredProceduresDatabaseTreeNode(Item item) {
         super(item);
-        item.setTagName(STORED_PROCEDURES);
+        item.setTagName(Constants.STORED_PROCEDURES);
     }
 
     @Override
@@ -22,7 +21,7 @@ class StoredProceduresDatabaseTreeNode extends DBTreeNode {
         List<TreeNode> treeNodes = new ArrayList<>();
         List<Map<String, String>> procedures = QueryManager
             .getInstance()
-            .getDatabaseStoredProcedures(getItem().getAttribute(DATABASE_NAME), connection);
+            .getDatabaseStoredProcedures(getItem().getAttribute(Constants.DATABASE_NAME), connection);
         for (Map<String, String> procedure : procedures) {
             Item procedureItem = new Item();
             for (Map.Entry<String, String> entry : procedure.entrySet()) {

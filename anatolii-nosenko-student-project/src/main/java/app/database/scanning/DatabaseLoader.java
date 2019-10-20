@@ -1,15 +1,20 @@
 package app.database.scanning;
 
-import app.structure.model.Item;
 import app.structure.model.TreeModel;
 import app.structure.model.TreeNode;
-import app.structure.model.database.RootDatabasesTreeNode;
-import app.structure.search.Searcher;
 import java.sql.Connection;
+import java.util.List;
 import org.apache.log4j.Logger;
 
 /**
  * Class to load database structure to TreeModel object.
+ * <p>
+ * To load full tree without lazy loading you should create tree with RootDatabasesTreeNode
+ * as root node and run initialization child nodes with false lazy initialization flag:
+ * <p>
+ * TreeModel tree = new TreeModel(searcher);
+ * tree.add(new RootDatabasesTreeNode(new Item()));
+ * tree.getRoot().initChildNodes(connection, false);
  */
 public class DatabaseLoader {
     private static final Logger LOGGER = Logger.getLogger(DatabaseLoader.class.getName());
@@ -21,33 +26,22 @@ public class DatabaseLoader {
     }
 
     /**
-     * Method creates tree and loads database structure into it.
-     *
-     * @param searcher Searcher implementation to create tree.
-     * @return TreeModel with the database structure.
-     */
-    public TreeModel loadNodesInfoFromDB(Searcher searcher) {
-        LOGGER.info("Loading database structure into the tree...");
-
-        TreeModel tree = new TreeModel(searcher);
-        tree.add(new RootDatabasesTreeNode(new Item()));
-        tree.getRoot().initChildNodes(connection, false);
-
-        return tree;
-    }
-
-    /**
      * Method to lazy load nodes from database.
      *
      * @param treeModel Current tree.
      * @param itemId    Item id from node to open.
-     * @return Tree with opened specific node.
+     * @return List with loaded nodes.
      */
-    public TreeModel nodesLazyLoading(TreeModel treeModel, long itemId) {
+    public List<TreeNode> nodesLazyLoading(TreeModel treeModel, long itemId) {
         LOGGER.info("Lazy loading the node with item id = ".concat(String.valueOf(itemId)));
 
         TreeNode node = treeModel.getSearcher().find(treeModel.getRoot(), itemId);
-        node.initChildNodes(connection, true);
-        return treeModel;
+
+        if (node != null) {
+            node.initChildNodes(connection, true);
+            return node.getChildTreeNodes();
+        }
+
+        return null;
     }
 }

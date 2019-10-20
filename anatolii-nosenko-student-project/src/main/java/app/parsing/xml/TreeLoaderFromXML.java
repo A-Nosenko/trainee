@@ -1,13 +1,10 @@
-package app.parsingXML;
+package app.parsing.xml;
 
-import static app.literals.Constants.ENCODING;
-import static app.literals.Constants.STANDALONE;
-import static app.literals.Constants.STANDALONE_YES;
-import static app.literals.Constants.VERSION;
+import app.literals.Constants;
 import app.exception.AppException;
 import app.structure.model.Item;
 import app.structure.model.TreeModel;
-import app.structure.model.base_node.TreeNodeBase;
+import app.structure.model.base.node.BaseTreeNode;
 import java.io.File;
 import java.io.IOException;
 import javax.xml.parsers.DocumentBuilder;
@@ -33,9 +30,8 @@ public class TreeLoaderFromXML {
      *
      * @param inputXML File to read.
      * @param model    TreeModel object to fill.
-     * @return TreeModel object filled content of file.
      */
-    public TreeModel load(File inputXML, TreeModel model) {
+    public void load(File inputXML, TreeModel model) {
         if (inputXML == null) {
             throw new AppException("Illegal argument! inputXML is null.");
         }
@@ -57,23 +53,21 @@ public class TreeLoaderFromXML {
 
         String version = document.getXmlVersion();
         if (version != null && !version.isEmpty()) {
-            treeModel.getDeclarationMap().put(VERSION, version);
+            treeModel.getDeclarationMap().put(Constants.VERSION, version);
         }
 
         String encoding = document.getXmlEncoding();
         if (encoding != null && !encoding.isEmpty()) {
-            treeModel.getDeclarationMap().put(ENCODING, encoding);
+            treeModel.getDeclarationMap().put(Constants.ENCODING, encoding);
         }
 
         boolean standalone = document.getXmlStandalone();
         if (standalone) {
-            treeModel.getDeclarationMap().put(STANDALONE, STANDALONE_YES);
+            treeModel.getDeclarationMap().put(Constants.STANDALONE, Constants.STANDALONE_YES);
         }
 
         document.getDocumentElement().normalize();
         parse(null, document.getDocumentElement());
-
-        return treeModel;
     }
 
     private void parse(Item parent, Node node) {
@@ -91,9 +85,9 @@ public class TreeLoaderFromXML {
         }
         Item currentItem = new Item();
         if (parent == null) {
-            treeModel.add(new TreeNodeBase(currentItem));
+            treeModel.add(new BaseTreeNode(currentItem));
         } else {
-            treeModel.add(parent.getUniqueId(), new TreeNodeBase(currentItem));
+            treeModel.add(parent.getUniqueId(), new BaseTreeNode(currentItem));
         }
 
         if (!(node instanceof Text)) {

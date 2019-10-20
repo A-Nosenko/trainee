@@ -1,9 +1,6 @@
 package app.exception;
 
-import static app.literals.Constants.EXCEPTION_BORDER;
-import static app.literals.Constants.EXCEPTION_CONTENT;
-import static app.literals.Constants.EXCEPTION_MARKER;
-import static app.literals.Constants.NEW_LINE;
+import app.literals.Constants;
 import org.apache.log4j.Logger;
 
 /**
@@ -20,30 +17,32 @@ public class AppException extends RuntimeException {
      * @param message Message about error.
      */
     public AppException(String message) {
+
         StringBuilder builder = new StringBuilder();
-        builder.append(NEW_LINE);
-        builder.append(EXCEPTION_BORDER);
-        builder.append(EXCEPTION_MARKER);
-        builder.append(NEW_LINE);
-        builder.append(EXCEPTION_BORDER);
-        builder.append(EXCEPTION_CONTENT);
-        builder.append(NEW_LINE);
-        builder.append(EXCEPTION_BORDER);
-        char[] messageContent = message
-            .replace("\n", " ")
+        builder.append(Constants.NEW_LINE);
+        builder.append(Constants.EXCEPTION_BORDER);
+        builder.append(Constants.EXCEPTION_MARKER);
+        builder.append(Constants.NEW_LINE);
+        builder.append(Constants.EXCEPTION_BORDER);
+        builder.append(Constants.EXCEPTION_CONTENT);
+        builder.append(Constants.NEW_LINE);
+        builder.append(Constants.EXCEPTION_BORDER);
+        char[] messageContent = ((message == null)
+            ? ("null")
+            : (message.replace("\n", " ")))
             .toCharArray();
         for (int i = 1; i <= messageContent.length; i++) {
             builder.append(messageContent[i - 1]);
-            if (i % EXCEPTION_MARKER.length() == 0) {
-                builder.append(NEW_LINE);
-                builder.append(EXCEPTION_BORDER);
+            if (i % Constants.EXCEPTION_MARKER.length() == 0) {
+                builder.append(Constants.NEW_LINE);
+                builder.append(Constants.EXCEPTION_BORDER);
             }
         }
-        builder.append(NEW_LINE);
+        builder.append(Constants.NEW_LINE);
 
-        builder.append(EXCEPTION_BORDER);
-        builder.append(EXCEPTION_MARKER);
-        builder.append(NEW_LINE);
+        builder.append(Constants.EXCEPTION_BORDER);
+        builder.append(Constants.EXCEPTION_MARKER);
+        builder.append(Constants.NEW_LINE);
         this.message = builder.toString();
 
         LOGGER.error(getMessage());

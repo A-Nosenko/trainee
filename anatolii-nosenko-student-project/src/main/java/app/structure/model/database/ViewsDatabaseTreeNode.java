@@ -1,7 +1,6 @@
 package app.structure.model.database;
 
-import static app.literals.Constants.TABLE_NAME;
-import static app.literals.Constants.VIEWS;
+import app.literals.Constants;
 import app.database.query.QueryManager;
 import app.structure.model.Item;
 import app.structure.model.TreeNode;
@@ -14,7 +13,7 @@ class ViewsDatabaseTreeNode extends DBTreeNode {
 
     ViewsDatabaseTreeNode(Item item) {
         super(item);
-        item.setTagName(VIEWS);
+        item.setTagName(Constants.VIEWS);
     }
 
     @Override
@@ -22,7 +21,7 @@ class ViewsDatabaseTreeNode extends DBTreeNode {
         List<TreeNode> treeNodes = new ArrayList<>();
         List<Map<String, String>> views = QueryManager
             .getInstance()
-            .getTableViews(getItem().getAttribute(TABLE_NAME), connection);
+            .getTableViews(getItem().getAttribute(Constants.TABLE_NAME), connection);
         for (Map<String, String> view : views) {
             Item viewItem = new Item();
             for (Map.Entry<String, String> entry : view.entrySet()) {

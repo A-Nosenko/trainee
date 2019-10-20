@@ -1,6 +1,6 @@
 package app.structure.model.database;
 
-import static app.literals.Constants.TRIGGER;
+import app.literals.Constants;
 import app.structure.model.Item;
 import app.structure.model.TreeNode;
 import java.sql.Connection;
@@ -10,7 +10,7 @@ class TriggerDatabaseTreeNode extends DBTreeNode {
 
     TriggerDatabaseTreeNode(Item item) {
         super(item);
-        item.setTagName(TRIGGER);
+        item.setTagName(Constants.TRIGGER);
     }
 
     @Override

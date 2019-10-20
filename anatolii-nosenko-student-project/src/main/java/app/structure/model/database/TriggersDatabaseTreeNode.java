@@ -1,8 +1,6 @@
 package app.structure.model.database;
 
-import static app.literals.Constants.DATABASE_NAME;
-import static app.literals.Constants.TABLE_NAME;
-import static app.literals.Constants.TRIGGERS;
+import app.literals.Constants;
 import app.database.query.QueryManager;
 import app.structure.model.Item;
 import app.structure.model.TreeNode;
@@ -15,7 +13,7 @@ class TriggersDatabaseTreeNode extends DBTreeNode {
 
     TriggersDatabaseTreeNode(Item item) {
         super(item);
-        item.setTagName(TRIGGERS);
+        item.setTagName(Constants.TRIGGERS);
     }
 
     @Override
@@ -23,8 +21,8 @@ class TriggersDatabaseTreeNode extends DBTreeNode {
         List<Map<String, String>> triggersMap = QueryManager
             .getInstance()
             .getTriggersAttributes(
-                getItem().getAttribute(DATABASE_NAME),
-                getItem().getAttribute(TABLE_NAME),
+                getItem().getAttribute(Constants.DATABASE_NAME),
+                getItem().getAttribute(Constants.TABLE_NAME),
                 connection);
         if (triggersMap.isEmpty()) {
             return null;

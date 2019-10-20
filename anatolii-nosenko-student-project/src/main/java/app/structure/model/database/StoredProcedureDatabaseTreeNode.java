@@ -1,6 +1,6 @@
 package app.structure.model.database;
 
-import static app.literals.Constants.STORED_PROCEDURE;
+import app.literals.Constants;
 import app.structure.model.Item;
 import app.structure.model.TreeNode;
 import java.sql.Connection;
@@ -10,7 +10,7 @@ class StoredProcedureDatabaseTreeNode extends DBTreeNode {
 
     StoredProcedureDatabaseTreeNode(Item item) {
         super(item);
-        item.setTagName(STORED_PROCEDURE);
+        item.setTagName(Constants.STORED_PROCEDURE);
     }
 
     @Override

@@ -1,7 +1,6 @@
 package app.structure.model.database;
 
-import static app.literals.Constants.DATABASES;
-import static app.literals.Constants.DATABASE_NAME;
+import app.literals.Constants;
 import app.database.query.QueryManager;
 import app.structure.model.Item;
 import app.structure.model.TreeNode;
@@ -16,7 +15,7 @@ public class RootDatabasesTreeNode extends DBTreeNode {
 
     public RootDatabasesTreeNode(Item item) {
         super(item);
-        item.setTagName(DATABASES);
+        item.setTagName(Constants.DATABASES);
     }
 
     @Override
@@ -27,7 +26,7 @@ public class RootDatabasesTreeNode extends DBTreeNode {
         for (String databaseName : databasesList) {
             Item database = new Item();
             treeNodes.add(new DatabaseTreeNode(database));
-            database.setAttribute(DATABASE_NAME, databaseName);
+            database.setAttribute(Constants.DATABASE_NAME, databaseName);
         }
 
         return treeNodes;

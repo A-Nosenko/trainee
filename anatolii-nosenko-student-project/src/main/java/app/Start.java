@@ -5,7 +5,10 @@ import org.apache.log4j.Logger;
 /**
  * Class to launch application.
  */
-public class Start {
+public final class Start {
+    private Start() {
+    }
+
     private static final Logger LOGGER = Logger.getLogger(Start.class.getName());
 
     /**

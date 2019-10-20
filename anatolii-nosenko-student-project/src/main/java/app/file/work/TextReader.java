@@ -1,9 +1,9 @@
-package app.file_work;
+package app.file.work;
 
-import static app.literals.Constants.NEW_LINE;
+import app.literals.Constants;
 import app.exception.AppException;
 import java.io.File;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import org.apache.log4j.Logger;
 
@@ -32,9 +32,9 @@ public class TextReader {
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
                 builder.append(scanner.nextLine());
-                builder.append(NEW_LINE);
+                builder.append(Constants.NEW_LINE);
             }
-        } catch (IOException e) {
+        } catch (FileNotFoundException e) {
             throw new AppException(e.getMessage());
         }
         return builder.toString();

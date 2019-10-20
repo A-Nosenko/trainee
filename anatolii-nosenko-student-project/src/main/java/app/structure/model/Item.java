@@ -45,12 +45,11 @@ public class Item {
      *
      * @param key   Attribute key.
      * @param value Attribute value.
-     * @return Old attribute value, if item already contains attribute
-     * with specific key, or null, if key is new.
+     * @return Old attribute value, if item already contains attribute with specific key, or null, if key is new.
      */
     public String setAttribute(String key, String value) {
         if (key == null) {
-            throw new AppException("key = ".concat(key));
+            throw new AppException("key = null");
         }
         if (content != null) {
             throw new AppException("Can't add attribute here, content must be null.");
