@@ -22,7 +22,10 @@ public class FunctionDatabaseTreeNodeTest {
 
     @Test
     public void fetchChildNodes() {
-        assertNull(new FunctionDatabaseTreeNode(new Item()).fetchChildNodes(null));
+        DBTreeNode dbTreeNode = new FunctionDatabaseTreeNode(new Item());
+        System.out.println(dbTreeNode.toJSON());
+        assertNull(
+            dbTreeNode.fetchChildNodes(null));
     }
 
     @AfterClass

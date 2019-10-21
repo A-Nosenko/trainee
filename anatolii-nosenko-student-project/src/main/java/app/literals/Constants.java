@@ -101,4 +101,15 @@ public final class Constants {
         "ACTION_REFERENCE_NEW_ROW", "CREATED", "SQL_MODE", "DEFINER",
         "CHARACTER_SET_CLIENT", "COLLATION_CONNECTION", "DATABASE_COLLATION"
     };
+
+    // Constants to represent JSON.
+    public static final String START_JSON = "{";
+    public static final String FINISH_JSON = "}";
+    public static final String COLON = " : ";
+    public static final String COMMA = ", ";
+    public static final String DOUBLE_QUOTES = "\"";
+    public static final String ID = "id";
+    public static final String TAG_NAME = "tag_name";
+    public static final String CONTENT = "content";
+    public static final String ATTRIBUTES = "attributes";
 }

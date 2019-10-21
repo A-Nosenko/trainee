@@ -22,7 +22,10 @@ public class StoredProcedureDatabaseTreeNodeTest {
 
     @Test
     public void fetchChildNodes() {
-        assertNull(new StoredProcedureDatabaseTreeNode(new Item()).fetchChildNodes(null));
+        DBTreeNode dbTreeNode = new StoredProcedureDatabaseTreeNode(new Item());
+        System.out.println(dbTreeNode.toJSON());
+        assertNull(
+            dbTreeNode.fetchChildNodes(null));
     }
 
     @AfterClass

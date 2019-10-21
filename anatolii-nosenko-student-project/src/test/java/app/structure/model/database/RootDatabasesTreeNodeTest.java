@@ -24,6 +24,7 @@ public class RootDatabasesTreeNodeTest {
         Item item = new Item();
 
         DBTreeNode dbTreeNode = new RootDatabasesTreeNode(item);
+        System.out.println(dbTreeNode.toJSON());
         assert (dbTreeNode.initChildNodes(connection, true).size() > 0);
     }
 

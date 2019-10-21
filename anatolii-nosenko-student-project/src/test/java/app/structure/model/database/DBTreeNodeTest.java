@@ -29,6 +29,7 @@ public class DBTreeNodeTest {
         item.setAttribute(Constants.TABLE_NAME, "user_summary");
 
         DBTreeNode dbTreeNode = new TableDDLDatabaseTreeNode(item);
+        System.out.println(dbTreeNode.toJSON());
         assertNotNull(dbTreeNode.initChildNodes(connection, false));
 
     }

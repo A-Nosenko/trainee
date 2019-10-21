@@ -3,6 +3,7 @@ package app.structure.model.database;
 import app.database.connection.ConnectionFactory;
 import app.database.connection.Props;
 import app.structure.model.Item;
+import app.structure.model.TreeNode;
 import java.sql.Connection;
 import java.sql.SQLException;
 import org.junit.AfterClass;
@@ -22,7 +23,10 @@ public class ForeignKeyDatabaseTreeNodeTest {
 
     @Test
     public void fetchChildNodes() {
-        assertNull(new ForeignKeyDatabaseTreeNode(new Item()).fetchChildNodes(null));
+        DBTreeNode dbTreeNode = new ForeignKeyDatabaseTreeNode(new Item());
+        System.out.println(dbTreeNode.toJSON());
+        assertNull(
+            dbTreeNode.fetchChildNodes(null));
     }
 
     @AfterClass

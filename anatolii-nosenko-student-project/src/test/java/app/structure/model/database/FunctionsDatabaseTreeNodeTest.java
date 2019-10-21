@@ -26,6 +26,7 @@ public class FunctionsDatabaseTreeNodeTest {
         item.setAttribute(Constants.DATABASE_NAME, "sys");
 
         DBTreeNode dbTreeNode = new FunctionsDatabaseTreeNode(item);
+        System.out.println(dbTreeNode.toJSON());
         assert (dbTreeNode.initChildNodes(connection, true).size() > 0);
     }
 

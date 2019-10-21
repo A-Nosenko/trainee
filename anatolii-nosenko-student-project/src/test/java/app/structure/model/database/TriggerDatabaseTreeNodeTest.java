@@ -22,7 +22,11 @@ public class TriggerDatabaseTreeNodeTest {
 
     @Test
     public void fetchChildNodes() {
-        assertNull(new TriggerDatabaseTreeNode(new Item()).fetchChildNodes(null));
+
+        DBTreeNode dbTreeNode = new TriggerDatabaseTreeNode(new Item());
+        System.out.println(dbTreeNode.toJSON());
+        assertNull(
+            dbTreeNode.fetchChildNodes(null));
     }
 
     @AfterClass
