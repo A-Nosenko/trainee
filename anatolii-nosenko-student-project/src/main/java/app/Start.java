@@ -1,14 +1,16 @@
 package app;
 
 import org.apache.log4j.Logger;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 /**
  * Class to launch application.
  */
-public final class Start {
-    private Start() {
-    }
-
+@SpringBootApplication
+public class Start extends SpringBootServletInitializer {
     private static final Logger LOGGER = Logger.getLogger(Start.class.getName());
 
     /**
@@ -18,5 +20,12 @@ public final class Start {
      */
     public static void main(String[] args) {
         LOGGER.info("Starting the application.");
+
+        SpringApplication.run(Start.class, args);
+    }
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(Start.class);
     }
 }

@@ -112,4 +112,7 @@ public final class Constants {
     public static final String TAG_NAME = "tag_name";
     public static final String CONTENT = "content";
     public static final String ATTRIBUTES = "attributes";
+
+    // Web pages.
+    public static final String START_PAGE = "index";
 }
