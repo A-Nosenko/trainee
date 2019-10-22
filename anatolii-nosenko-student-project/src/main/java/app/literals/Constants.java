@@ -105,6 +105,8 @@ public final class Constants {
     // Constants to represent JSON.
     public static final String START_JSON = "{";
     public static final String FINISH_JSON = "}";
+    public static final String START_JSON_ARRAY = "[";
+    public static final String FINISH_JSON_ARRAY = "]";
     public static final String COLON = " : ";
     public static final String COMMA = ", ";
     public static final String DOUBLE_QUOTES = "\"";
