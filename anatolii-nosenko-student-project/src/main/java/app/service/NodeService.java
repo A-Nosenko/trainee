@@ -1,15 +1,14 @@
 package app.service;
 
-import app.database.connection.ConnectionFactory;
-import app.database.connection.Props;
 import app.literals.Constants;
-import app.structure.model.Item;
+import app.model.ConnectionHolder;
+import app.model.TreeHolder;
 import app.structure.model.TreeModel;
 import app.structure.model.TreeNode;
-import app.structure.model.database.RootDatabasesTreeNode;
-import app.structure.search.BreadthFirstSearcher;
 import java.sql.Connection;
 import java.util.List;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,24 +16,13 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class NodeService {
+    private static final Logger LOGGER = Logger.getLogger(NodeService.class.getName());
 
-    ///////////////////////////////////////////////////////////////////////////////////
-    // Test configuration, till connection form not completed use default connection.
-    ///////////////////////////////////////////////////////////////////////////////////
-    private static Props props = new Props("jdbc:mysql://localhost:3306?useUnicode=true"
-        + "&useJDBCCompliantTimezoneShift=true"
-        + "&useLegacyDatetimeCode=false"
-        + "&serverTimezone=UTC",
-        "root",
-        "root",
-        "com.mysql.cj.jdbc.Driver");
-    private static Connection connection = ConnectionFactory.getConnection(props);
-    private static TreeModel treeModel = new TreeModel(new BreadthFirstSearcher());
+    @Autowired
+    private TreeHolder treeHolder;
 
-    static {
-        treeModel.add(new RootDatabasesTreeNode(new Item()));
-    }
-    ///////////////////////////////////////////////////////////////////////////////////
+    @Autowired
+    private ConnectionHolder connectionHolder;
 
     /**
      * Method to load nodes.
@@ -45,6 +33,15 @@ public class NodeService {
     public String loadChildNodes(long itemId) {
         StringBuilder builder = new StringBuilder();
         builder.append(Constants.START_JSON_ARRAY);
+        TreeModel treeModel = treeHolder.getTreeModel();
+        Connection connection = connectionHolder.getConnection();
+
+        if (treeModel == null || connection == null) {
+            LOGGER.error("Can't load child nodes! First initialise Connection and TreeModel via ConnectionController.");
+            builder.append(Constants.FINISH_JSON_ARRAY);
+            return builder.toString();
+        }
+
         TreeNode node = treeModel.getSearcher().find(treeModel.getRoot(), itemId);
 
         if (node != null) {

@@ -115,6 +115,13 @@ public final class Constants {
     public static final String CONTENT = "content";
     public static final String ATTRIBUTES = "attributes";
 
-    // Web pages.
-    public static final String START_PAGE = "index";
+    // Connection default attributes.
+    public static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+    public static final String URL_PREFIX = "jdbc:mysql://";
+    public static final String URL_DIVIDER = ":";
+    public static final String URL_SUFFIX =
+        "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+
+    // Constants to building the response.
+    public static final String CONNECTOR = "connector";
 }

@@ -44,8 +44,15 @@ public final class Factory {
         return builder.toString();
     }
 
-    private static void appendKeyValue(StringBuilder builder,
-                                       String key, String value) {
+    /**
+     * Method to build JSON text.
+     *
+     * @param builder StringBuilder with JSON content.
+     * @param key     Key to add in JSON content.
+     * @param value   Value to add in JSON content.
+     */
+    public static void appendKeyValue(StringBuilder builder,
+                                      String key, String value) {
         appendParameter(builder, key);
         builder.append(Constants.COLON);
         appendParameter(builder, value);
