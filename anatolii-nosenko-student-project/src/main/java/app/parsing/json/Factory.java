@@ -51,7 +51,7 @@ public final class Factory {
      * @param key     Key to add in JSON content.
      * @param value   Value to add in JSON content.
      */
-    public static void appendKeyValue(StringBuilder builder,
+    private static void appendKeyValue(StringBuilder builder,
                                       String key, String value) {
         appendParameter(builder, key);
         builder.append(Constants.COLON);
