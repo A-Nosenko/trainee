@@ -8,9 +8,9 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
-class TablesDatabaseTreeNode extends DBTreeNode {
+public class TablesDatabaseTreeNode extends DBTreeNode {
 
-    TablesDatabaseTreeNode(Item item) {
+    public TablesDatabaseTreeNode(Item item) {
         super(item);
         item.setTagName(Constants.TABLES);
     }
@@ -32,6 +32,7 @@ class TablesDatabaseTreeNode extends DBTreeNode {
                     .getInstance()
                     .getLastInsertId(databaseName, tableName, connection)));
             treeNodes.add(new TableDatabaseTreeNode(table));
+            table.setTagName(table.getTagName().concat(" ").concat(tableName));
         }
 
         return treeNodes;

@@ -9,9 +9,9 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
-class TableDDLDatabaseTreeNode extends DBTreeNode {
+public class TableDDLDatabaseTreeNode extends DBTreeNode {
 
-    TableDDLDatabaseTreeNode(Item item) {
+    public TableDDLDatabaseTreeNode(Item item) {
         super(item);
         item.setTagName(Constants.DDL);
     }

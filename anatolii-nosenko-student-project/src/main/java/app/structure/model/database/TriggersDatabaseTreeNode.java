@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-class TriggersDatabaseTreeNode extends DBTreeNode {
+public class TriggersDatabaseTreeNode extends DBTreeNode {
 
-    TriggersDatabaseTreeNode(Item item) {
+    public TriggersDatabaseTreeNode(Item item) {
         super(item);
         item.setTagName(Constants.TRIGGERS);
     }

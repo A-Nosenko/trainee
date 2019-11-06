@@ -6,9 +6,9 @@ import app.structure.model.TreeNode;
 import java.sql.Connection;
 import java.util.List;
 
-class FunctionDatabaseTreeNode extends DBTreeNode {
+public class FunctionDatabaseTreeNode extends DBTreeNode {
 
-    FunctionDatabaseTreeNode(Item item) {
+    public FunctionDatabaseTreeNode(Item item) {
         super(item);
         item.setTagName(Constants.FUNCTION);
     }

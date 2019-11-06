@@ -6,9 +6,9 @@ import app.structure.model.TreeNode;
 import java.sql.Connection;
 import java.util.List;
 
-class StoredProcedureDatabaseTreeNode extends DBTreeNode {
+public class StoredProcedureDatabaseTreeNode extends DBTreeNode {
 
-    StoredProcedureDatabaseTreeNode(Item item) {
+    public StoredProcedureDatabaseTreeNode(Item item) {
         super(item);
         item.setTagName(Constants.STORED_PROCEDURE);
     }

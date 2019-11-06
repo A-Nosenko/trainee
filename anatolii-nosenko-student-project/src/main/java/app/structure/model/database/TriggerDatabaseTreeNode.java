@@ -6,9 +6,9 @@ import app.structure.model.TreeNode;
 import java.sql.Connection;
 import java.util.List;
 
-class TriggerDatabaseTreeNode extends DBTreeNode {
+public class TriggerDatabaseTreeNode extends DBTreeNode {
 
-    TriggerDatabaseTreeNode(Item item) {
+    public TriggerDatabaseTreeNode(Item item) {
         super(item);
         item.setTagName(Constants.TRIGGER);
     }

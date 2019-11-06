@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-class StoredProceduresDatabaseTreeNode extends DBTreeNode {
+public class StoredProceduresDatabaseTreeNode extends DBTreeNode {
 
-    StoredProceduresDatabaseTreeNode(Item item) {
+    public StoredProceduresDatabaseTreeNode(Item item) {
         super(item);
         item.setTagName(Constants.STORED_PROCEDURES);
     }

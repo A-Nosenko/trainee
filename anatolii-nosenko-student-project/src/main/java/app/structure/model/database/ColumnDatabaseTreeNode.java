@@ -9,9 +9,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-class ColumnDatabaseTreeNode extends DBTreeNode {
+public class ColumnDatabaseTreeNode extends DBTreeNode {
 
-    ColumnDatabaseTreeNode(Item item) {
+    public ColumnDatabaseTreeNode(Item item) {
         super(item);
         item.setTagName(Constants.COLUMN);
     }

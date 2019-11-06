@@ -4,7 +4,24 @@ import app.literals.Constants;
 import app.exception.AppException;
 import app.structure.model.Item;
 import app.structure.model.TreeModel;
+import app.structure.model.TreeNode;
 import app.structure.model.base.node.BaseTreeNode;
+import app.structure.model.database.ColumnDatabaseTreeNode;
+import app.structure.model.database.ColumnsDatabaseTreeNode;
+import app.structure.model.database.DatabaseTreeNode;
+import app.structure.model.database.ForeignKeyDatabaseTreeNode;
+import app.structure.model.database.FunctionDatabaseTreeNode;
+import app.structure.model.database.FunctionsDatabaseTreeNode;
+import app.structure.model.database.RootDatabasesTreeNode;
+import app.structure.model.database.StoredProcedureDatabaseTreeNode;
+import app.structure.model.database.StoredProceduresDatabaseTreeNode;
+import app.structure.model.database.TableDDLDatabaseTreeNode;
+import app.structure.model.database.TableDatabaseTreeNode;
+import app.structure.model.database.TablesDatabaseTreeNode;
+import app.structure.model.database.TriggerDatabaseTreeNode;
+import app.structure.model.database.TriggersDatabaseTreeNode;
+import app.structure.model.database.ViewDatabaseTreeNode;
+import app.structure.model.database.ViewsDatabaseTreeNode;
 import java.io.File;
 import java.io.IOException;
 import javax.xml.parsers.DocumentBuilder;
@@ -87,7 +104,61 @@ public class TreeLoaderFromXML {
         if (parent == null) {
             treeModel.add(new BaseTreeNode(currentItem));
         } else {
-            treeModel.add(parent.getUniqueId(), new BaseTreeNode(currentItem));
+            TreeNode treeNode;
+            switch (node.getNodeName()) {
+                case Constants.COLUMN:
+                    treeNode = new ColumnDatabaseTreeNode(currentItem);
+                    break;
+                case Constants.COLUMNS:
+                    treeNode = new ColumnsDatabaseTreeNode(currentItem);
+                    break;
+                case Constants.DATABASE:
+                    treeNode = new DatabaseTreeNode(currentItem);
+                    break;
+                case Constants.FOREIGN_KEY:
+                    treeNode = new ForeignKeyDatabaseTreeNode(currentItem);
+                    break;
+                case Constants.FUNCTION:
+                    treeNode = new FunctionDatabaseTreeNode(currentItem);
+                    break;
+                case Constants.FUNCTIONS:
+                    treeNode = new FunctionsDatabaseTreeNode(currentItem);
+                    break;
+                case Constants.DATABASES:
+                    treeNode = new RootDatabasesTreeNode(currentItem);
+                    break;
+                case Constants.STORED_PROCEDURE:
+                    treeNode = new StoredProcedureDatabaseTreeNode(currentItem);
+                    break;
+                case Constants.STORED_PROCEDURES:
+                    treeNode = new StoredProceduresDatabaseTreeNode(currentItem);
+                    break;
+                case Constants.TABLE:
+                    treeNode = new TableDatabaseTreeNode(currentItem);
+                    break;
+                case Constants.DDL:
+                    treeNode = new TableDDLDatabaseTreeNode(currentItem);
+                    break;
+                case Constants.TABLES:
+                    treeNode = new TablesDatabaseTreeNode(currentItem);
+                    break;
+                case Constants.TRIGGER:
+                    treeNode = new TriggerDatabaseTreeNode(currentItem);
+                    break;
+                case Constants.TRIGGERS:
+                    treeNode = new TriggersDatabaseTreeNode(currentItem);
+                    break;
+                case Constants.VIEW:
+                    treeNode = new ViewDatabaseTreeNode(currentItem);
+                    break;
+                case Constants.VIEWS:
+                    treeNode = new ViewsDatabaseTreeNode(currentItem);
+                    break;
+                default:
+                    treeNode = new BaseTreeNode(currentItem);
+                    break;
+            }
+            treeModel.add(parent.getUniqueId(), treeNode);
         }
 
         if (!(node instanceof Text)) {

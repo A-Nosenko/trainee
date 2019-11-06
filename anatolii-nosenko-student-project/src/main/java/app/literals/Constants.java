@@ -121,7 +121,4 @@ public final class Constants {
     public static final String URL_DIVIDER = ":";
     public static final String URL_SUFFIX =
         "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-
-    // Constants to building the response.
-    public static final String CONNECTOR = "connector";
 }

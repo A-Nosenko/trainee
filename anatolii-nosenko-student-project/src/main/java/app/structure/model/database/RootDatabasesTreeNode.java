@@ -26,6 +26,7 @@ public class RootDatabasesTreeNode extends DBTreeNode {
         for (String databaseName : databasesList) {
             Item database = new Item();
             treeNodes.add(new DatabaseTreeNode(database));
+            database.setTagName(database.getTagName().concat(" ").concat(databaseName));
             database.setAttribute(Constants.DATABASE_NAME, databaseName);
         }
 

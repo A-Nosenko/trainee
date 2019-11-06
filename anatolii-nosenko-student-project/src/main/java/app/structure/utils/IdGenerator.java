@@ -1,10 +1,12 @@
 package app.structure.utils;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 /**
  * Class to generate unique ids.
  */
 public final class IdGenerator {
-    private long id;
+    private AtomicLong id = new AtomicLong();
     private static IdGenerator idGenerator;
 
     private IdGenerator() {
@@ -28,6 +30,6 @@ public final class IdGenerator {
      * @return unique id.
      */
     public long getNext() {
-        return ++id;
+        return id.incrementAndGet();
     }
 }

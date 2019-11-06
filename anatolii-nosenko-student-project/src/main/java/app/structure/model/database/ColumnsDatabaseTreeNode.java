@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-class ColumnsDatabaseTreeNode extends DBTreeNode {
+public class ColumnsDatabaseTreeNode extends DBTreeNode {
 
-    ColumnsDatabaseTreeNode(Item item) {
+    public ColumnsDatabaseTreeNode(Item item) {
         super(item);
         item.setTagName(Constants.COLUMNS);
     }
@@ -32,6 +32,8 @@ class ColumnsDatabaseTreeNode extends DBTreeNode {
                 column.setAttribute(attributes.getKey(), attributes.getValue());
             }
             treeNodes.add(new ColumnDatabaseTreeNode(column));
+            column.setTagName(
+                column.getTagName().concat(" ").concat(columnAttributes.get(Constants.COLUMN_ATTRIBUTES[0])));
         }
 
         return treeNodes;

@@ -6,9 +6,9 @@ import app.structure.model.TreeNode;
 import java.sql.Connection;
 import java.util.List;
 
-class ViewDatabaseTreeNode extends DBTreeNode {
+public class ViewDatabaseTreeNode extends DBTreeNode {
 
-    ViewDatabaseTreeNode(Item item) {
+    public ViewDatabaseTreeNode(Item item) {
         super(item);
         item.setTagName(Constants.VIEW);
     }

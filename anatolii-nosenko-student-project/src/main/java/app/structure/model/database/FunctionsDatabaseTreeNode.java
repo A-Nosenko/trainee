@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-class FunctionsDatabaseTreeNode extends DBTreeNode {
+public class FunctionsDatabaseTreeNode extends DBTreeNode {
 
-    FunctionsDatabaseTreeNode(Item item) {
+    public FunctionsDatabaseTreeNode(Item item) {
         super(item);
         item.setTagName(Constants.FUNCTIONS);
     }

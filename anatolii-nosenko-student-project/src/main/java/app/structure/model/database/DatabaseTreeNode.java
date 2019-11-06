@@ -7,9 +7,9 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
-class DatabaseTreeNode extends DBTreeNode {
+public class DatabaseTreeNode extends DBTreeNode {
 
-    DatabaseTreeNode(Item item) {
+    public DatabaseTreeNode(Item item) {
         super(item);
         item.setTagName(Constants.DATABASE);
     }
