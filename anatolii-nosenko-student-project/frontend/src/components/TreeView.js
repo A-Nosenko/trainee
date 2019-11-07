@@ -1,11 +1,18 @@
 import React, {Component} from 'react';
+import RootNode from './RootNode'
+import Table from './Table'
 
 class TreeView extends Component {
 
     render() {
         return (
-            <div>
-                <h2>TreeView</h2>
+            <div className='Database-tree'>
+                <div className='Tree'>
+                    <RootNode/>
+                </div>
+                <div className='Table'>
+                    <Table/>
+                </div>
             </div>
         );
     }

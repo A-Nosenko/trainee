@@ -7,7 +7,8 @@ const initState = {
     login: "root",
     password: "root",
     connectionStatus: "",
-    rootId: ""
+    rootId: "",
+    rootName: "",
 };
 
 const connectionReducer = (state = initState, action) => {
@@ -57,7 +58,8 @@ const connectionReducer = (state = initState, action) => {
                         type: types.UPDATE_CONNECTION,
                         payload: {
                             status: data.connector,
-                            rootNewId: JSON.parse(data.root).id
+                            rootNewId: JSON.parse(data.root).item.uniqueId,
+                            rootNewName: JSON.parse(data.root).item.tagName
                         }
                     });
                 })
@@ -76,7 +78,8 @@ const connectionReducer = (state = initState, action) => {
             return {
                 ...state,
                 connectionStatus: action.payload.status,
-                rootId: action.payload.rootNewId
+                rootId: action.payload.rootNewId,
+                rootName: action.payload.rootNewName
             };
 
         default:

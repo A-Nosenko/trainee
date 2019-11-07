@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
 import ConnectionForm from "./ConnectionForm";
 import TreeView from "./TreeView";
 import StatusBar from "./StatusBar";
@@ -50,9 +50,6 @@ export const Error = ({path}) =>
     <div>
         <Header/>
         <div className='center-container'>
-            <h1>Error!</h1>
-            <h1>Resource</h1>
-            <h1>{path.pathname}</h1>
-            <h1>not found.</h1>
+            <h2>Resource not found!</h2>
         </div>
     </div>;

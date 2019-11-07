@@ -3,28 +3,49 @@ body {
     color: whitesmoke;
 }
 
+::-webkit-scrollbar {
+    background-color: #101f44; /* 1 - скроллбар */
+}
+
+::-webkit-scrollbar-button {
+    background-color: #235C75; /* 2 - кнопка */
+}
+
+::-webkit-scrollbar-track {
+    background-color: #101f44; /* 3 - трек */
+}
+
+::-webkit-scrollbar-track-piece {
+    background-color: #101f44; /* 4 - видимая часть трека */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #235C75; /* 5 - ползунок */
+}
+
+::-webkit-scrollbar-corner {
+    background-color: #101f44; /* 6 - уголок */
+}
+
+::-webkit-resizer {
+    background-color: #1c415e; /* 7 - изменение размеров */
+}
+
 header {
-  min-height: 25vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
+    min-height: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
 }
 
 footer {
 
 }
 
-.App {
-    text-align: center;
-}
-
-.App-logo {
-    height: 40vmin;
-}
-
 .App-nav {
-    min-width: 150vh;
+    min-height: 20%;
+    min-width: 50%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -45,10 +66,10 @@ footer {
 }
 
 span {
-  color: whitesmoke;
-  font-family: Courier, sans-serif;
-  font-style: italic;
-  font-size: 120%
+    color: whitesmoke;
+    font-family: Courier, sans-serif;
+    font-style: italic;
+    font-size: 110%
 }
 
 span.error {
@@ -56,6 +77,9 @@ span.error {
     text-transform: uppercase;
 }
 
+span.cursor {
+    cursor: pointer;
+}
 
 button.button {
     min-width: 150px;
@@ -69,7 +93,7 @@ button.button {
 }
 
 button.button:hover {
-  background: #235C75;
+    background: #235C75;
 }
 
 button.button:disabled {
@@ -77,6 +101,7 @@ button.button:disabled {
 }
 
 .center-container {
+    padding: 2%;
     color: whitesmoke;
     display: flex;
     align-items: center;
@@ -89,5 +114,26 @@ button.button:disabled {
 
 .Status-bar-div {
     align-self: flex-end;
-    padding: 5vh;
+    padding: 2%;
+}
+
+.Database-tree {
+    min-width: 98%;
+    display: flex;
+    flex-direction: row;
+    max-height: 72vh;
+}
+
+.Tree {
+    min-width: 45%;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+.Table {
+    min-width: 55%;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: auto;
 }

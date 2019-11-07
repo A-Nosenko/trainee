@@ -5,3 +5,4 @@ target/
 test_data/
 !test_data/input.xml
 *.log
+*.bat

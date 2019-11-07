@@ -6,7 +6,7 @@ class StatusBar extends Component {
         return(
         <div className='Status-bar-div'>
             {(this.props.status)
-                ? (<span>{this.props.status} Root: {this.props.root}</span> )
+                ? (<span>{this.props.status}</span> )
                         :(<span className='error'>Disconnected</span>)}
         </div>
         );
