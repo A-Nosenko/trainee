@@ -3,6 +3,7 @@ package app.parsing.xml;
 import app.literals.Constants;
 import app.structure.model.TreeNode;
 import app.structure.model.TreeModel;
+import app.structure.model.database.*;
 import java.util.Map;
 import org.apache.log4j.Logger;
 
@@ -47,7 +48,42 @@ public class TreeSaverToXML {
         StringBuilder builder = new StringBuilder();
         if (treeNode.getItem().getTagName() != null) {
             builder.append(Constants.START_TEG);
-            builder.append(treeNode.getItem().getTagName());
+
+            if (treeNode instanceof ColumnDatabaseTreeNode) {
+                builder.append(Constants.COLUMN);
+            } else if (treeNode instanceof ColumnsDatabaseTreeNode) {
+                builder.append(Constants.COLUMNS);
+            }else if (treeNode instanceof DatabaseTreeNode) {
+                builder.append(Constants.DATABASE);
+            }else if (treeNode instanceof ForeignKeyDatabaseTreeNode) {
+                builder.append(Constants.FOREIGN_KEY);
+            }else if (treeNode instanceof FunctionDatabaseTreeNode) {
+                builder.append(Constants.FUNCTION);
+            }else if (treeNode instanceof FunctionsDatabaseTreeNode) {
+                builder.append(Constants.FUNCTIONS);
+            }else if (treeNode instanceof RootDatabasesTreeNode) {
+                builder.append(Constants.DATABASES);
+            }else if (treeNode instanceof StoredProcedureDatabaseTreeNode) {
+                builder.append(Constants.STORED_PROCEDURE);
+            }else if (treeNode instanceof StoredProceduresDatabaseTreeNode) {
+                builder.append(Constants.STORED_PROCEDURES);
+            }else if (treeNode instanceof TableDatabaseTreeNode) {
+                builder.append(Constants.TABLE);
+            }else if (treeNode instanceof TableDDLDatabaseTreeNode) {
+                builder.append(Constants.DDL);
+            }else if (treeNode instanceof TablesDatabaseTreeNode) {
+                builder.append(Constants.TABLES);
+            }else if (treeNode instanceof TriggerDatabaseTreeNode) {
+                builder.append(Constants.TRIGGER);
+            }else if (treeNode instanceof TriggersDatabaseTreeNode) {
+                builder.append(Constants.TRIGGERS);
+            }else if (treeNode instanceof ViewDatabaseTreeNode) {
+                builder.append(Constants.VIEW);
+            }else if (treeNode instanceof ViewsDatabaseTreeNode) {
+                builder.append(Constants.VIEWS);
+            } else {
+                builder.append(treeNode.getItem().getTagName());
+            }
 
             for (Map.Entry<String, String> entry : treeNode.getItem().getAttributes().entrySet()) {
                 builder.append(Constants.SPACE);
