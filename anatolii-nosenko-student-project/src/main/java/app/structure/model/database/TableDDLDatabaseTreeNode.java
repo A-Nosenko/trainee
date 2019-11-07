@@ -14,6 +14,7 @@ public class TableDDLDatabaseTreeNode extends DBTreeNode {
     public TableDDLDatabaseTreeNode(Item item) {
         super(item);
         item.setTagName(Constants.DDL);
+        setFinalNode(true);
     }
 
     @Override

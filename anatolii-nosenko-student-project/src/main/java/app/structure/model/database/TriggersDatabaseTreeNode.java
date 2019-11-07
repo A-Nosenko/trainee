@@ -34,6 +34,7 @@ public class TriggersDatabaseTreeNode extends DBTreeNode {
                 triggerItem.setAttribute(triggerAttributes.getKey(), triggerAttributes.getValue());
             }
             treeNodes.add(new TriggerDatabaseTreeNode(triggerItem));
+            triggerItem.setTagName(triggerItem.getTagName().concat(" ").concat(triggerMap.get(Constants.TRIGGER_ATTRIBUTES[2])));
         }
 
         return treeNodes;

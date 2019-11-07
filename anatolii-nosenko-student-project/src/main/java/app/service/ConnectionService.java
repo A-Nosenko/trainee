@@ -12,6 +12,7 @@ import app.structure.model.Item;
 import app.structure.model.TreeModel;
 import app.structure.model.database.RootDatabasesTreeNode;
 import app.structure.search.BreadthFirstSearcher;
+import com.google.gson.Gson;
 import java.sql.Connection;
 import java.sql.SQLException;
 import org.apache.log4j.Logger;
@@ -66,7 +67,8 @@ public class ConnectionService {
         treeModel.add(new RootDatabasesTreeNode(new Item()));
         treeHolder.setTreeModel(treeModel);
 
-        response.setRoot(treeModel.getRoot().toJSON());
+        Gson gson = new Gson();
+        response.setRoot(gson.toJson(treeModel.getRoot()));
 
         try {
            response.setConnector(connection.getMetaData().getDriverVersion());

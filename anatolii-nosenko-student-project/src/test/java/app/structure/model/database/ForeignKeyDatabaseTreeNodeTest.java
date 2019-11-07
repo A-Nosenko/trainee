@@ -24,7 +24,6 @@ public class ForeignKeyDatabaseTreeNodeTest {
     @Test
     public void fetchChildNodes() {
         DBTreeNode dbTreeNode = new ForeignKeyDatabaseTreeNode(new Item());
-        System.out.println(dbTreeNode.toJSON());
         assertNull(
             dbTreeNode.fetchChildNodes(null));
     }

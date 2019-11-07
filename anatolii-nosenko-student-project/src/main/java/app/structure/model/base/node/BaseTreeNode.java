@@ -1,6 +1,5 @@
 package app.structure.model.base.node;
 
-import app.parsing.json.Factory;
 import app.structure.model.Item;
 import app.structure.model.TreeNode;
 import java.util.List;
@@ -19,8 +18,4 @@ public class BaseTreeNode extends TreeNode {
         return null;
     }
 
-    @Override
-    public String toJSON() {
-        return Factory.create(getItem().getUniqueId(), getItem().getTagName(), getItem().getContent(), getItem().getAttributes());
-    }
 }

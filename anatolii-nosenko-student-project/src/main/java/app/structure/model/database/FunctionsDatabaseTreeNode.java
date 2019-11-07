@@ -28,6 +28,7 @@ public class FunctionsDatabaseTreeNode extends DBTreeNode {
                 functionItem.setAttribute(entry.getKey(), entry.getValue());
             }
             treeNodes.add(new FunctionDatabaseTreeNode(functionItem));
+            functionItem.setTagName(functionItem.getTagName().concat(" ").concat(function.get(Constants.FUNCTION_ATTRIBUTES[0])));
         }
         return treeNodes;
     }

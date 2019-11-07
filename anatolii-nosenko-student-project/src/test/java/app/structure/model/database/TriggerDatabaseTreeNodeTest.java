@@ -24,7 +24,6 @@ public class TriggerDatabaseTreeNodeTest {
     public void fetchChildNodes() {
 
         DBTreeNode dbTreeNode = new TriggerDatabaseTreeNode(new Item());
-        System.out.println(dbTreeNode.toJSON());
         assertNull(
             dbTreeNode.fetchChildNodes(null));
     }

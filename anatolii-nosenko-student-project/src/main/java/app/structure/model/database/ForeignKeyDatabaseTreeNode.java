@@ -11,6 +11,7 @@ public class ForeignKeyDatabaseTreeNode extends DBTreeNode {
     public ForeignKeyDatabaseTreeNode(Item item) {
         super(item);
         item.setTagName(Constants.FOREIGN_KEY);
+        setFinalNode(true);
     }
 
     @Override

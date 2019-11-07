@@ -19,7 +19,7 @@ public class TreeSaverToXMLTest extends XMLTestCase {
 
         TreeModel treeModel = new TreeModel(new DepthFirstSearcher());
         TreeLoaderFromXML treeLoaderFromXML = new TreeLoaderFromXML();
-        treeLoaderFromXML.load(new File("src/test/test_data/input.xml"), treeModel);
+        treeLoaderFromXML.load(new File("src/test/test_data/full_tree.xml"), treeModel);
 
         TreeSaverToXML treeSaverToXML = new TreeSaverToXML();
         String XMLFromTree = treeSaverToXML.save(treeModel);
@@ -38,7 +38,7 @@ public class TreeSaverToXMLTest extends XMLTestCase {
         String XML_2 = textReader.read(new File("src/test/test_data/out_2.xml"));
 
         XMLUnit.setIgnoreWhitespace(true);
-        String inputXML = textReader.read(new File("src/test/test_data/input.xml"));
+        String inputXML = textReader.read(new File("src/test/test_data/full_tree.xml"));
 
         assertXMLEqual(inputXML, XML_1);
 

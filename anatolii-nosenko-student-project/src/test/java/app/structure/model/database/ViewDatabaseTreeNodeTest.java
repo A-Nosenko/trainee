@@ -23,7 +23,6 @@ public class ViewDatabaseTreeNodeTest {
     @Test
     public void fetchChildNodes() {
         DBTreeNode dbTreeNode = new ViewDatabaseTreeNode(new Item());
-        System.out.println(dbTreeNode.toJSON());
         assertNull(
             dbTreeNode.fetchChildNodes(null));
     }

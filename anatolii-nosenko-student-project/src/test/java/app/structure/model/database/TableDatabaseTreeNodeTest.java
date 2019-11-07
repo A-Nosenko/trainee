@@ -27,7 +27,6 @@ public class TableDatabaseTreeNodeTest {
         item.setAttribute(Constants.TABLE_NAME, "user_summary");
 
         DBTreeNode dbTreeNode = new TableDatabaseTreeNode(item);
-        System.out.println(dbTreeNode.toJSON());
         assert (dbTreeNode.initChildNodes(connection, true).size() > 0);
     }
 

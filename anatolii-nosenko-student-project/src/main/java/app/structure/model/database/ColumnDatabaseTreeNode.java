@@ -14,6 +14,7 @@ public class ColumnDatabaseTreeNode extends DBTreeNode {
     public ColumnDatabaseTreeNode(Item item) {
         super(item);
         item.setTagName(Constants.COLUMN);
+        setFinalNode(true);
     }
 
     @Override

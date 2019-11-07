@@ -12,6 +12,7 @@ public abstract class TreeNode {
     private Item item;
     private TreeNode parentTreeNode;
     private final List<TreeNode> childTreeNodes;
+    private boolean isFinalNode;
 
     protected TreeNode(Item item) {
         this.item = item;
@@ -29,13 +30,6 @@ public abstract class TreeNode {
      * @return List of child tree nodes.
      */
     public abstract List<TreeNode> initChildNodes(Object datasource, boolean lazyInitialisation);
-
-    /**
-     * Method to represent node in JSON format.
-     *
-     * @return Node in JSON format.
-     */
-    public abstract String toJSON();
 
     /**
      * Method to get tree root from any tree node.
@@ -69,6 +63,14 @@ public abstract class TreeNode {
 
     public Item getItem() {
         return item;
+    }
+
+    public boolean isFinalNode() {
+        return isFinalNode;
+    }
+
+    public void setFinalNode(boolean finalNode) {
+        isFinalNode = finalNode;
     }
 
     public List<TreeNode> getChildTreeNodes() {

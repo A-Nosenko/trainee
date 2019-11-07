@@ -29,6 +29,7 @@ public final class Constants {
     public static final String TEG_BOUNDS_TO_NEXT_LINE = ">\n<";
 
     public static final String NULL_ELEMENT = "<null/>";
+    public static final String END_NODE_FLAG = "end";
 
     public static final String VERSION = "version";
     public static final String DEFAULT_VERSION = "1.0";
@@ -103,17 +104,8 @@ public final class Constants {
     };
 
     // Constants to represent JSON.
-    public static final String START_JSON = "{";
-    public static final String FINISH_JSON = "}";
     public static final String START_JSON_ARRAY = "[";
     public static final String FINISH_JSON_ARRAY = "]";
-    public static final String COLON = " : ";
-    public static final String COMMA = ", ";
-    public static final String DOUBLE_QUOTES = "\"";
-    public static final String ID = "id";
-    public static final String TAG_NAME = "tag_name";
-    public static final String CONTENT = "content";
-    public static final String ATTRIBUTES = "attributes";
 
     // Connection default attributes.
     public static final String DRIVER = "com.mysql.cj.jdbc.Driver";

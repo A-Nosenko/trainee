@@ -11,6 +11,7 @@ public class TriggerDatabaseTreeNode extends DBTreeNode {
     public TriggerDatabaseTreeNode(Item item) {
         super(item);
         item.setTagName(Constants.TRIGGER);
+        setFinalNode(true);
     }
 
     @Override

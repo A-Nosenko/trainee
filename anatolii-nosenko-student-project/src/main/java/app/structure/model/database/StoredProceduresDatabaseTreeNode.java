@@ -28,6 +28,10 @@ public class StoredProceduresDatabaseTreeNode extends DBTreeNode {
                 procedureItem.setAttribute(entry.getKey(), entry.getValue());
             }
             treeNodes.add(new StoredProcedureDatabaseTreeNode(procedureItem));
+            procedureItem.setTagName(
+                procedureItem.getTagName()
+                    .concat(" ")
+                    .concat(procedure.get(Constants.STORED_PROCEDURE_ATTRIBUTES[1])));
         }
         return treeNodes;
     }

@@ -11,6 +11,7 @@ public class StoredProcedureDatabaseTreeNode extends DBTreeNode {
     public StoredProcedureDatabaseTreeNode(Item item) {
         super(item);
         item.setTagName(Constants.STORED_PROCEDURE);
+        setFinalNode(true);
     }
 
     @Override

@@ -11,6 +11,7 @@ public class FunctionDatabaseTreeNode extends DBTreeNode {
     public FunctionDatabaseTreeNode(Item item) {
         super(item);
         item.setTagName(Constants.FUNCTION);
+        setFinalNode(true);
     }
 
     @Override

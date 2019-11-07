@@ -27,7 +27,6 @@ public class TriggersDatabaseTreeNodeTest {
         item.setAttribute(Constants.TABLE_NAME, "sys_config");
 
         DBTreeNode dbTreeNode = new TriggersDatabaseTreeNode(item);
-        System.out.println(dbTreeNode.toJSON());
         assert (dbTreeNode.initChildNodes(connection, true).size() > 0);
     }
 

@@ -27,12 +27,7 @@ public class ViewsDatabaseTreeNodeTest {
         item.setAttribute(Constants.TABLE_NAME, "schema_auto_increment_columns");
 
         DBTreeNode dbTreeNode = new ViewsDatabaseTreeNode(item);
-        System.out.println(dbTreeNode.toJSON());
         assert (dbTreeNode.initChildNodes(connection, true).size() > 0);
-
-        for (TreeNode node : dbTreeNode.getChildTreeNodes()) {
-            System.out.println(node.toJSON());
-        }
     }
 
     @AfterClass

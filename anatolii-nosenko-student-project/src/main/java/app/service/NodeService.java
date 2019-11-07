@@ -5,6 +5,7 @@ import app.model.ConnectionHolder;
 import app.model.TreeHolder;
 import app.structure.model.TreeModel;
 import app.structure.model.TreeNode;
+import com.google.gson.Gson;
 import java.sql.Connection;
 import java.util.List;
 import org.apache.log4j.Logger;
@@ -31,15 +32,13 @@ public class NodeService {
      * @return JSON array of child nodes.
      */
     public String loadChildNodes(long itemId) {
-        StringBuilder builder = new StringBuilder();
-        builder.append(Constants.START_JSON_ARRAY);
         TreeModel treeModel = treeHolder.getTreeModel();
         Connection connection = connectionHolder.getConnection();
+        String emptyResult = Constants.START_JSON_ARRAY.concat(Constants.FINISH_JSON_ARRAY);
 
         if (treeModel == null || connection == null) {
             LOGGER.error("Can't load child nodes! First initialise Connection and TreeModel via ConnectionController.");
-            builder.append(Constants.FINISH_JSON_ARRAY);
-            return builder.toString();
+            return emptyResult;
         }
 
         TreeNode node = treeModel.getSearcher().find(treeModel.getRoot(), itemId);
@@ -49,16 +48,11 @@ public class NodeService {
             if (treeNodes == null || treeNodes.isEmpty()) {
                 treeNodes = node.initChildNodes(connection, true);
             }
-            if (treeNodes != null && !treeNodes.isEmpty()) {
-                for (TreeNode child : treeNodes) {
-                    builder.append(child.toJSON());
-                    builder.append(Constants.COMMA);
-                }
-                builder.replace(builder.length() - 2, builder.length(), "");
-            }
+
+            Gson gson = new Gson();
+            return gson.toJson(treeNodes);
         }
 
-        builder.append(Constants.FINISH_JSON_ARRAY);
-        return builder.toString();
+        return emptyResult;
     }
 }

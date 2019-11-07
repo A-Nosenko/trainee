@@ -1,7 +1,6 @@
 package app.structure.model.database;
 
 import app.exception.AppException;
-import app.parsing.json.Factory;
 import app.structure.model.Item;
 import app.structure.model.TreeNode;
 import java.sql.Connection;
@@ -38,9 +37,4 @@ abstract class DBTreeNode extends TreeNode {
     }
 
     abstract List<TreeNode> fetchChildNodes(Connection connection);
-
-    @Override
-    public String toJSON() {
-        return Factory.create(getItem().getUniqueId(), getItem().getTagName(), getItem().getContent(), getItem().getAttributes());
-    }
 }

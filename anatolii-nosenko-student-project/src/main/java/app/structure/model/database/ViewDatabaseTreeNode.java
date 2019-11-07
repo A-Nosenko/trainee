@@ -11,6 +11,7 @@ public class ViewDatabaseTreeNode extends DBTreeNode {
     public ViewDatabaseTreeNode(Item item) {
         super(item);
         item.setTagName(Constants.VIEW);
+        setFinalNode(true);
     }
 
     @Override

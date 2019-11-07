@@ -30,10 +30,6 @@ public class ColumnDatabaseTreeNodeTest {
         DBTreeNode dbTreeNode = new ColumnDatabaseTreeNode(item);
 
         assert (dbTreeNode.initChildNodes(connection, true).size() > 0);
-
-        for (TreeNode node : dbTreeNode.getChildTreeNodes()) {
-            System.out.println(node.toJSON());
-        }
     }
 
     @AfterClass
