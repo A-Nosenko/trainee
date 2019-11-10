@@ -233,15 +233,15 @@ public final class QueryManager {
     public long getLastInsertId(String databaseName, String tableName, Connection connection) {
         long result = 0;
         builder = new StringBuilder();
-        builder.append("SELECT LAST_INSERT_ID() FROM ");
+        builder.append("SELECT COUNT(LAST_INSERT_ID()) FROM ");
         builder.append(databaseName);
         builder.append(".");
         builder.append(tableName);
 
         try (PreparedStatement statement = connection.prepareStatement(builder.toString())) {
             ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                result++;
+            if (resultSet.next()) {
+                result = resultSet.getInt(1);
             }
         } catch (SQLException | NullPointerException e) {
             throw new AppException(e.getMessage());
