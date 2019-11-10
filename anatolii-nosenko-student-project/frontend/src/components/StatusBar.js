@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {connect} from "react-redux";
+import {connect} from 'react-redux';
+import {getConnectionStatusSelector} from '../selectors/selectors'
 
 class StatusBar extends Component {
     render() {
@@ -15,8 +16,7 @@ class StatusBar extends Component {
 
 const mapStateToProps = (state) => {
   return {
-      status: state.connectionReducer.connectionStatus,
-      root: state.connectionReducer.rootId
+      status: getConnectionStatusSelector(state).status
   }
 };
 

@@ -1,62 +1,62 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import Open from '../images/open.png';
 import Close from '../images/close.png';
 import EndPoint from '../images/end_point.png';
+import {findTheNodeSelector} from '../selectors/selectors';
+import {openNode, closeNode} from '../actions/TreeActions';
+import NodeWrapper from "./NodeWrapper";
 
 class Node extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
-            image: Open,
-            childNodes: [],
-            end: props.end
+            firstPainting: true,
+            image: props.target.childTreeNodes.length ? Close : Open,
         }
     }
 
     onClick = () => {
-        this.state.image === Open
-            ? this.openNode()
-            : this.closeNode()
+        this.props.target.childTreeNodes.length
+            ? this.closeNode()
+            : this.openNode()
     };
 
     openNode = () => {
         this.setState({image: Close});
-        fetch('http://localhost:8080/open?id=' + this.props.nodeId)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                this.setState({childNodes: data});
-                if (!data.length) {
-                    this.setState({end: true})
-                }
-            })
-            .catch((e) => {
-                    console.log(e.toString());
-                }
-            );
+        this.setState({firstPainting: false});
+        this.props.open(this.props.target.item.uniqueId);
     };
 
     closeNode = () => {
         this.setState({image: Open});
-        this.setState({childNodes: []});
+        this.setState({firstPainting: true});
+        this.props.close(this.props.target.item.uniqueId);
     };
 
     render() {
         return (
             <ul>
                 {
-                    this.state.end
-                        ? <img src={EndPoint} alt={this.props.name}/>
-                        : <img onClick={this.onClick} src={this.state.image} alt={this.props.name}/>
+                    this.props.target.isFinalNode || (!this.state.firstPainting && !this.props.target.childTreeNodes.length)
+                        ? <img src={EndPoint} alt={this.props.target.item.tagName}/>
+                        : <img onClick={this.onClick} src={this.state.image} alt={this.props.target.item.tagName}/>
                 }
-                <span className='cursor'>{this.props.name}</span>
-                {this.state.childNodes.map(
-                    function (node, key) {
+                <span className='cursor' onClick={() => {
+                    console.log(this.props.target);
+                }}>{
+                        this.props.target.item.tagName
+                            ? this.props.target.item.tagName
+                            : this.props.target.item.content
+                    }
+                </span>
+                {this.props.target.childTreeNodes.map(
+                    (node, key) => {
                         return (
-                            <Node nodeId={node.item.uniqueId}
-                                  name={node.item.tagName}
-                                  key={key}
-                                  end={node.isFinalNode}/>
+                            node != null
+                                ? <NodeWrapper id={node.item.uniqueId} key={key}/>
+                                : <ul>null</ul>
                         )
                     }
                 )}
@@ -65,4 +65,17 @@ class Node extends Component {
     }
 }
 
-export default Node;
+const mapStateToProps = (state, ownProps) => {
+    return {
+        target: findTheNodeSelector(state, ownProps.id).node
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        open: ip => dispatch(openNode(ip)),
+        close: ip => dispatch(closeNode(ip))
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Node);

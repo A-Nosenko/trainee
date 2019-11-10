@@ -9,6 +9,7 @@ const initState = {
     connectionStatus: "",
     rootId: "",
     rootName: "",
+    nodes: []
 };
 
 const connectionReducer = (state = initState, action) => {
@@ -54,12 +55,13 @@ const connectionReducer = (state = initState, action) => {
             })
                 .then(response => response.json())
                 .then(data => {
+                    let node = JSON.parse(data.root);
                     store.dispatch({
                         type: types.UPDATE_CONNECTION,
                         payload: {
                             status: data.connector,
-                            rootNewId: JSON.parse(data.root).item.uniqueId,
-                            rootNewName: JSON.parse(data.root).item.tagName
+                            rootNewId: node.item.uniqueId,
+                            rootNode: node
                         }
                     });
                 })
@@ -71,7 +73,8 @@ const connectionReducer = (state = initState, action) => {
             return {
                 ...state,
                 connectionStatus: "",
-                rootId: ""
+                rootId: "",
+                nodes: []
             };
 
         case types.UPDATE_CONNECTION:
@@ -79,8 +82,84 @@ const connectionReducer = (state = initState, action) => {
                 ...state,
                 connectionStatus: action.payload.status,
                 rootId: action.payload.rootNewId,
-                rootName: action.payload.rootNewName
+                nodes: [action.payload.rootNode]
             };
+
+        case types.OPEN_NODE:
+            fetch('http://localhost:8080/open?id=' + action.payload.id)
+                .then(response => response.json())
+                .then(data => {
+                    store.dispatch({
+                        type: types.ADD_CHILD_NODES,
+                        payload: {
+                            id: action.payload.id,
+                            nodes: data
+                        }
+                    });
+                })
+                .catch((e) => {
+                        console.log(e.toString());
+                    }
+                );
+            return state;
+
+        case types.ADD_CHILD_NODES:
+            let nodeToOpen = state.nodes.find(node => node.item.uniqueId === action.payload.id);
+            let overriddenNodeToOpen = {
+                item: nodeToOpen.item,
+                isFinalNode: nodeToOpen.isFinalNode,
+                childTreeNodes: action.payload.nodes
+            };
+
+            return {
+                ...state,
+                nodes: state
+                    .nodes
+                    .filter(node => node.item.uniqueId !== action.payload.id)
+                    .concat(action.payload.nodes.map(function (node) {
+                        return {
+                            item: node.item,
+                            isFinalNode: node.isFinalNode,
+                            childTreeNodes: []
+                        }
+                    }))
+                    .concat(overriddenNodeToOpen)
+            };
+
+        case types.CLOSE_NODE:
+            let nodeToClose = state.nodes.find(node => node.item.uniqueId === action.payload.id);
+
+            if (!nodeToClose) {
+                return state;
+            }
+
+            if (!nodeToClose.childTreeNodes) {
+                return state;
+            }
+
+            let currentNodeIdWithChildIdes = [action.payload.id];
+            nodeToClose
+                .childTreeNodes
+                .forEach(childNode => currentNodeIdWithChildIdes.push(childNode.item.uniqueId));
+
+            let overriddenNodeToClose = {
+                item: nodeToClose.item,
+                childTreeNodes: [],
+                isFinalNode: nodeToClose.isFinalNode,
+            };
+
+            if (currentNodeIdWithChildIdes.length > 1) {
+                let newNodes = state
+                    .nodes
+                    .filter(node => !currentNodeIdWithChildIdes.includes(node.item.uniqueId))
+                    .concat(overriddenNodeToClose);
+                return {
+                    ...state,
+                    nodes: newNodes
+                };
+            }
+
+            return state;
 
         default:
             return state;

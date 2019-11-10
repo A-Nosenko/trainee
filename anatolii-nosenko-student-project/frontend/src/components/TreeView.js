@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import RootNode from './RootNode'
+import Node from './Node'
 import Table from './Table'
+import {getRootNodeIdSelector} from "../selectors/selectors";
+import {connect} from "react-redux";
 
 class TreeView extends Component {
 
@@ -8,7 +10,11 @@ class TreeView extends Component {
         return (
             <div className='Database-tree'>
                 <div className='Tree'>
-                    <RootNode/>
+                    {
+                        this.props.root.id
+                            ? <Node id={this.props.root.id}/>
+                            : <span className='error'>Can't open tree without connection.</span>
+                    }
                 </div>
                 <div className='Table'>
                     <Table/>
@@ -18,4 +24,10 @@ class TreeView extends Component {
     }
 }
 
-export default TreeView;
+const mapStateToProps = (state) => {
+    return {
+        root: getRootNodeIdSelector(state)
+    }
+};
+
+export default connect(mapStateToProps)(TreeView);

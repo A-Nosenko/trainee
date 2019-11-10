@@ -4,9 +4,10 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
+import {getConnectionPropertiesSelector} from '../selectors/selectors'
 
 import {updateIp, updatePort, updateLogin, updatePassword, createConnection}
-    from '../actions/ConnectionFormActions';
+    from '../actions/ConnectionActions';
 
 class ConnectionForm extends Component {
 
@@ -27,7 +28,7 @@ class ConnectionForm extends Component {
                                 <TableCell><input
                                     id='ip'
                                     type='text'
-                                    value={this.props.ip}
+                                    value={this.props.connectionProperties.ip}
                                     onChange={event => this.props.inputIp(event.target.value)}/></TableCell>
                             </TableRow>
                             <TableRow>
@@ -35,7 +36,7 @@ class ConnectionForm extends Component {
                                 <TableCell><input
                                     id='port'
                                     type='number'
-                                    value={this.props.port}
+                                    value={this.props.connectionProperties.port}
                                     onChange={event => this.props.inputPort(event.target.value)}/></TableCell>
                             </TableRow>
                             <TableRow>
@@ -43,7 +44,7 @@ class ConnectionForm extends Component {
                                 <TableCell><input
                                     id='login'
                                     type='text'
-                                    value={this.props.login}
+                                    value={this.props.connectionProperties.login}
                                     onChange={event => this.props.inputLogin(event.target.value)}/></TableCell>
                             </TableRow>
                             <TableRow>
@@ -51,7 +52,7 @@ class ConnectionForm extends Component {
                                 <TableCell><input
                                     id='password'
                                     type='password'
-                                    value={this.props.password}
+                                    value={this.props.connectionProperties.password}
                                     onChange={event => this.props.inputPassword(event.target.value)}/></TableCell>
                             </TableRow>
                             <TableRow>
@@ -73,11 +74,7 @@ class ConnectionForm extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        ip: state.connectionReducer.ip,
-        port: state.connectionReducer.port,
-        login: state.connectionReducer.login,
-        password: state.connectionReducer.password,
-        rootId: state.connectionReducer.rootId,
+        connectionProperties: getConnectionPropertiesSelector(state)
     };
 };
 
