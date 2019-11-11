@@ -46,17 +46,15 @@ class Node extends Component {
                 <span className='cursor' onClick={() => {
                     console.log(this.props.target);
                 }}>{
-                        this.props.target.item.tagName
-                            ? this.props.target.item.tagName
-                            : this.props.target.item.content
-                    }
+                    this.props.target.item.tagName
+                        ? this.props.target.item.tagName
+                        : this.props.target.item.content
+                }
                 </span>
                 {this.props.target.childTreeNodes.map(
-                    (node, key) => {
+                    (nodeId, key) => {
                         return (
-                            node != null
-                                ? <NodeWrapper id={node.item.uniqueId} key={key}/>
-                                : <ul>null</ul>
+                            <NodeWrapper id={nodeId} key={key}/>
                         )
                     }
                 )}

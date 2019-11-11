@@ -8,7 +8,6 @@ const initState = {
     password: "root",
     connectionStatus: "",
     rootId: "",
-    rootName: "",
     nodes: []
 };
 
@@ -108,7 +107,7 @@ const connectionReducer = (state = initState, action) => {
             let overriddenNodeToOpen = {
                 item: nodeToOpen.item,
                 isFinalNode: nodeToOpen.isFinalNode,
-                childTreeNodes: action.payload.nodes
+                childTreeNodes: action.payload.nodes.map(node => node.item.uniqueId)
             };
 
             return {
@@ -137,10 +136,7 @@ const connectionReducer = (state = initState, action) => {
                 return state;
             }
 
-            let currentNodeIdWithChildIdes = [action.payload.id];
-            nodeToClose
-                .childTreeNodes
-                .forEach(childNode => currentNodeIdWithChildIdes.push(childNode.item.uniqueId));
+            let currentNodeIdWithChildIdes = nodeToClose.childTreeNodes.concat(action.payload.id);
 
             let overriddenNodeToClose = {
                 item: nodeToClose.item,
