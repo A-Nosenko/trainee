@@ -47,13 +47,13 @@ public class QueryManagerTest {
     }
 
     @Test
-    public void getTableDDL() {
-        assertTrue(queryManager.getTableDDL("sys", "sys_config", connection).contains("CREATE TABLE"));
+    public void getDDL() {
+        assertTrue(queryManager.getDDL("sys", DDL.TABLE, "sys_config", connection).contains("CREATE TABLE"));
     }
 
     @Test(expected = AppException.class)
     public void getTableDDLException() {
-        queryManager.getTableDDL("sys", null, connection);
+        queryManager.getDDL("sys", DDL.TABLE, null, connection);
     }
 
     @Test

@@ -15,7 +15,6 @@ import app.structure.model.database.FunctionsDatabaseTreeNode;
 import app.structure.model.database.RootDatabasesTreeNode;
 import app.structure.model.database.StoredProcedureDatabaseTreeNode;
 import app.structure.model.database.StoredProceduresDatabaseTreeNode;
-import app.structure.model.database.TableDDLDatabaseTreeNode;
 import app.structure.model.database.TableDatabaseTreeNode;
 import app.structure.model.database.TablesDatabaseTreeNode;
 import app.structure.model.database.TriggerDatabaseTreeNode;
@@ -135,9 +134,6 @@ public class TreeLoaderFromXML {
                     break;
                 case Constants.TABLE:
                     treeNode = new TableDatabaseTreeNode(currentItem);
-                    break;
-                case Constants.DDL:
-                    treeNode = new TableDDLDatabaseTreeNode(currentItem);
                     break;
                 case Constants.TABLES:
                     treeNode = new TablesDatabaseTreeNode(currentItem);

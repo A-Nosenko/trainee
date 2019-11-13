@@ -1,5 +1,6 @@
 package app.structure.model.database;
 
+import app.database.query.DDL;
 import app.literals.Constants;
 import app.database.query.QueryManager;
 import app.structure.model.Item;
@@ -33,6 +34,13 @@ public class TriggersDatabaseTreeNode extends DBTreeNode {
             for (Map.Entry<String, String> triggerAttributes : triggerMap.entrySet()) {
                 triggerItem.setAttribute(triggerAttributes.getKey(), triggerAttributes.getValue());
             }
+            triggerItem.setAttribute(Constants.DDL,
+                QueryManager
+                    .getInstance()
+                    .getDDL(getItem().getAttribute(Constants.DATABASE_NAME),
+                        DDL.TRIGGER,
+                        triggerMap.get(Constants.TRIGGER_ATTRIBUTES[2]), connection)
+            );
             treeNodes.add(new TriggerDatabaseTreeNode(triggerItem));
             triggerItem.setTagName(triggerItem.getTagName().concat(" ").concat(triggerMap.get(Constants.TRIGGER_ATTRIBUTES[2])));
         }

@@ -53,33 +53,31 @@ public class TreeSaverToXML {
                 builder.append(Constants.COLUMN);
             } else if (treeNode instanceof ColumnsDatabaseTreeNode) {
                 builder.append(Constants.COLUMNS);
-            }else if (treeNode instanceof DatabaseTreeNode) {
+            } else if (treeNode instanceof DatabaseTreeNode) {
                 builder.append(Constants.DATABASE);
-            }else if (treeNode instanceof ForeignKeyDatabaseTreeNode) {
+            } else if (treeNode instanceof ForeignKeyDatabaseTreeNode) {
                 builder.append(Constants.FOREIGN_KEY);
-            }else if (treeNode instanceof FunctionDatabaseTreeNode) {
+            } else if (treeNode instanceof FunctionDatabaseTreeNode) {
                 builder.append(Constants.FUNCTION);
-            }else if (treeNode instanceof FunctionsDatabaseTreeNode) {
+            } else if (treeNode instanceof FunctionsDatabaseTreeNode) {
                 builder.append(Constants.FUNCTIONS);
-            }else if (treeNode instanceof RootDatabasesTreeNode) {
+            } else if (treeNode instanceof RootDatabasesTreeNode) {
                 builder.append(Constants.DATABASES);
-            }else if (treeNode instanceof StoredProcedureDatabaseTreeNode) {
+            } else if (treeNode instanceof StoredProcedureDatabaseTreeNode) {
                 builder.append(Constants.STORED_PROCEDURE);
-            }else if (treeNode instanceof StoredProceduresDatabaseTreeNode) {
+            } else if (treeNode instanceof StoredProceduresDatabaseTreeNode) {
                 builder.append(Constants.STORED_PROCEDURES);
-            }else if (treeNode instanceof TableDatabaseTreeNode) {
+            } else if (treeNode instanceof TableDatabaseTreeNode) {
                 builder.append(Constants.TABLE);
-            }else if (treeNode instanceof TableDDLDatabaseTreeNode) {
-                builder.append(Constants.DDL);
-            }else if (treeNode instanceof TablesDatabaseTreeNode) {
+            } else if (treeNode instanceof TablesDatabaseTreeNode) {
                 builder.append(Constants.TABLES);
-            }else if (treeNode instanceof TriggerDatabaseTreeNode) {
+            } else if (treeNode instanceof TriggerDatabaseTreeNode) {
                 builder.append(Constants.TRIGGER);
-            }else if (treeNode instanceof TriggersDatabaseTreeNode) {
+            } else if (treeNode instanceof TriggersDatabaseTreeNode) {
                 builder.append(Constants.TRIGGERS);
-            }else if (treeNode instanceof ViewDatabaseTreeNode) {
+            } else if (treeNode instanceof ViewDatabaseTreeNode) {
                 builder.append(Constants.VIEW);
-            }else if (treeNode instanceof ViewsDatabaseTreeNode) {
+            } else if (treeNode instanceof ViewsDatabaseTreeNode) {
                 builder.append(Constants.VIEWS);
             } else {
                 builder.append(treeNode.getItem().getTagName());

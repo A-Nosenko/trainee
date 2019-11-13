@@ -25,7 +25,11 @@ public class FunctionsDatabaseTreeNode extends DBTreeNode {
         for (Map<String, String> function : functions) {
             Item functionItem = new Item();
             for (Map.Entry<String, String> entry : function.entrySet()) {
-                functionItem.setAttribute(entry.getKey(), entry.getValue());
+                if (entry.getKey().equals(Constants.FUNCTION_ATTRIBUTES[15])) {
+                    functionItem.setAttribute(Constants.DDL, entry.getValue());
+                } else {
+                    functionItem.setAttribute(entry.getKey(), entry.getValue());
+                }
             }
             treeNodes.add(new FunctionDatabaseTreeNode(functionItem));
             functionItem.setTagName(functionItem.getTagName().concat(" ").concat(function.get(Constants.FUNCTION_ATTRIBUTES[0])));

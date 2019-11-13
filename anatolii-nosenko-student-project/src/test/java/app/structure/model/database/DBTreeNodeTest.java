@@ -28,7 +28,7 @@ public class DBTreeNodeTest {
         item.setAttribute(Constants.DATABASE_NAME, "sys");
         item.setAttribute(Constants.TABLE_NAME, "user_summary");
 
-        DBTreeNode dbTreeNode = new TableDDLDatabaseTreeNode(item);
+        DBTreeNode dbTreeNode = new TableDatabaseTreeNode(item);
         assertNotNull(dbTreeNode.initChildNodes(connection, false));
 
     }
@@ -39,7 +39,7 @@ public class DBTreeNodeTest {
         item.setAttribute(Constants.DATABASE_NAME, "sys");
         item.setAttribute(Constants.TABLE_NAME, "user_summary");
 
-        DBTreeNode dbTreeNode = new TableDDLDatabaseTreeNode(item);
+        DBTreeNode dbTreeNode = new TableDatabaseTreeNode(item);
         dbTreeNode.initChildNodes(new Object(), true);
 
     }

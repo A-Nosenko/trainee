@@ -1,5 +1,6 @@
 package app.structure.model.database;
 
+import app.database.query.DDL;
 import app.literals.Constants;
 import app.database.query.QueryManager;
 import app.structure.model.Item;
@@ -27,6 +28,13 @@ public class StoredProceduresDatabaseTreeNode extends DBTreeNode {
             for (Map.Entry<String, String> entry : procedure.entrySet()) {
                 procedureItem.setAttribute(entry.getKey(), entry.getValue());
             }
+            procedureItem.setAttribute(Constants.DDL,
+                QueryManager
+                    .getInstance()
+                    .getDDL(getItem().getAttribute(Constants.DATABASE_NAME),
+                        DDL.PROCEDURE, procedure.get(Constants.STORED_PROCEDURE_ATTRIBUTES[1]),
+                        connection)
+            );
             treeNodes.add(new StoredProcedureDatabaseTreeNode(procedureItem));
             procedureItem.setTagName(
                 procedureItem.getTagName()

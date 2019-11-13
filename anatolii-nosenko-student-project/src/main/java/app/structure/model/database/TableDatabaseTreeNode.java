@@ -26,11 +26,6 @@ public class TableDatabaseTreeNode extends DBTreeNode {
         columns.setAttribute(Constants.TABLE_NAME, tableName);
         treeNodes.add(new ColumnsDatabaseTreeNode(columns));
 
-        Item ddl = new Item();
-        ddl.setAttribute(Constants.DATABASE_NAME, databaseName);
-        ddl.setAttribute(Constants.TABLE_NAME, tableName);
-        treeNodes.add(new TableDDLDatabaseTreeNode(ddl));
-
         Item viewsItem = new Item();
         viewsItem.setAttribute(Constants.TABLE_NAME, tableName);
         treeNodes.add(new ViewsDatabaseTreeNode(viewsItem));

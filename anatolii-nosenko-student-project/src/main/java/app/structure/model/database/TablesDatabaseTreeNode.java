@@ -1,5 +1,6 @@
 package app.structure.model.database;
 
+import app.database.query.DDL;
 import app.literals.Constants;
 import app.database.query.QueryManager;
 import app.structure.model.Item;
@@ -33,6 +34,9 @@ public class TablesDatabaseTreeNode extends DBTreeNode {
                     .getLastInsertId(databaseName, tableName, connection)));
             treeNodes.add(new TableDatabaseTreeNode(table));
             table.setTagName(table.getTagName().concat(" ").concat(tableName));
+            table.setAttribute(Constants.DDL, QueryManager
+                .getInstance()
+                .getDDL(databaseName, DDL.TABLE, tableName, connection));
         }
 
         return treeNodes;

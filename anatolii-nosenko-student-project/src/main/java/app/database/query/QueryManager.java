@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public final class QueryManager {
 
-    private static QueryManager queryManager;
+    private  static QueryManager queryManager;
 
     private StringBuilder builder = new StringBuilder();
 
@@ -54,7 +54,7 @@ public final class QueryManager {
      * @param connection   Connection to database server.
      * @return List of tables names.
      */
-    public List<String> getTablesNames(String databaseName, Connection connection) {
+    public synchronized List<String> getTablesNames(String databaseName, Connection connection) {
         makeQuery("USE ".concat(databaseName), connection);
         return getStringLines("SHOW TABLES", connection);
     }
@@ -63,23 +63,42 @@ public final class QueryManager {
      * Method to fetch table DDL script.
      *
      * @param databaseName Database name.
-     * @param tableName    Table name.
+     * @param type         Target type to fetch DDL.
+     * @param targetName   Target name.
      * @param connection   Connection to database server.
      * @return Script to create table.
      */
-    public String getTableDDL(String databaseName, String tableName, Connection connection) {
+    public synchronized String getDDL(String databaseName, DDL type, String targetName, Connection connection) {
         String result = null;
 
         makeQuery("USE ".concat(databaseName), connection);
 
         builder = new StringBuilder();
-        builder.append("SHOW CREATE TABLE ");
-        builder.append(tableName);
+        builder.append("SHOW CREATE ");
+        switch (type) {
+            case TABLE:
+                builder.append(DDL.TABLE.name());
+                break;
+            case TRIGGER:
+                builder.append(DDL.TRIGGER.name());
+                break;
+            case PROCEDURE:
+                builder.append(DDL.PROCEDURE.name());
+                break;
+            default:
+                throw new AppException("Incorrect target to fetch DDL.");
+        }
+        builder.append(Constants.SPACE);
+        builder.append(targetName);
 
         try (PreparedStatement statement = connection.prepareStatement(builder.toString())) {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                result = resultSet.getString(2);
+                if (type == DDL.TABLE) {
+                    result = resultSet.getString(2);
+                } else {
+                    result = resultSet.getString(type.getKey());
+                }
             }
         } catch (SQLException | NullPointerException e) {
             throw new AppException(e.getMessage());
@@ -96,7 +115,7 @@ public final class QueryManager {
      * @param connection Connection to database server.
      * @return List of String elements from ResultSet.
      */
-    private List<String> getStringLines(String query, Connection connection) {
+    private synchronized List<String> getStringLines(String query, Connection connection) {
         List<String> result = new ArrayList<>();
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             ResultSet resultSet = statement.executeQuery();
@@ -230,7 +249,7 @@ public final class QueryManager {
      * @param connection   Connection to database server.
      * @return Last insert id.
      */
-    public long getLastInsertId(String databaseName, String tableName, Connection connection) {
+    public synchronized long getLastInsertId(String databaseName, String tableName, Connection connection) {
         long result = 0;
         builder = new StringBuilder();
         builder.append("SELECT COUNT(LAST_INSERT_ID()) FROM ");
@@ -250,7 +269,7 @@ public final class QueryManager {
         return result;
     }
 
-    private void makeQuery(String query, Connection connection) {
+    private synchronized void makeQuery(String query, Connection connection) {
         try (Statement statement = connection.createStatement()) {
             statement.executeQuery(query);
         } catch (SQLException | NullPointerException e) {
@@ -258,7 +277,7 @@ public final class QueryManager {
         }
     }
 
-    private List<Map<String, String>> getMapsOfArguments(String query, String[] arguments,
+    private synchronized List<Map<String, String>> getMapsOfArguments(String query, String[] arguments,
                                                          Connection connection) {
         List<Map<String, String>> result = new ArrayList<>();
         try (PreparedStatement statement = connection.prepareStatement(query)) {
@@ -278,7 +297,7 @@ public final class QueryManager {
         return result;
     }
 
-    private Map<String, String> getMapOfArguments(String query, String[] arguments,
+    private synchronized Map<String, String> getMapOfArguments(String query, String[] arguments,
                                                   Connection connection) {
         Map<String, String> map = new HashMap<>();
         try (PreparedStatement statement = connection.prepareStatement(query)) {

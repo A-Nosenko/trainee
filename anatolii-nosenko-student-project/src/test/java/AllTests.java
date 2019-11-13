@@ -21,7 +21,6 @@ import app.structure.model.database.FunctionsDatabaseTreeNodeTest;
 import app.structure.model.database.RootDatabasesTreeNodeTest;
 import app.structure.model.database.StoredProcedureDatabaseTreeNodeTest;
 import app.structure.model.database.StoredProceduresDatabaseTreeNodeTest;
-import app.structure.model.database.TableDDLDatabaseTreeNodeTest;
 import app.structure.model.database.TableDatabaseTreeNodeTest;
 import app.structure.model.database.TablesDatabaseTreeNodeTest;
 import app.structure.model.database.TriggerDatabaseTreeNodeTest;
@@ -61,7 +60,6 @@ import org.junit.runners.Suite;
     StoredProceduresDatabaseTreeNodeTest.class,
     TableDatabaseTreeNodeTest.class,
     TablesDatabaseTreeNodeTest.class,
-    TableDDLDatabaseTreeNodeTest.class,
     TriggerDatabaseTreeNodeTest.class,
     TriggersDatabaseTreeNodeTest.class,
     ViewDatabaseTreeNodeTest.class,
