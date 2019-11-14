@@ -8,7 +8,7 @@ class TreeView extends Component {
 
     render() {
         return (
-            <div className='Database-tree'>
+            <div className='Database-tree-table'>
                 <div className='Tree'>
                     {
                         this.props.root.id

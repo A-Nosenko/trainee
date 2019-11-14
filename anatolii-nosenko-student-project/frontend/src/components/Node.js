@@ -4,7 +4,7 @@ import Open from '../images/open.png';
 import Close from '../images/close.png';
 import EndPoint from '../images/end_point.png';
 import {findTheNodeSelector} from '../selectors/selectors';
-import {openNode, closeNode} from '../actions/TreeActions';
+import {openNode, closeNode, showNode} from '../actions/TreeActions';
 import NodeWrapper from "./NodeWrapper";
 
 class Node extends Component {
@@ -44,7 +44,7 @@ class Node extends Component {
                         : <img onClick={this.onClick} src={this.state.image} alt={this.props.target.item.tagName}/>
                 }
                 <span className='cursor' onClick={() => {
-                    console.log(this.props.target);
+                    this.props.show(this.props.target.item);
                 }}>{
                     this.props.target.item.tagName
                         ? this.props.target.item.tagName
@@ -72,7 +72,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         open: ip => dispatch(openNode(ip)),
-        close: ip => dispatch(closeNode(ip))
+        close: ip => dispatch(closeNode(ip)),
+        show: item => dispatch(showNode(item))
     }
 };
 

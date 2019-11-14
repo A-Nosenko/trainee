@@ -1,6 +1,8 @@
-import {combineReducers} from 'redux';
+import {combineReducers, createStore} from 'redux';
 import connectionReducer from './ConnectionReducer';
+import treeReducer from './TreeReducer';
 
 export const rootReducer = combineReducers({
-    connectionReducer
+    connection: connectionReducer,
+    tree: treeReducer
 });

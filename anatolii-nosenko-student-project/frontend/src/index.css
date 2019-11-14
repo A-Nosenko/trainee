@@ -1,6 +1,7 @@
 body {
     background-color: #101f44;
     color: whitesmoke;
+    width: 99%;
 }
 
 ::-webkit-scrollbar {
@@ -117,8 +118,8 @@ button.button:disabled {
     padding: 2%;
 }
 
-.Database-tree {
-    min-width: 98%;
+.Database-tree-table {
+    width: 100%;
     display: flex;
     flex-direction: row;
     max-height: 72vh;
@@ -136,4 +137,8 @@ button.button:disabled {
     display: flex;
     overflow-x: auto;
     overflow-y: auto;
+}
+
+.custom-react-table {
+    width: 98%;
 }

@@ -13,3 +13,10 @@ export function closeNode(id) {
         payload: {id}
     }
 }
+
+export function showNode(item) {
+    return {
+        type: types.SHOW_NODE,
+        payload: {item}
+    }
+}
