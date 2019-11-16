@@ -11,8 +11,10 @@ import java.util.List;
 public abstract class TreeNode {
     private Item item;
     private TreeNode parentTreeNode;
-    private final List<TreeNode> childTreeNodes;
+    private List<TreeNode> childTreeNodes;
     private boolean isFinalNode;
+    private boolean receivedFromDatabase;
+    private boolean receivedFromXML;
 
     protected TreeNode(Item item) {
         this.item = item;
@@ -75,6 +77,22 @@ public abstract class TreeNode {
 
     public List<TreeNode> getChildTreeNodes() {
         return childTreeNodes;
+    }
+
+    public boolean isReceivedFromDatabase() {
+        return receivedFromDatabase;
+    }
+
+    public void setReceivedFromDatabase(boolean receivedFromDatabase) {
+        this.receivedFromDatabase = receivedFromDatabase;
+    }
+
+    public boolean isReceivedFromXML() {
+        return receivedFromXML;
+    }
+
+    public void setReceivedFromXML(boolean receivedFromXML) {
+        this.receivedFromXML = receivedFromXML;
     }
 
     @Override

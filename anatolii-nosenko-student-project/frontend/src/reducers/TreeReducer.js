@@ -10,13 +10,53 @@ const initState = {
 const treeReducer = (state = initState, action) => {
 
     switch (action.type) {
+        case types.SAVE_TREE_TO_XML:
+            fetch('http://localhost:8080/save')
+                .then(response => {
+                    if (response.ok && !(response.status === 409)) {
+                        window.alert("Tree saving to XML completed.");
+                    } else {
+                        window.alert("Tree saving to XML failed. Tree not initialized on server.");
+                    }
+                })
+                .catch((e) => {
+                        console.log(e.toString());
+                    }
+                );
+            return state;
 
-        case types.UPDATE_CONNECTION:
+        case types.LOAD_TREE_FROM_XML:
+            fetch('http://localhost:8080/load')
+                .then(response => response.json())
+                .then(data => {
+                    let node = JSON.parse(data.root);
+                    store.dispatch({
+                        type: types.UPDATE_CONNECTION,
+                        payload: {
+                            status: data.connector,
+                        }
+
+                    });
+                    store.dispatch({
+                        type: types.UPDATE_ROOT,
+                        payload: {
+                            rootNewId: node.item.uniqueId,
+                            rootNode: node
+                        }
+                    });
+                })
+                .catch((e) => {
+                        console.log(e.toString());
+                    }
+                );
+            return state;
+
+        case types.UPDATE_ROOT:
             return {
                 ...state,
-                connectionStatus: action.payload.status,
                 rootId: action.payload.rootNewId,
-                nodes: [action.payload.rootNode]
+                nodes: [action.payload.rootNode],
+                itemToShow: null
             };
 
         case types.OPEN_NODE:
@@ -50,13 +90,7 @@ const treeReducer = (state = initState, action) => {
                 nodes: state
                     .nodes
                     .filter(node => node.item.uniqueId !== action.payload.id)
-                    .concat(action.payload.nodes.map(function (node) {
-                        return {
-                            item: node.item,
-                            isFinalNode: node.isFinalNode,
-                            childTreeNodes: []
-                        }
-                    }))
+                    .concat(action.payload.nodes)
                     .concat(overriddenNodeToOpen)
             };
 

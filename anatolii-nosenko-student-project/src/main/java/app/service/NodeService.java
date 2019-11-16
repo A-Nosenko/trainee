@@ -5,8 +5,10 @@ import app.model.ConnectionHolder;
 import app.model.TreeHolder;
 import app.structure.model.TreeModel;
 import app.structure.model.TreeNode;
+import app.structure.model.base.node.BaseTreeNode;
 import com.google.gson.Gson;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +35,9 @@ public class NodeService {
      */
     public String loadChildNodes(long itemId) {
         TreeModel treeModel = treeHolder.getTreeModel();
-        Connection connection = connectionHolder.getConnection();
         String emptyResult = Constants.START_JSON_ARRAY.concat(Constants.FINISH_JSON_ARRAY);
 
-        if (treeModel == null || connection == null) {
+        if (treeModel == null) {
             LOGGER.error("Can't load child nodes! First initialise Connection and TreeModel via ConnectionController.");
             return emptyResult;
         }
@@ -45,12 +46,24 @@ public class NodeService {
 
         if (node != null) {
             List<TreeNode> treeNodes = node.getChildTreeNodes();
-            if (treeNodes == null || treeNodes.isEmpty()) {
-                treeNodes = node.initChildNodes(connection, true);
+            if (treeNodes.isEmpty()) {
+                Connection connection = connectionHolder.getConnection();
+                if (connection != null) {
+                    treeNodes = node.initChildNodes(connection, true);
+                }
+            }
+
+            List<TreeNode> treeNodesWithoutChildNodes = new ArrayList<>();
+            for (TreeNode treeNode : treeNodes) {
+                TreeNode temp = new BaseTreeNode(treeNode.getItem());
+                temp.setFinalNode(treeNode.isFinalNode());
+                temp.setReceivedFromDatabase(treeNode.isReceivedFromDatabase());
+                temp.setReceivedFromXML(treeNode.isReceivedFromXML());
+                treeNodesWithoutChildNodes.add(temp);
             }
 
             Gson gson = new Gson();
-            return gson.toJson(treeNodes);
+            return gson.toJson(treeNodesWithoutChildNodes);
         }
 
         return emptyResult;

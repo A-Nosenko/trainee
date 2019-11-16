@@ -154,6 +154,7 @@ public class TreeLoaderFromXML {
                     treeNode = new BaseTreeNode(currentItem);
                     break;
             }
+            treeNode.setReceivedFromXML(true);
             treeModel.add(parent.getUniqueId(), treeNode);
         }
 

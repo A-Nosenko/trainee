@@ -33,7 +33,6 @@ public class TablesDatabaseTreeNode extends DBTreeNode {
                     .getInstance()
                     .getLastInsertId(databaseName, tableName, connection)));
             treeNodes.add(new TableDatabaseTreeNode(table));
-            table.setTagName(table.getTagName().concat(" ").concat(tableName));
             table.setAttribute(Constants.DDL, QueryManager
                 .getInstance()
                 .getDDL(databaseName, DDL.TABLE, tableName, connection));

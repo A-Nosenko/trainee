@@ -1,4 +1,4 @@
-import {combineReducers, createStore} from 'redux';
+import {combineReducers} from 'redux';
 import connectionReducer from './ConnectionReducer';
 import treeReducer from './TreeReducer';
 

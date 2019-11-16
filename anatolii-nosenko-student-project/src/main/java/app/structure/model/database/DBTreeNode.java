@@ -24,7 +24,10 @@ abstract class DBTreeNode extends TreeNode {
 
         List<TreeNode> nextNodes = fetchChildNodes((Connection) datasource);
         if (nextNodes != null) {
-            this.getChildTreeNodes().addAll(fetchChildNodes((Connection) datasource));
+            for (TreeNode node : nextNodes) {
+                node.setReceivedFromDatabase(true);
+            }
+            this.getChildTreeNodes().addAll(nextNodes);
         }
 
         if (!lazyInitialisation) {

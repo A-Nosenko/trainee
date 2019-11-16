@@ -18,13 +18,14 @@ public class DepthFirstSearcher implements Searcher {
         result = null;
 
         if (treeNode.getItem().getUniqueId() == itemId) {
-            System.out.println();
             result = treeNode;
             return result;
         }
 
         for (TreeNode child : treeNode.getChildTreeNodes()) {
-            find(child, itemId);
+            if (result == null) {
+                find(child, itemId);
+            }
         }
 
         return result;

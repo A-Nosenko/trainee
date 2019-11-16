@@ -29,7 +29,7 @@ public final class Constants {
     public static final String TEG_BOUNDS_TO_NEXT_LINE = ">\n<";
 
     public static final String NULL_ELEMENT = "<null/>";
-    public static final String END_NODE_FLAG = "end";
+    public static final String EMPTY = "";
 
     public static final String VERSION = "version";
     public static final String DEFAULT_VERSION = "1.0";
@@ -113,4 +113,7 @@ public final class Constants {
     public static final String URL_DIVIDER = ":";
     public static final String URL_SUFFIX =
         "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+
+    public static final String TEMP_XML = "temp_data/temp.xml";
+    public static final String LOADED_FROM_XML_STATUS = "Information about database received from XML.";
 }

@@ -20,3 +20,15 @@ export function showNode(item) {
         payload: {item}
     }
 }
+
+export function loadTreeFromXML() {
+    return {
+        type: types.LOAD_TREE_FROM_XML
+    }
+}
+
+export function saveTreeToXML() {
+    return {
+        type: types.SAVE_TREE_TO_XML
+    }
+}

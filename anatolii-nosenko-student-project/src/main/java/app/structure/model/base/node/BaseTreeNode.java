@@ -11,7 +11,6 @@ public class BaseTreeNode extends TreeNode {
 
     public BaseTreeNode(Item item) {
         super(item);
-        setFinalNode(true);
     }
 
     @Override

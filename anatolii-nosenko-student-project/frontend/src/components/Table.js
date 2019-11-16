@@ -18,12 +18,9 @@ class Table extends Component {
 
         let temp = {};
         for (let [key, value] of content) {
-            console.log("- " + key);
-            console.log("-- " + value);
             temp[key] = value;
         }
         let data = [temp];
-        console.log("## " + data);
         const columns = content.map(([key, value]) => {
             return {
                 Header: <span>

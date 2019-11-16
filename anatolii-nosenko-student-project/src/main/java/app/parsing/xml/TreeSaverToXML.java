@@ -46,42 +46,45 @@ public class TreeSaverToXML {
             return Constants.NULL_ELEMENT;
         }
         StringBuilder builder = new StringBuilder();
+        String tagName = null;
         if (treeNode.getItem().getTagName() != null) {
             builder.append(Constants.START_TEG);
 
             if (treeNode instanceof ColumnDatabaseTreeNode) {
-                builder.append(Constants.COLUMN);
+                tagName = Constants.COLUMN;
             } else if (treeNode instanceof ColumnsDatabaseTreeNode) {
-                builder.append(Constants.COLUMNS);
+                tagName = Constants.COLUMNS;
             } else if (treeNode instanceof DatabaseTreeNode) {
-                builder.append(Constants.DATABASE);
+                tagName = Constants.DATABASE;
             } else if (treeNode instanceof ForeignKeyDatabaseTreeNode) {
-                builder.append(Constants.FOREIGN_KEY);
+                tagName = Constants.FOREIGN_KEY;
             } else if (treeNode instanceof FunctionDatabaseTreeNode) {
-                builder.append(Constants.FUNCTION);
+                tagName = Constants.FUNCTION;
             } else if (treeNode instanceof FunctionsDatabaseTreeNode) {
-                builder.append(Constants.FUNCTIONS);
+                tagName = Constants.FUNCTIONS;
             } else if (treeNode instanceof RootDatabasesTreeNode) {
-                builder.append(Constants.DATABASES);
+                tagName = Constants.DATABASES;
             } else if (treeNode instanceof StoredProcedureDatabaseTreeNode) {
-                builder.append(Constants.STORED_PROCEDURE);
+                tagName = Constants.STORED_PROCEDURE;
             } else if (treeNode instanceof StoredProceduresDatabaseTreeNode) {
-                builder.append(Constants.STORED_PROCEDURES);
+                tagName = Constants.STORED_PROCEDURES;
             } else if (treeNode instanceof TableDatabaseTreeNode) {
-                builder.append(Constants.TABLE);
+                tagName = Constants.TABLE;
             } else if (treeNode instanceof TablesDatabaseTreeNode) {
-                builder.append(Constants.TABLES);
+                tagName = Constants.TABLES;
             } else if (treeNode instanceof TriggerDatabaseTreeNode) {
-                builder.append(Constants.TRIGGER);
+                tagName = Constants.TRIGGER;
             } else if (treeNode instanceof TriggersDatabaseTreeNode) {
-                builder.append(Constants.TRIGGERS);
+                tagName = Constants.TRIGGERS;
             } else if (treeNode instanceof ViewDatabaseTreeNode) {
-                builder.append(Constants.VIEW);
+                tagName = Constants.VIEW;
             } else if (treeNode instanceof ViewsDatabaseTreeNode) {
-                builder.append(Constants.VIEWS);
+                tagName = Constants.VIEWS;
             } else {
-                builder.append(treeNode.getItem().getTagName());
+                tagName = treeNode.getItem().getTagName();
             }
+
+            builder.append(tagName);
 
             for (Map.Entry<String, String> entry : treeNode.getItem().getAttributes().entrySet()) {
                 builder.append(Constants.SPACE);
@@ -103,7 +106,7 @@ public class TreeSaverToXML {
         }
         if (treeNode.getItem().getTagName() != null) {
             builder.append(Constants.CLOSE_START_TEG);
-            builder.append(treeNode.getItem().getTagName());
+            builder.append(tagName);
             builder.append(Constants.END_TEG);
         }
         return builder.toString();

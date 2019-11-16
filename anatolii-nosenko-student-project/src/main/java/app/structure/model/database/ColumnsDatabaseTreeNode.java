@@ -32,8 +32,6 @@ public class ColumnsDatabaseTreeNode extends DBTreeNode {
                 column.setAttribute(attributes.getKey(), attributes.getValue());
             }
             treeNodes.add(new ColumnDatabaseTreeNode(column));
-            column.setTagName(
-                column.getTagName().concat(" ").concat(columnAttributes.get(Constants.COLUMN_ATTRIBUTES[0])));
         }
 
         return treeNodes;

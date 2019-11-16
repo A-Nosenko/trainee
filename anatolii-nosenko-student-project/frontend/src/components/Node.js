@@ -9,14 +9,6 @@ import NodeWrapper from "./NodeWrapper";
 
 class Node extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            firstPainting: true,
-            image: props.target.childTreeNodes.length ? Close : Open,
-        }
-    }
-
     onClick = () => {
         this.props.target.childTreeNodes.length
             ? this.closeNode()
@@ -24,14 +16,10 @@ class Node extends Component {
     };
 
     openNode = () => {
-        this.setState({image: Close});
-        this.setState({firstPainting: false});
         this.props.open(this.props.target.item.uniqueId);
     };
 
     closeNode = () => {
-        this.setState({image: Open});
-        this.setState({firstPainting: true});
         this.props.close(this.props.target.item.uniqueId);
     };
 
@@ -39,11 +27,16 @@ class Node extends Component {
         return (
             <ul>
                 {
-                    this.props.target.isFinalNode || (!this.state.firstPainting && !this.props.target.childTreeNodes.length)
+                    this.props.target.isFinalNode
                         ? <img src={EndPoint} alt={this.props.target.item.tagName}/>
-                        : <img onClick={this.onClick} src={this.state.image} alt={this.props.target.item.tagName}/>
+                        : <img onClick={this.onClick} src={this.props.target.childTreeNodes.length ? Close : Open}
+                               alt={this.props.target.item.tagName}/>
                 }
-                <span className='cursor' onClick={() => {
+                <span className={
+                    this.props.target.receivedFromDatabase
+                        ? 'fromDatabase'
+                        : this.props.target.receivedFromXML ? 'fromXML' : 'cursor'
+                } onClick={() => {
                     this.props.show(this.props.target.item);
                 }}>{
                     this.props.target.item.tagName
