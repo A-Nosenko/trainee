@@ -2,6 +2,7 @@ package app.service;
 
 import app.literals.Constants;
 import app.model.ConnectionHolder;
+import app.model.NodePostDtoResponse;
 import app.model.TreeHolder;
 import app.structure.model.TreeModel;
 import app.structure.model.TreeNode;
@@ -53,17 +54,13 @@ public class NodeService {
                 }
             }
 
-            List<TreeNode> treeNodesWithoutChildNodes = new ArrayList<>();
+            List<NodePostDtoResponse> nodePostDtoResponses = new ArrayList<>();
             for (TreeNode treeNode : treeNodes) {
-                TreeNode temp = new BaseTreeNode(treeNode.getItem());
-                temp.setFinalNode(treeNode.isFinalNode());
-                temp.setReceivedFromDatabase(treeNode.isReceivedFromDatabase());
-                temp.setReceivedFromXML(treeNode.isReceivedFromXML());
-                treeNodesWithoutChildNodes.add(temp);
+                nodePostDtoResponses.add(new NodePostDtoResponse(treeNode));
             }
 
             Gson gson = new Gson();
-            return gson.toJson(treeNodesWithoutChildNodes);
+            return gson.toJson(nodePostDtoResponses);
         }
 
         return emptyResult;

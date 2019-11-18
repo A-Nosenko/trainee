@@ -4,6 +4,7 @@ import app.exception.AppException;
 import app.file.work.TextWriter;
 import app.literals.Constants;
 import app.model.ConnectionPostDtoResponse;
+import app.model.NodePostDtoResponse;
 import app.model.TreeHolder;
 import app.parsing.xml.TreeLoaderFromXML;
 import app.parsing.xml.TreeSaverToXML;
@@ -64,14 +65,11 @@ public class TreeSavingService {
         treeHolder.setTreeModel(treeModel);
 
         // Transferring to frontend the root node with closed child nodes to reduce load of response.
-        TreeNode temp = new BaseTreeNode(treeHolder.getTreeModel().getRoot().getItem());
-        temp.setFinalNode(treeHolder.getTreeModel().getRoot().isFinalNode());
-        temp.setReceivedFromXML(treeHolder.getTreeModel().getRoot().isReceivedFromXML());
-        temp.setReceivedFromDatabase(treeHolder.getTreeModel().getRoot().isReceivedFromDatabase());
+        NodePostDtoResponse nodePostDtoResponse = new NodePostDtoResponse(treeHolder.getTreeModel().getRoot());
 
         Gson gson = new Gson();
         ConnectionPostDtoResponse response = new ConnectionPostDtoResponse();
-        response.setRoot(gson.toJson(temp));
+        response.setRoot(gson.toJson(nodePostDtoResponse));
         response.setConnector(Constants.LOADED_FROM_XML_STATUS);
         return response;
     }
