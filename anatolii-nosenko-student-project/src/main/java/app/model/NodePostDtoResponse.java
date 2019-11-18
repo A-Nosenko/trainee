@@ -8,12 +8,52 @@ import app.structure.model.database.DatabaseTreeNode;
 import app.structure.model.database.FunctionDatabaseTreeNode;
 import app.structure.model.database.TableDatabaseTreeNode;
 import app.structure.model.database.TriggerDatabaseTreeNode;
+import java.util.Map;
 
 /**
  * Class to return on frontend the information about tree node.
  */
 public class NodePostDtoResponse {
-    private final Item item;
+
+    final class ItemPostDto {
+        private final long uniqueId;
+        private String tagName;
+        private final Map<String, String> attributes;
+        private final String content;
+
+        private ItemPostDto(Item item) {
+            this.uniqueId = item.getUniqueId();
+            this.tagName = item.getTagName();
+            this.attributes = item.getAttributes();
+            this.content = item.getContent();
+        }
+
+        public void setTagName(String tagName) {
+            this.tagName = tagName;
+        }
+
+        public long getUniqueId() {
+            return uniqueId;
+        }
+
+        String getTagName() {
+            return tagName;
+        }
+
+        public Map<String, String> getAttributes() {
+            return attributes;
+        }
+
+        public String getContent() {
+            return content;
+        }
+
+        public String getAttribute(String attribute) {
+            return attributes.get(attribute);
+        }
+    }
+
+    private final ItemPostDto item;
     private final TreeNode[] childTreeNodes = new TreeNode[0];
     private final boolean isFinalNode;
     private final boolean receivedFromDatabase;
@@ -27,7 +67,7 @@ public class NodePostDtoResponse {
      * @param treeNode Node to return on frontend.
      */
     public NodePostDtoResponse(TreeNode treeNode) {
-        this.item = treeNode.getItem();
+        this.item = new ItemPostDto(treeNode.getItem());
         this.isFinalNode = treeNode.isFinalNode();
         this.receivedFromDatabase = treeNode.isReceivedFromDatabase();
         this.receivedFromXML = treeNode.isReceivedFromXML();
@@ -45,7 +85,7 @@ public class NodePostDtoResponse {
         }
     }
 
-    public Item getItem() {
+    public ItemPostDto getItem() {
         return item;
     }
 
