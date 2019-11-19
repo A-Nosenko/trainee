@@ -1,7 +1,6 @@
 import app.StartTest;
 import app.database.connection.ConnectionFactoryTest;
 import app.database.query.QueryManagerTest;
-import app.database.scanning.DatabaseLoaderTest;
 import app.exception.AppExceptionTest;
 import app.file.work.TextReaderTest;
 import app.file.work.TextWriterTest;
@@ -36,7 +35,6 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses( {
     ConnectionFactoryTest.class,
     QueryManagerTest.class,
-    DatabaseLoaderTest.class,
     AppExceptionTest.class,
     TextWriterTest.class,
     TextReaderTest.class,

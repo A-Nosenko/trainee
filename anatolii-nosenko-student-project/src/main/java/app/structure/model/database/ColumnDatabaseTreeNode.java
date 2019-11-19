@@ -14,7 +14,6 @@ public class ColumnDatabaseTreeNode extends DBTreeNode {
     public ColumnDatabaseTreeNode(Item item) {
         super(item);
         item.setTagName(Constants.COLUMN);
-        setFinalNode(true);
     }
 
     @Override
@@ -26,6 +25,11 @@ public class ColumnDatabaseTreeNode extends DBTreeNode {
                 getItem().getAttribute(Constants.COLUMN_ATTRIBUTES[0]), connection);
 
         Item foreignKeyItem = new Item();
+
+        if (attributes.entrySet().isEmpty()) {
+            return null;
+        }
+
         for (Map.Entry<String, String> entry : attributes.entrySet()) {
             foreignKeyItem.setAttribute(entry.getKey(), entry.getValue());
         }
