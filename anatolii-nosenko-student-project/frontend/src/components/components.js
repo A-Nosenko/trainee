@@ -42,7 +42,7 @@ export const About = () =>
     <div>
         <Header/>
         <div className='center-container'>
-            <h2>Database Viewer 2019</h2>
+            <h2>Database Viewer 2019. Supports working with MySQL database.</h2>
         </div>
     </div>;
 

@@ -16,6 +16,7 @@ public class RootDatabasesTreeNode extends DBTreeNode {
     public RootDatabasesTreeNode(Item item) {
         super(item);
         item.setTagName(Constants.DATABASES);
+        setReceivedFromDatabase(true);
     }
 
     @Override

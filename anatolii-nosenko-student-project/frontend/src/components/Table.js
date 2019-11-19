@@ -29,11 +29,12 @@ class Table extends Component {
                 id: key,
                 accessor: key,
                 style: {
-                    textAlign: 'left',
-                    whiteSpace: 'pre-wrap' // allow for words wrap inside
+                    whiteSpace: 'pre-line',
+                    textAlign: value.length > 100 ? 'left' : 'center',
+                    padding: '0.5%',
                 },
                 width: value
-                    ? (value.length > 100 ? 500 : 200)
+                    ? (value.length > 100 ? 700 : 200)
                     : 0
             }
         });

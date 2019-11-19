@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public class NodePostDtoResponse {
 
-    final class ItemPostDto {
+    private final class ItemPostDto {
         private final long uniqueId;
         private String tagName;
         private final Map<String, String> attributes;

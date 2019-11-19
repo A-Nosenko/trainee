@@ -81,7 +81,9 @@ const treeReducer = (state = initState, action) => {
             let nodeToOpen = state.nodes.find(node => node.item.uniqueId === action.payload.id);
             let overriddenNodeToOpen = {
                 item: nodeToOpen.item,
-                isFinalNode: nodeToOpen.isFinalNode,
+                isFinalNode: nodeToOpen.isFinalNode || !action.payload.nodes.length,
+                receivedFromDatabase: nodeToOpen.receivedFromDatabase,
+                receivedFromXML: nodeToOpen.receivedFromXML,
                 childTreeNodes: action.payload.nodes.map(node => node.item.uniqueId)
             };
 
@@ -109,6 +111,8 @@ const treeReducer = (state = initState, action) => {
 
             let overriddenNodeToClose = {
                 item: nodeToClose.item,
+                receivedFromDatabase: nodeToClose.receivedFromDatabase,
+                receivedFromXML: nodeToClose.receivedFromXML,
                 childTreeNodes: [],
                 isFinalNode: nodeToClose.isFinalNode,
             };

@@ -6,7 +6,6 @@ import app.model.NodePostDtoResponse;
 import app.model.TreeHolder;
 import app.structure.model.TreeModel;
 import app.structure.model.TreeNode;
-import app.structure.model.base.node.BaseTreeNode;
 import com.google.gson.Gson;
 import java.sql.Connection;
 import java.util.ArrayList;

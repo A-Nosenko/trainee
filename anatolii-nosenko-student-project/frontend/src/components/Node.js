@@ -34,8 +34,8 @@ class Node extends Component {
                 }
                 <span className={
                     this.props.target.receivedFromDatabase
-                        ? 'fromDatabase'
-                        : this.props.target.receivedFromXML ? 'fromXML' : 'cursor'
+                        ? 'cursor fromDatabase'
+                        : this.props.target.receivedFromXML ? 'cursor fromXML' : 'cursor'
                 } onClick={() => {
                     this.props.show(this.props.target.item);
                 }}>{

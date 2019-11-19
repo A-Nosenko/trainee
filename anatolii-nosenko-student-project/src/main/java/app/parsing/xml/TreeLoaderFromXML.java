@@ -101,60 +101,10 @@ public class TreeLoaderFromXML {
         }
         Item currentItem = new Item();
         if (parent == null) {
-            treeModel.add(new BaseTreeNode(currentItem));
+            TreeNode treeNode = (initTreeNode(node, currentItem));
+            treeModel.add(treeNode);
         } else {
-            TreeNode treeNode;
-            switch (node.getNodeName()) {
-                case Constants.COLUMN:
-                    treeNode = new ColumnDatabaseTreeNode(currentItem);
-                    break;
-                case Constants.COLUMNS:
-                    treeNode = new ColumnsDatabaseTreeNode(currentItem);
-                    break;
-                case Constants.DATABASE:
-                    treeNode = new DatabaseTreeNode(currentItem);
-                    break;
-                case Constants.FOREIGN_KEY:
-                    treeNode = new ForeignKeyDatabaseTreeNode(currentItem);
-                    break;
-                case Constants.FUNCTION:
-                    treeNode = new FunctionDatabaseTreeNode(currentItem);
-                    break;
-                case Constants.FUNCTIONS:
-                    treeNode = new FunctionsDatabaseTreeNode(currentItem);
-                    break;
-                case Constants.DATABASES:
-                    treeNode = new RootDatabasesTreeNode(currentItem);
-                    break;
-                case Constants.STORED_PROCEDURE:
-                    treeNode = new StoredProcedureDatabaseTreeNode(currentItem);
-                    break;
-                case Constants.STORED_PROCEDURES:
-                    treeNode = new StoredProceduresDatabaseTreeNode(currentItem);
-                    break;
-                case Constants.TABLE:
-                    treeNode = new TableDatabaseTreeNode(currentItem);
-                    break;
-                case Constants.TABLES:
-                    treeNode = new TablesDatabaseTreeNode(currentItem);
-                    break;
-                case Constants.TRIGGER:
-                    treeNode = new TriggerDatabaseTreeNode(currentItem);
-                    break;
-                case Constants.TRIGGERS:
-                    treeNode = new TriggersDatabaseTreeNode(currentItem);
-                    break;
-                case Constants.VIEW:
-                    treeNode = new ViewDatabaseTreeNode(currentItem);
-                    break;
-                case Constants.VIEWS:
-                    treeNode = new ViewsDatabaseTreeNode(currentItem);
-                    break;
-                default:
-                    treeNode = new BaseTreeNode(currentItem);
-                    break;
-            }
-            treeNode.setReceivedFromXML(true);
+            TreeNode treeNode = (initTreeNode(node, currentItem));
             treeModel.add(parent.getUniqueId(), treeNode);
         }
 
@@ -179,5 +129,62 @@ public class TreeLoaderFromXML {
                 next = next.getNextSibling();
             }
         }
+    }
+
+    private TreeNode initTreeNode(Node node, Item currentItem) {
+        TreeNode treeNode;
+        switch (node.getNodeName()) {
+            case Constants.COLUMN:
+                treeNode = new ColumnDatabaseTreeNode(currentItem);
+                break;
+            case Constants.COLUMNS:
+                treeNode = new ColumnsDatabaseTreeNode(currentItem);
+                break;
+            case Constants.DATABASE:
+                treeNode = new DatabaseTreeNode(currentItem);
+                break;
+            case Constants.FOREIGN_KEY:
+                treeNode = new ForeignKeyDatabaseTreeNode(currentItem);
+                break;
+            case Constants.FUNCTION:
+                treeNode = new FunctionDatabaseTreeNode(currentItem);
+                break;
+            case Constants.FUNCTIONS:
+                treeNode = new FunctionsDatabaseTreeNode(currentItem);
+                break;
+            case Constants.DATABASES:
+                treeNode = new RootDatabasesTreeNode(currentItem);
+                break;
+            case Constants.STORED_PROCEDURE:
+                treeNode = new StoredProcedureDatabaseTreeNode(currentItem);
+                break;
+            case Constants.STORED_PROCEDURES:
+                treeNode = new StoredProceduresDatabaseTreeNode(currentItem);
+                break;
+            case Constants.TABLE:
+                treeNode = new TableDatabaseTreeNode(currentItem);
+                break;
+            case Constants.TABLES:
+                treeNode = new TablesDatabaseTreeNode(currentItem);
+                break;
+            case Constants.TRIGGER:
+                treeNode = new TriggerDatabaseTreeNode(currentItem);
+                break;
+            case Constants.TRIGGERS:
+                treeNode = new TriggersDatabaseTreeNode(currentItem);
+                break;
+            case Constants.VIEW:
+                treeNode = new ViewDatabaseTreeNode(currentItem);
+                break;
+            case Constants.VIEWS:
+                treeNode = new ViewsDatabaseTreeNode(currentItem);
+                break;
+            default:
+                treeNode = new BaseTreeNode(currentItem);
+                break;
+        }
+        treeNode.setReceivedFromXML(true);
+        treeNode.setReceivedFromDatabase(false);
+        return treeNode;
     }
 }
