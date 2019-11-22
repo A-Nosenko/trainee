@@ -99,12 +99,12 @@ public class QueryManagerTest {
     @Test
     public void getForeignKeyAttributes() {
         assertTrue(queryManager
-            .getForeignKeyAttributes("sys", "sys_config", "variable", connection).size() > 0);
+            .getColumnKeyAttributes("sys", "sys_config", "variable", connection).size() > 0);
     }
 
     @Test(expected = AppException.class)
     public void getForeignKeyAttributesException() {
-        queryManager.getForeignKeyAttributes("sys", "sys_config", null, null);
+        queryManager.getColumnKeyAttributes("sys", "sys_config", null, null);
     }
 
     @Test

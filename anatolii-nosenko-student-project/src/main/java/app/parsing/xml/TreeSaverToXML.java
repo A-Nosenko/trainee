@@ -56,8 +56,8 @@ public class TreeSaverToXML {
                 tagName = Constants.COLUMNS;
             } else if (treeNode instanceof DatabaseTreeNode) {
                 tagName = Constants.DATABASE;
-            } else if (treeNode instanceof ForeignKeyDatabaseTreeNode) {
-                tagName = Constants.FOREIGN_KEY;
+            } else if (treeNode instanceof ColumnKeyDatabaseTreeNode) {
+                tagName = Constants.KEY;
             } else if (treeNode instanceof FunctionDatabaseTreeNode) {
                 tagName = Constants.FUNCTION;
             } else if (treeNode instanceof FunctionsDatabaseTreeNode) {

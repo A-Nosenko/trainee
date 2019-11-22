@@ -20,7 +20,7 @@ public class ColumnDatabaseTreeNode extends DBTreeNode {
     List<TreeNode> fetchChildNodes(Connection connection) {
         Map<String, String> attributes = QueryManager
             .getInstance()
-            .getForeignKeyAttributes(
+            .getColumnKeyAttributes(
                 getItem().getAttribute(Constants.DATABASE_NAME), getItem().getAttribute(Constants.TABLE_NAME),
                 getItem().getAttribute(Constants.COLUMN_ATTRIBUTES[0]), connection);
 
@@ -34,6 +34,6 @@ public class ColumnDatabaseTreeNode extends DBTreeNode {
             foreignKeyItem.setAttribute(entry.getKey(), entry.getValue());
         }
 
-        return Collections.singletonList(new ForeignKeyDatabaseTreeNode(foreignKeyItem));
+        return Collections.singletonList(new ColumnKeyDatabaseTreeNode(foreignKeyItem));
     }
 }

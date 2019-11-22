@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public final class QueryManager {
 
-    private  static QueryManager queryManager;
+    private static QueryManager queryManager;
 
     private StringBuilder builder = new StringBuilder();
 
@@ -204,8 +204,8 @@ public final class QueryManager {
      * @param connection   Connection to database server.
      * @return Information about foreign key.
      */
-    public Map<String, String> getForeignKeyAttributes(String databaseName, String tableName,
-                                                       String columnName, Connection connection) {
+    public Map<String, String> getColumnKeyAttributes(String databaseName, String tableName,
+                                                      String columnName, Connection connection) {
 
         builder = new StringBuilder();
         builder.append("SELECT * ");
@@ -217,7 +217,25 @@ public final class QueryManager {
         builder.append(columnName);
         builder.append("\'");
 
-        return getMapOfArguments(builder.toString(), Constants.FOREIGN_KEY_ATTRIBUTES, connection);
+        Map<String, String> result = getMapOfArguments(builder.toString(), Constants.KEY_ATTRIBUTES, connection);
+
+        String typeName = result.get(Constants.KEY_ATTRIBUTES[0]);
+        if (typeName != null && !typeName.equals(Constants.PRIMARY_KEY)) {
+            String tableDDL = getDDL(databaseName, DDL.TABLE, tableName, connection);
+            String[] lines = tableDDL.split(Constants.NEW_LINE);
+            for (String lineSource : lines) {
+                String line = lineSource.trim();
+                if (line.contains("CONSTRAINT") && line.contains(typeName)) {
+                    if (line.endsWith(",")) {
+                        result.put(Constants.DDL, line.substring(0, line.length() - 1));
+                        return result;
+                    }
+                    result.put(Constants.DDL, line);
+                }
+            }
+        }
+
+        return result;
     }
 
     /**
@@ -278,7 +296,7 @@ public final class QueryManager {
     }
 
     private synchronized List<Map<String, String>> getMapsOfArguments(String query, String[] arguments,
-                                                         Connection connection) {
+                                                                      Connection connection) {
         List<Map<String, String>> result = new ArrayList<>();
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             ResultSet resultSet = statement.executeQuery();
@@ -298,7 +316,7 @@ public final class QueryManager {
     }
 
     private synchronized Map<String, String> getMapOfArguments(String query, String[] arguments,
-                                                  Connection connection) {
+                                                               Connection connection) {
         Map<String, String> map = new HashMap<>();
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             ResultSet resultSet = statement.executeQuery();

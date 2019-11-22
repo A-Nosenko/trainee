@@ -6,11 +6,11 @@ import app.structure.model.TreeNode;
 import java.sql.Connection;
 import java.util.List;
 
-public class ForeignKeyDatabaseTreeNode extends DBTreeNode {
+public class ColumnKeyDatabaseTreeNode extends DBTreeNode {
 
-    public ForeignKeyDatabaseTreeNode(Item item) {
+    public ColumnKeyDatabaseTreeNode(Item item) {
         super(item);
-        item.setTagName(Constants.FOREIGN_KEY);
+        item.setTagName(Constants.KEY);
         setFinalNode(true);
     }
 

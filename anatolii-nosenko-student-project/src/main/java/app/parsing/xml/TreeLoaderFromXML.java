@@ -9,7 +9,7 @@ import app.structure.model.base.node.BaseTreeNode;
 import app.structure.model.database.ColumnDatabaseTreeNode;
 import app.structure.model.database.ColumnsDatabaseTreeNode;
 import app.structure.model.database.DatabaseTreeNode;
-import app.structure.model.database.ForeignKeyDatabaseTreeNode;
+import app.structure.model.database.ColumnKeyDatabaseTreeNode;
 import app.structure.model.database.FunctionDatabaseTreeNode;
 import app.structure.model.database.FunctionsDatabaseTreeNode;
 import app.structure.model.database.RootDatabasesTreeNode;
@@ -143,8 +143,8 @@ public class TreeLoaderFromXML {
             case Constants.DATABASE:
                 treeNode = new DatabaseTreeNode(currentItem);
                 break;
-            case Constants.FOREIGN_KEY:
-                treeNode = new ForeignKeyDatabaseTreeNode(currentItem);
+            case Constants.KEY:
+                treeNode = new ColumnKeyDatabaseTreeNode(currentItem);
                 break;
             case Constants.FUNCTION:
                 treeNode = new FunctionDatabaseTreeNode(currentItem);

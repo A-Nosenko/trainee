@@ -86,8 +86,9 @@ public final class Constants {
     public static final String[] COLUMN_ATTRIBUTES = {
         "Field", "Type", "Null", "Key", "Default", "Extra"
     };
-    public static final String FOREIGN_KEY = "foreign_key";
-    public static final String[] FOREIGN_KEY_ATTRIBUTES = {
+    public static final String KEY = "key";
+    public static final String PRIMARY_KEY = "PRIMARY";
+    public static final String[] KEY_ATTRIBUTES = {
         "CONSTRAINT_NAME", "REFERENCED_TABLE_NAME", "REFERENCED_COLUMN_NAME", "ORDINAL_POSITION"
     };
     public static final String DDL = "ddl_script";

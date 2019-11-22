@@ -14,7 +14,7 @@ import app.structure.model.database.ColumnDatabaseTreeNodeTest;
 import app.structure.model.database.ColumnsDatabaseTreeNodeTest;
 import app.structure.model.database.DBTreeNodeTest;
 import app.structure.model.database.DatabaseTreeNodeTest;
-import app.structure.model.database.ForeignKeyDatabaseTreeNodeTest;
+import app.structure.model.database.ColumnKeyDatabaseTreeNodeTest;
 import app.structure.model.database.FunctionDatabaseTreeNodeTest;
 import app.structure.model.database.FunctionsDatabaseTreeNodeTest;
 import app.structure.model.database.RootDatabasesTreeNodeTest;
@@ -50,7 +50,7 @@ import org.junit.runners.Suite;
     ColumnDatabaseTreeNodeTest.class,
     ColumnsDatabaseTreeNodeTest.class,
     DatabaseTreeNodeTest.class,
-    ForeignKeyDatabaseTreeNodeTest.class,
+    ColumnKeyDatabaseTreeNodeTest.class,
     FunctionDatabaseTreeNodeTest.class,
     FunctionsDatabaseTreeNodeTest.class,
     RootDatabasesTreeNodeTest.class,

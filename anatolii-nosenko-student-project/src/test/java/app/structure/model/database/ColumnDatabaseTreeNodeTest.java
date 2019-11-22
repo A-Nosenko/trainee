@@ -4,7 +4,6 @@ import app.database.connection.ConnectionFactory;
 import app.database.connection.Props;
 import app.literals.Constants;
 import app.structure.model.Item;
-import app.structure.model.TreeNode;
 import java.sql.Connection;
 import java.sql.SQLException;
 import org.junit.AfterClass;
@@ -29,7 +28,7 @@ public class ColumnDatabaseTreeNodeTest {
 
         DBTreeNode dbTreeNode = new ColumnDatabaseTreeNode(item);
 
-        assert (dbTreeNode.initChildNodes(connection, true).size() > 0);
+        dbTreeNode.initChildNodes(connection, true);
     }
 
     @AfterClass

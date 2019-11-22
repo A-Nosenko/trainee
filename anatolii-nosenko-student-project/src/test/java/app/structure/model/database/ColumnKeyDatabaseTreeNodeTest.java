@@ -3,14 +3,13 @@ package app.structure.model.database;
 import app.database.connection.ConnectionFactory;
 import app.database.connection.Props;
 import app.structure.model.Item;
-import app.structure.model.TreeNode;
 import java.sql.Connection;
 import java.sql.SQLException;
 import org.junit.AfterClass;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-public class ForeignKeyDatabaseTreeNodeTest {
+public class ColumnKeyDatabaseTreeNodeTest {
 
     private static Props props = new Props("jdbc:mysql://localhost:3306?useUnicode=true" +
         "&useJDBCCompliantTimezoneShift=true" +
@@ -23,7 +22,7 @@ public class ForeignKeyDatabaseTreeNodeTest {
 
     @Test
     public void fetchChildNodes() {
-        DBTreeNode dbTreeNode = new ForeignKeyDatabaseTreeNode(new Item());
+        DBTreeNode dbTreeNode = new ColumnKeyDatabaseTreeNode(new Item());
         assertNull(
             dbTreeNode.fetchChildNodes(null));
     }
