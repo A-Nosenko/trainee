@@ -54,13 +54,11 @@ public class ConnectionService {
             LOGGER.info("Can't create connection! \n".concat(props.toString()));
         }
 
-        ConnectionPostDtoResponse response = new ConnectionPostDtoResponse();
-
         connectionHolder.setConnection(connection);
 
         if (connection == null) {
             treeHolder.setTreeModel(null);
-           return null;
+            return null;
         }
 
         TreeModel treeModel = new TreeModel(new BreadthFirstSearcher());
@@ -68,10 +66,11 @@ public class ConnectionService {
         treeHolder.setTreeModel(treeModel);
 
         Gson gson = new Gson();
+        ConnectionPostDtoResponse response = new ConnectionPostDtoResponse();
         response.setRoot(gson.toJson(treeModel.getRoot()));
 
         try {
-           response.setConnector(connection.getMetaData().getDriverVersion());
+            response.setConnector(connection.getMetaData().getDriverVersion());
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
         }

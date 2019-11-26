@@ -15,3 +15,6 @@ export const OPEN_NODE = "OPEN_NODE";
 export const SHOW_NODE = "SHOW_NODE";
 export const LOAD_TREE_FROM_XML = "LOAD_TREE_FROM_XML";
 export const SAVE_TREE_TO_XML = "SAVE_TREE_TO_XML";
+
+export const UPDATE_SEARCH_TYPE = "UPDATE_SEARCH_TYPE";
+export const UPDATE_SEARCH_VALUE = "UPDATE_SEARCH_VALUE";

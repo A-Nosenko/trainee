@@ -9,7 +9,8 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
     "react-table": "^6.10.3",
-    "redux": "^1.0.1"
+    "redux": "^1.0.1",
+    "React": "latest"
   },
   "scripts": {
     "start": "react-scripts start",

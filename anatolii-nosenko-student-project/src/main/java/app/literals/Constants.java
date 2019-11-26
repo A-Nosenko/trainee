@@ -45,7 +45,7 @@ public final class Constants {
         "Exception: ";
 
     // Constants to mapping database.
-    public static final String DATABASES = "databases";
+    public static final String DATABASES = "ROOT";
     public static final String DATABASE = "database";
     public static final String DATABASE_NAME = "database_name";
     public static final String VIEWS = "views";

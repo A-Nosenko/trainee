@@ -152,6 +152,7 @@ button.button:disabled {
 .Tree {
     min-width: 45%;
     display: flex;
+    flex-direction: column;
     overflow-x: auto;
     overflow-y: auto;
 }
@@ -165,4 +166,8 @@ button.button:disabled {
 
 .custom-react-table {
     width: 98%;
+}
+
+.hiddenNode {
+    display: none;
 }

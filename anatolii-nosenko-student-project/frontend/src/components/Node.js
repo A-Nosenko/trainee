@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import Open from '../images/open.png';
 import Close from '../images/close.png';
 import EndPoint from '../images/end_point.png';
-import {findTheNodeSelector} from '../selectors/selectors';
+import {findTheNodeSelector, getFilter} from '../selectors/selectors';
 import {openNode, closeNode, showNode} from '../actions/TreeActions';
 import NodeWrapper from "./NodeWrapper";
 
@@ -16,16 +16,17 @@ class Node extends Component {
     };
 
     openNode = () => {
-        this.props.open(this.props.target.item.uniqueId);
+        this.props.open(this.props.id);
     };
 
     closeNode = () => {
-        this.props.close(this.props.target.item.uniqueId);
+        this.props.close(this.props.id);
     };
 
     render() {
         return (
             <ul>
+                <div className={this.props.filter ? '' : 'hiddenNode'}>
                 {
                     this.props.target.isFinalNode
                         ? <img src={EndPoint} alt={this.props.target.item.tagName}/>
@@ -44,6 +45,7 @@ class Node extends Component {
                         : this.props.target.item.content
                 }
                 </span>
+                </div>
                 {this.props.target.childTreeNodes.map(
                     (nodeId, key) => {
                         return (
@@ -58,14 +60,15 @@ class Node extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        target: findTheNodeSelector(state, ownProps.id).node
+        target: findTheNodeSelector(state, ownProps.id).node,
+        filter: getFilter(state, ownProps.id)
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        open: ip => dispatch(openNode(ip)),
-        close: ip => dispatch(closeNode(ip)),
+        open: id => dispatch(openNode(id)),
+        close: id => dispatch(closeNode(id)),
         show: item => dispatch(showNode(item))
     }
 };
