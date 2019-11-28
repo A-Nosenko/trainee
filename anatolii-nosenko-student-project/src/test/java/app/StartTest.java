@@ -6,6 +6,10 @@ public class StartTest {
 
     @Test
     public void main() {
-        Start.main(new String[]{"arg1"});
+        try {
+            Start.main(new String[]{"arg1"});
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
     }
 }

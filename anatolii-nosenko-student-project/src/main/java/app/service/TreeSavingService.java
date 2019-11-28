@@ -9,8 +9,6 @@ import app.model.TreeHolder;
 import app.parsing.xml.TreeLoaderFromXML;
 import app.parsing.xml.TreeSaverToXML;
 import app.structure.model.TreeModel;
-import app.structure.model.TreeNode;
-import app.structure.model.base.node.BaseTreeNode;
 import app.structure.search.DepthFirstSearcher;
 import com.google.gson.Gson;
 import java.io.File;

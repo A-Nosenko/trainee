@@ -4,6 +4,11 @@ import app.database.query.QueryManagerTest;
 import app.exception.AppExceptionTest;
 import app.file.work.TextReaderTest;
 import app.file.work.TextWriterTest;
+import app.model.ConnectionHolderTest;
+import app.model.ConnectionPostDtoResponseTest;
+import app.model.ConnectionPostDtoTest;
+import app.model.NodePostDtoResponseTest;
+import app.model.TreeHolderTest;
 import app.parsing.xml.TreeSaverToXMLTest;
 import app.parsing.xml.TreeLoaderFromXMLTest;
 import app.structure.model.ItemTest;
@@ -62,7 +67,12 @@ import org.junit.runners.Suite;
     TriggersDatabaseTreeNodeTest.class,
     ViewDatabaseTreeNodeTest.class,
     ViewsDatabaseTreeNodeTest.class,
-    StartTest.class
+    StartTest.class,
+    ConnectionHolderTest.class,
+    ConnectionPostDtoResponseTest.class,
+    ConnectionPostDtoTest.class,
+    NodePostDtoResponseTest.class,
+    TreeHolderTest.class
 })
 
 public class AllTests {
