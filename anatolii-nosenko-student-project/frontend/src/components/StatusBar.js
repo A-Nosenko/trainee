@@ -36,6 +36,6 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(loadTreeFromXML());
         }
     }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(StatusBar);

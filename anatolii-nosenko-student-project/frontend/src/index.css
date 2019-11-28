@@ -92,6 +92,7 @@ span.fromDatabase {
 
 button.button {
     min-width: 150px;
+    width: 150px;
     position: relative;
     display: inline-block;
     font-weight: 700;
@@ -155,6 +156,12 @@ button.button:disabled {
     flex-direction: column;
     overflow-x: auto;
     overflow-y: auto;
+}
+
+.SubmitBlock {
+    min-width: 50vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .Table {
