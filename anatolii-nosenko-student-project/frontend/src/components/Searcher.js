@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {updateTypeToSearch, updateValueToSearch} from "../actions/SearchActions";
-import {connect} from "react-redux";
+import {updateTypeToSearch, updateValueToSearch} from '../actions/SearchActions';
+import {connect} from 'react-redux';
 
 class Searcher extends Component {
 
@@ -8,7 +8,7 @@ class Searcher extends Component {
         return (
             <div className='Status-bar-div'>
                 <select onChange={event => this.props.setType(event.target.value)}>
-                    <option  value='' defaultValue>Select item type</option>
+                    <option value='' defaultValue>Select item type</option>
                     <option value='database'>Database</option>
                     <option value='function'>Function</option>
                     <option value='stored_procedure'>Stored procedure</option>

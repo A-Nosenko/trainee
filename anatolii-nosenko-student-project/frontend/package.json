@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "React": "latest",
     "mdbreact": "^4.23.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",

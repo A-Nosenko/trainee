@@ -1,13 +1,7 @@
 import React, {Component} from 'react';
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
-import {
-    Home,
-    Connection,
-    Tree,
-    About,
-    Error
-} from './components/components.js'
+import {About, Connection, Error, Home, Tree} from './components/components.js'
 
 class App extends Component {
     render() {

@@ -4,7 +4,7 @@ import Open from '../images/open.png';
 import Close from '../images/close.png';
 import EndPoint from '../images/end_point.png';
 import {findTheNodeSelector, getFilter} from '../selectors/selectors';
-import {openNode, closeNode, showNode} from '../actions/TreeActions';
+import {closeNode, openNode, showNode} from '../actions/TreeActions';
 import NodeWrapper from "./NodeWrapper";
 
 class Node extends Component {
@@ -26,24 +26,24 @@ class Node extends Component {
     render() {
         return (
             <ul>
-                <div className={this.props.filter ? '' : 'hiddenNode'}>
-                {
-                    this.props.target.isFinalNode
-                        ? <img src={EndPoint} alt={this.props.target.item.tagName}/>
-                        : <img onClick={this.onClick} src={this.props.target.childTreeNodes.length ? Close : Open}
-                               alt={this.props.target.item.tagName}/>
-                }
-                <span className={
-                    this.props.target.receivedFromDatabase
-                        ? 'cursor fromDatabase'
-                        : this.props.target.receivedFromXML ? 'cursor fromXML' : 'cursor'
-                } onClick={() => {
-                    this.props.show(this.props.target.item);
-                }}>{
-                    this.props.target.item.tagName
-                        ? this.props.target.item.tagName
-                        : this.props.target.item.content
-                }
+                <div className={this.props.filter ? '' : 'HiddenNode'}>
+                    {
+                        this.props.target.isFinalNode
+                            ? <img src={EndPoint} alt={this.props.target.item.tagName}/>
+                            : <img onClick={this.onClick} src={this.props.target.childTreeNodes.length ? Close : Open}
+                                   alt={this.props.target.item.tagName}/>
+                    }
+                    <span className={
+                        this.props.target.receivedFromDatabase
+                            ? 'cursor fromDatabase'
+                            : this.props.target.receivedFromXML ? 'cursor fromXML' : 'cursor'
+                    } onClick={() => {
+                        this.props.show(this.props.target.item);
+                    }}>{
+                        this.props.target.item.tagName
+                            ? this.props.target.item.tagName
+                            : this.props.target.item.content
+                    }
                 </span>
                 </div>
                 {this.props.target.childTreeNodes.map(

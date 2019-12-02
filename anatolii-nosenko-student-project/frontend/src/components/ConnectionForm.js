@@ -1,14 +1,9 @@
 import React, {Component} from 'react';
-import {connect} from "react-redux";
-import {MDBInput} from "mdbreact";
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-import {getConnectionPropertiesSelector} from '../selectors/selectors'
+import {connect} from 'react-redux';
+import {MDBRow} from 'mdbreact';
+import {getConnectionPropertiesSelector} from '../selectors/selectors';
 
-import {updateIp, updatePort, updateLogin, updatePassword, createConnection}
-    from '../actions/ConnectionActions';
+import {createConnection, updateIp, updateLogin, updatePassword, updatePort} from '../actions/ConnectionActions';
 
 class ConnectionForm extends Component {
 
@@ -39,10 +34,7 @@ class ConnectionForm extends Component {
     };
 
     checkPort = (port) => {
-        if (!port) {
-            return "Port can't be empty!";
-        }
-        if (port < 1 || port > 65535) {
+        if (!port || port < 1 || port > 65535) {
             return "Incorrect port!";
         }
         return '';
@@ -77,90 +69,96 @@ class ConnectionForm extends Component {
             && !this.state.passwordError;
     };
 
-    styles = theme => ({
-        container: {
-            color: 'whitesmoke',
-        }
-    });
-
     render() {
         return (
             <form onSubmit={this.submitHandler}>
 
-                <div className='ConnectionForm'>
-                    <Table>
-                        <TableBody>
-                            <TableRow>
-                                <TableCell><span>IP</span></TableCell>
-                                <TableCell><MDBInput
-                                    id='ip'
-                                    type='text'
-                                    value={this.props.connectionProperties.ip}
-                                    onChange={
-                                        event => {
-                                            this.setState({ipError: this.checkIp(event.target.value)});
-                                            this.props.inputIp(event.target.value)
-                                        }
-                                    }/></TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell><span>Port</span></TableCell>
-                                <TableCell><MDBInput
-                                    id='port'
-                                    type='number'
-                                    value={this.props.connectionProperties.port}
-                                    onChange={
-                                        event => {
-                                            this.setState({portError: this.checkPort(event.target.value)});
-                                            this.props.inputPort(event.target.value)
-                                        }
-                                    }/></TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell><span>Login</span></TableCell>
-                                <TableCell><MDBInput
-                                    id='login'
-                                    type='text'
-                                    value={this.props.connectionProperties.login}
-                                    onChange={
-                                        event => {
-                                            this.setState({loginError: this.checkLogin(event.target.value)});
-                                            this.props.inputLogin(event.target.value)
-                                        }
-                                    }/></TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell><span>Password</span></TableCell>
-                                <TableCell><MDBInput
-                                    id='password'
-                                    type='password'
-                                    value={this.props.connectionProperties.password}
-                                    onChange={
-                                        event => {
-                                            this.setState({passwordError: this.checkPassword(event.target.value)});
-                                            this.props.inputPassword(event.target.value)
-                                        }
-                                    }/></TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell> </TableCell>
-                                <TableCell>
-                                    {
-                                        this.isFormValid() ?
-                                            <div className='SubmitBlock'>
-                                                <button className='button' type='submit'>Connect</button>
-                                            </div>
-                                            : <div className='SubmitBlock'>
-                                                <span className='error'>{this.state.ipError}</span>
-                                                <span className='error'>{this.state.portError}</span>
-                                                <span className='error'>{this.state.loginError}</span>
-                                                <span className='error'>{this.state.passwordError}</span>
-                                            </div>
+                <div>
+                    <div className='ConnectionForm'>
+                        <MDBRow>
+                            <label htmlFor="ip">
+                                <span>IP</span>
+                            </label>
+                            <input
+                                id='ip'
+                                type='text'
+                                value={this.props.connectionProperties.ip}
+                                onChange={
+                                    event => {
+                                        this.setState({ipError: this.checkIp(event.target.value)});
+                                        this.props.inputIp(event.target.value)
                                     }
-                                </TableCell>
-                            </TableRow>
-                        </TableBody>
-                    </Table>
+                                }
+                                className={!this.state.ipError ? "form-control is-valid" : "form-control is-invalid"}
+                            />
+                            <div className="invalid-feedback">{this.state.ipError}</div>
+                            <div className="valid-feedback Invisible">_</div>
+                        </MDBRow>
+                        <MDBRow>
+                            <label htmlFor="port">
+                                <span>Port</span>
+                            </label>
+                            <input
+                                id='port'
+                                type='number'
+                                value={this.props.connectionProperties.port}
+                                onChange={
+                                    event => {
+                                        this.setState({portError: this.checkPort(event.target.value)});
+                                        this.props.inputPort(event.target.value)
+                                    }
+                                }
+                                className={!this.state.portError ? "form-control is-valid" : "form-control is-invalid"}
+                            />
+                            <div className="invalid-feedback">{this.state.portError}</div>
+                            <div className="valid-feedback Invisible">_</div>
+                        </MDBRow>
+                        <MDBRow>
+                            <label htmlFor="login">
+                                <span>Login</span>
+                            </label>
+                            <input
+                                id='login'
+                                type='text'
+                                value={this.props.connectionProperties.login}
+                                onChange={
+                                    event => {
+                                        this.setState({loginError: this.checkLogin(event.target.value)});
+                                        this.props.inputLogin(event.target.value)
+                                    }
+                                }
+                                className={!this.state.loginError ? "form-control is-valid" : "form-control is-invalid"}
+                            />
+                            <div className="invalid-feedback">{this.state.loginError}</div>
+                            <div className="valid-feedback Invisible">_</div>
+                        </MDBRow>
+                        <MDBRow>
+                            <label htmlFor="password">
+                                <span>Password</span>
+                            </label>
+                            <input
+                                id='password'
+                                type='password'
+                                value={this.props.connectionProperties.password}
+                                onChange={
+                                    event => {
+                                        this.setState({passwordError: this.checkPassword(event.target.value)});
+                                        this.props.inputPassword(event.target.value)
+                                    }
+                                }
+                                className={!this.state.passwordError ? "form-control is-valid" : "form-control is-invalid"}
+                            />
+                            <div className="invalid-feedback">{this.state.passwordError}</div>
+                            <div className="valid-feedback Invisible">_</div>
+                        </MDBRow>
+                        <MDBRow className="Center-container">
+                            <button className='button'
+                                    type='submit'
+                                    disabled={!this.isFormValid()}>Connect
+                            </button>
+
+                        </MDBRow>
+                    </div>
                 </div>
             </form>
         );

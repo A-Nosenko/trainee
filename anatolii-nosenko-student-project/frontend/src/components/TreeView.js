@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import Node from './Node'
-import Table from './Table'
-import {getRootNodeIdSelector} from "../selectors/selectors";
-import {connect} from "react-redux";
-import Searcher from "./Searcher";
+import Node from './Node';
+import Table from './Table';
+import {getRootNodeIdSelector} from '../selectors/selectors';
+import {connect} from 'react-redux';
+import Searcher from './Searcher';
 
 class TreeView extends Component {
 

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getItemToShow} from '../selectors/selectors';
 import ReactTable from 'react-table';
-import 'react-table/react-table.css'
+import 'react-table/react-table.css';
 
 class Table extends Component {
     render() {
@@ -43,7 +43,6 @@ class Table extends Component {
             <ReactTable
                 data={data}
                 columns={columns}
-                className='custom-react-table'
                 showPagination={false}
                 defaultPageSize={1}
             />

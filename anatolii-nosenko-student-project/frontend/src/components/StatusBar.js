@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getConnectionStatusSelector} from '../selectors/selectors'
-import {saveTreeToXML, loadTreeFromXML} from '../actions/TreeActions';
+import {getConnectionStatusSelector} from '../selectors/selectors';
+import {loadTreeFromXML, saveTreeToXML} from '../actions/TreeActions';
 
 class StatusBar extends Component {
     render() {

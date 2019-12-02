@@ -5,31 +5,31 @@ body {
 }
 
 ::-webkit-scrollbar {
-    background-color: #101f44; /* 1 - скроллбар */
+    background-color: #101f44;
 }
 
 ::-webkit-scrollbar-button {
-    background-color: #235C75; /* 2 - кнопка */
+    background-color: #235C75;
 }
 
 ::-webkit-scrollbar-track {
-    background-color: #101f44; /* 3 - трек */
+    background-color: #101f44;
 }
 
 ::-webkit-scrollbar-track-piece {
-    background-color: #101f44; /* 4 - видимая часть трека */
+    background-color: #101f44;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #235C75; /* 5 - ползунок */
+    background-color: #235C75;
 }
 
 ::-webkit-scrollbar-corner {
-    background-color: #101f44; /* 6 - уголок */
+    background-color: #101f44;
 }
 
 ::-webkit-resizer {
-    background-color: #1c415e; /* 7 - изменение размеров */
+    background-color: #1c415e;
 }
 
 header {
@@ -42,6 +42,10 @@ header {
 
 footer {
 
+}
+
+.Invisible {
+    visibility: hidden;
 }
 
 .App-nav {
@@ -110,16 +114,12 @@ button.button:disabled {
     background: #700D12;
 }
 
-.center-container {
+.Center-container {
     padding: 2%;
     color: whitesmoke;
     display: flex;
     align-items: center;
     flex-direction: column;
-}
-
-.ConnectionFormErrors {
-
 }
 
 .Status-bar-div {
@@ -171,10 +171,10 @@ button.button:disabled {
     overflow-y: auto;
 }
 
-.custom-react-table {
-    width: 98%;
+.ConnectionForm {
+    min-width: 100vh;
 }
 
-.hiddenNode {
+.HiddenNode {
     display: none;
 }
