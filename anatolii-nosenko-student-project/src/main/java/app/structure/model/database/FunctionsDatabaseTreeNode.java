@@ -1,7 +1,9 @@
 package app.structure.model.database;
 
-import app.literals.Constants;
+import app.database.query.DDL;
 import app.database.query.QueryManager;
+import app.exception.AppException;
+import app.literals.Constants;
 import app.structure.model.Item;
 import app.structure.model.TreeNode;
 import java.sql.Connection;
@@ -25,11 +27,18 @@ public class FunctionsDatabaseTreeNode extends DBTreeNode {
         for (Map<String, String> function : functions) {
             Item functionItem = new Item();
             for (Map.Entry<String, String> entry : function.entrySet()) {
-                if (entry.getKey().equals(Constants.FUNCTION_ATTRIBUTES[15])) {
-                    functionItem.setAttribute(Constants.DDL, entry.getValue());
-                } else {
-                    functionItem.setAttribute(entry.getKey(), entry.getValue());
-                }
+                functionItem.setAttribute(entry.getKey(), entry.getValue());
+            }
+            try {
+                functionItem.setAttribute(Constants.DDL, QueryManager
+                    .getInstance()
+                    .getDDL(
+                        getItem().getAttribute(Constants.DATABASE_NAME), DDL.FUNCTION,
+                        functionItem.getAttribute(Constants.FUNCTION_ATTRIBUTES[3]), connection
+                    )
+                );
+            } catch (AppException e) {
+                continue;
             }
             treeNodes.add(new FunctionDatabaseTreeNode(functionItem));
         }

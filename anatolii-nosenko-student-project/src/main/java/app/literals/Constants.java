@@ -74,7 +74,7 @@ public final class Constants {
         "EXTERNAL_LANGUAGE", "PARAMETER_STYLE", "IS_DETERMINISTIC",
         "SQL_DATA_ACCESS", "SQL_PATH", "SECURITY_TYPE",
         "CREATED", "LAST_ALTERED", "SQL_MODE",
-        "ROUTINE_COMMENT", "DEFINER", "CHARACTER_SET_CLIENT",
+        "ROUTINE_COMMENT", "CHARACTER_SET_CLIENT",
         "COLLATION_CONNECTION", "DATABASE_COLLATION"
     };
     public static final String TABLES = "tables";
