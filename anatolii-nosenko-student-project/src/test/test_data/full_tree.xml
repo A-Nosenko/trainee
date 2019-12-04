@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ROOT>
+<database database_name="information_schema">
+<functions database_name="information_schema">
+</functions>
+<stored_procedures database_name="information_schema">
+</stored_procedures>
+<tables database_name="information_schema">
+</tables>
+</database>
+<database database_name="my_shop">
+</database>
+<database database_name="mysql">
+</database>
+<database database_name="performance_schema">
+</database>
+<database database_name="sys">
+</database>
+<database database_name="test">
+<functions database_name="test">
+<function CHARACTER_MAXIMUM_LENGTH="null" CHARACTER_OCTET_LENGTH="null" CHARACTER_SET_CLIENT="utf8mb4" CHARACTER_SET_NAME="null" COLLATION_CONNECTION="utf8mb4_0900_ai_ci" COLLATION_NAME="null" CREATED="2019-12-04 13:29:05" DATABASE_COLLATION="utf8mb4_0900_ai_ci" DATA_TYPE="int" DATETIME_PRECISION="null" DTD_IDENTIFIER="int(11)" EXTERNAL_LANGUAGE="SQL" EXTERNAL_NAME="null" IS_DETERMINISTIC="NO" LAST_ALTERED="2019-12-04 13:29:05" NUMERIC_PRECISION="10" NUMERIC_SCALE="0" PARAMETER_STYLE="SQL" ROUTINE_BODY="SQL" ROUTINE_CATALOG="def" ROUTINE_COMMENT="" ROUTINE_DEFINITION="BEGIN
+
+RETURN 1;
+END" ROUTINE_NAME="f1" ROUTINE_SCHEMA="test" ROUTINE_TYPE="FUNCTION" SECURITY_TYPE="DEFINER" SPECIFIC_NAME="f1" SQL_DATA_ACCESS="CONTAINS SQL" SQL_MODE="STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION" SQL_PATH="null" ddl_script="CREATE DEFINER=`root`@`localhost` FUNCTION `f1`() RETURNS int(11)
+BEGIN
+
+RETURN 1;
+END">
+</function>
+</functions>
+<stored_procedures database_name="test">
+</stored_procedures>
+<tables database_name="test">
+<table LAST_INSERT_ID="0" database_name="test" ddl_script="CREATE TABLE `account` (
+  `user_id` int(11) NOT NULL,
+  `current_money` int(11) DEFAULT NULL,
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `account_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8" table_name="account">
+<columns database_name="test" table_name="account">
+<column Default="null" Extra="" Field="user_id" Key="MUL" Null="NO" Type="int(11)" database_name="test" table_name="account">
+</column>
+<column Default="null" Extra="" Field="current_money" Key="" Null="YES" Type="int(11)" database_name="test" table_name="account">
+</column>
+</columns>
+<views table_name="account">
+</views>
+<triggers database_name="test" table_name="account">
+</triggers>
+</table>
+<table LAST_INSERT_ID="0" database_name="test" ddl_script="CREATE TABLE `orders` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `order_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `pay_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `product_id` (`product_id`),
+  CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8" table_name="orders">
+<columns database_name="test" table_name="orders">
+</columns>
+<views table_name="orders">
+</views>
+<triggers database_name="test" table_name="orders">
+</triggers>
+</table>
+<table LAST_INSERT_ID="0" database_name="test" ddl_script="CREATE TABLE `photos` (
+  `product_id` int(11) NOT NULL,
+  `body` longblob NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  KEY `product_id` (`product_id`),
+  KEY `photos_ibfk_2` (`user_id`),
+  CONSTRAINT `photos_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
+  CONSTRAINT `photos_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8" table_name="photos">
+<columns database_name="test" table_name="photos">
+</columns>
+<views table_name="photos">
+</views>
+<triggers database_name="test" table_name="photos">
+</triggers>
+</table>
+<table LAST_INSERT_ID="0" database_name="test" ddl_script="CREATE TABLE `products` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(300) NOT NULL,
+  `description` varchar(1000) DEFAULT NULL,
+  `price` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8" table_name="products">
+<columns database_name="test" table_name="products">
+</columns>
+<views table_name="products">
+</views>
+<triggers database_name="test" table_name="products">
+</triggers>
+</table>
+<table LAST_INSERT_ID="3" database_name="test" ddl_script="CREATE TABLE `roles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `role` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8" table_name="roles">
+<columns database_name="test" table_name="roles">
+</columns>
+<views table_name="roles">
+</views>
+<triggers database_name="test" table_name="roles">
+</triggers>
+</table>
+<table LAST_INSERT_ID="1" database_name="test" ddl_script="CREATE TABLE `user_roles` (
+  `user_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  UNIQUE KEY `user_id` (`user_id`,`role_id`),
+  KEY `role_id` (`role_id`),
+  CONSTRAINT `user_roles_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `user_roles_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8" table_name="user_roles">
+<columns database_name="test" table_name="user_roles">
+</columns>
+<views table_name="user_roles">
+</views>
+<triggers database_name="test" table_name="user_roles">
+</triggers>
+</table>
+<table LAST_INSERT_ID="1" database_name="test" ddl_script="CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `login` varchar(200) NOT NULL,
+  `email` varchar(300) DEFAULT NULL,
+  `password` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8" table_name="users">
+<columns database_name="test" table_name="users">
+</columns>
+<views table_name="users">
+</views>
+<triggers database_name="test" table_name="users">
+</triggers>
+</table>
+</tables>
+</database>
+</ROOT>
