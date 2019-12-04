@@ -6,7 +6,8 @@ package app.database.query;
 public enum DDL {
     TABLE(null),
     PROCEDURE("Create Procedure"),
-    TRIGGER("SQL Original Statement");
+    TRIGGER("SQL Original Statement"),
+    FUNCTION("Create Function");
 
     /**
      * Constructor to create target for fetching DDL script with appropriate key.

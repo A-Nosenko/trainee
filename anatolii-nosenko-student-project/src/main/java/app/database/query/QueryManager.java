@@ -85,6 +85,9 @@ public final class QueryManager {
             case PROCEDURE:
                 builder.append(DDL.PROCEDURE.name());
                 break;
+            case FUNCTION:
+                builder.append(DDL.FUNCTION.name());
+                break;
             default:
                 throw new AppException("Incorrect target to fetch DDL.");
         }
@@ -227,10 +230,12 @@ public final class QueryManager {
                 String line = lineSource.trim();
                 if (line.contains("CONSTRAINT") && line.contains(typeName)) {
                     if (line.endsWith(",")) {
-                        result.put(Constants.DDL, line.substring(0, line.length() - 1));
-                        return result;
+                        line = line.substring(0, line.length() - 1);
                     }
-                    result.put(Constants.DDL, line);
+                    result.put(Constants.DDL, "ALTER TABLE "
+                        .concat(tableName)
+                        .concat(" ADD ")
+                        .concat(line));
                 }
             }
         }
