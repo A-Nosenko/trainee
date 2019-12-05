@@ -1,4 +1,7 @@
 import app.StartTest;
+import app.controller.ConnectionControllerTest;
+import app.controller.NodesControllerTest;
+import app.controller.TreeSavingControllerTest;
 import app.database.connection.ConnectionFactoryTest;
 import app.database.query.QueryManagerTest;
 import app.exception.AppExceptionTest;
@@ -11,6 +14,9 @@ import app.model.NodePostDtoResponseTest;
 import app.model.TreeHolderTest;
 import app.parsing.xml.TreeSaverToXMLTest;
 import app.parsing.xml.TreeLoaderFromXMLTest;
+import app.service.ConnectionServiceTest;
+import app.service.NodeServiceTest;
+import app.service.TreeSavingServiceTest;
 import app.structure.model.ItemTest;
 import app.structure.model.TreeModelTest;
 import app.structure.model.TreeNodeTest;
@@ -72,7 +78,13 @@ import org.junit.runners.Suite;
     ConnectionPostDtoResponseTest.class,
     ConnectionPostDtoTest.class,
     NodePostDtoResponseTest.class,
-    TreeHolderTest.class
+    TreeHolderTest.class,
+    ConnectionControllerTest.class,
+    NodesControllerTest.class,
+    TreeSavingControllerTest.class,
+    ConnectionServiceTest.class,
+    NodeServiceTest.class,
+    TreeSavingServiceTest.class
 })
 
 public class AllTests {

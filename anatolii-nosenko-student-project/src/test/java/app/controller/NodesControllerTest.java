@@ -1,13 +1,13 @@
 package app.controller;
 
 import org.junit.Test;
-import static org.mockito.Mockito.mock;
 
 public class NodesControllerTest {
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void openNode() {
-        NodesController nodesController = mock(NodesController.class);
+        NodesController nodesController = new NodesController();
+
         nodesController.openNode(0);
     }
 }

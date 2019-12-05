@@ -1,12 +1,11 @@
 package app.model;
 
+import app.literals.Constants;
 import app.structure.model.Item;
-import app.structure.model.database.RootDatabasesTreeNode;
-import java.util.Map;
+import app.structure.model.database.DatabaseTreeNode;
 import static junit.framework.TestCase.assertFalse;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -16,7 +15,9 @@ public class NodePostDtoResponseTest {
 
     @BeforeClass
     public static void init() {
-        nodePostDtoResponse = new NodePostDtoResponse(new RootDatabasesTreeNode(new Item()));
+        Item item = new Item();
+        item.setAttribute(Constants.DATABASE_NAME, "test");
+        nodePostDtoResponse = new NodePostDtoResponse(new DatabaseTreeNode(item));
     }
 
     @Test
@@ -36,11 +37,36 @@ public class NodePostDtoResponseTest {
 
     @Test
     public void isReceivedFromDatabase() {
-        assertTrue(nodePostDtoResponse.isReceivedFromDatabase());
+        assertFalse(nodePostDtoResponse.isReceivedFromDatabase());
     }
 
     @Test
     public void isReceivedFromXML() {
+        assertFalse(nodePostDtoResponse.isReceivedFromXML());
+    }
+
+    @Test
+    public void testGetItem() {
+        assertNotNull(nodePostDtoResponse.getItem());
+    }
+
+    @Test
+    public void testGetChildTreeNodes() {
+        assertNotNull(nodePostDtoResponse.getChildTreeNodes());
+    }
+
+    @Test
+    public void testIsFinalNode() {
+        assertFalse(nodePostDtoResponse.isFinalNode());
+    }
+
+    @Test
+    public void testIsReceivedFromDatabase() {
+        assertFalse(nodePostDtoResponse.isReceivedFromDatabase());
+    }
+
+    @Test
+    public void testIsReceivedFromXML() {
         assertFalse(nodePostDtoResponse.isReceivedFromXML());
     }
 

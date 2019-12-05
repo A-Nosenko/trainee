@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public class NodePostDtoResponse {
 
-    private final class ItemPostDto {
+    private static final class ItemPostDto {
         private final long uniqueId;
         private String tagName;
         private final Map<String, String> attributes;
@@ -89,19 +89,19 @@ public class NodePostDtoResponse {
         return item;
     }
 
-    public TreeNode[] getChildTreeNodes() {
+    TreeNode[] getChildTreeNodes() {
         return childTreeNodes;
     }
 
-    public boolean isFinalNode() {
+    boolean isFinalNode() {
         return isFinalNode;
     }
 
-    public boolean isReceivedFromDatabase() {
+    boolean isReceivedFromDatabase() {
         return receivedFromDatabase;
     }
 
-    public boolean isReceivedFromXML() {
+    boolean isReceivedFromXML() {
         return receivedFromXML;
     }
 }

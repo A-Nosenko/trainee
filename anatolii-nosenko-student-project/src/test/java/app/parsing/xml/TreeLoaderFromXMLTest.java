@@ -5,7 +5,6 @@ import app.file.work.TextWriter;
 import app.structure.model.TreeModel;
 import app.structure.search.DepthFirstSearcher;
 import java.io.File;
-import org.junit.AfterClass;
 import org.junit.Test;
 
 public class TreeLoaderFromXMLTest {
@@ -30,10 +29,5 @@ public class TreeLoaderFromXMLTest {
     public void loadNullTreeException() {
         TreeLoaderFromXML treeLoaderFromXML = new TreeLoaderFromXML();
         treeLoaderFromXML.load(new File("src/test/test_data/input.xml"), null);
-    }
-
-    @AfterClass
-    public static void methodAfterClass() {
-        wrongXML.delete();
     }
 }
