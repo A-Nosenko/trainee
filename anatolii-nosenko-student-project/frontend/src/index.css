@@ -114,6 +114,11 @@ button.button:disabled {
     background: #700D12;
 }
 
+.Main-container {
+    min-width: 100%;
+    max-width: 100%;
+}
+
 .Center-container {
     padding: 2%;
     color: whitesmoke;

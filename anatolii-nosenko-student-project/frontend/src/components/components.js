@@ -46,7 +46,7 @@ export const About = () =>
         </div>
     </div>;
 
-export const Error = ({path}) =>
+export const Error = () =>
     <div>
         <Header/>
         <div className='Center-container'>
