@@ -1,1 +1,8 @@
-taskkill /f /im node.exe & exit 0
+%@Try%
+taskkill /f /im node.exe
+%@EndTry%
+:@Catch
+exit 0
+:@EndCatch
+
+
