@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "chromedriver": "^78.0.1",
+    "geckodriver": "^1.19.1",
     "mdbreact": "^4.23.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
@@ -10,13 +12,15 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
     "react-table": "^6.10.3",
-    "redux": "^1.0.1"
+    "redux": "^1.0.1",
+    "selenium-webdriver": "^4.0.0-alpha.5"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "selenium-test": "mocha test"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -35,6 +39,7 @@
   },
   "devDependencies": {
     "@material-ui/core": "^4.5.2",
+    "mocha": "^6.2.2",
     "redux-devtools": "^3.5.0",
     "reselect": "^4.0.0"
   }
