@@ -5,4 +5,4 @@
 
 ## Usage
 
-![Connection form](https://gitlab.kharkov.dbbest.com/java-students/anatolii-nosenko-student-project/blob/master/images_for_presentation/connection_form.png)
+![Connection form](images_for_presentation/connection_form.png)
