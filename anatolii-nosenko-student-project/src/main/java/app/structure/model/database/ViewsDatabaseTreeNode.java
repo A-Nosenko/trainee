@@ -25,7 +25,7 @@ public class ViewsDatabaseTreeNode extends DBTreeNode {
         for (Map<String, String> view : views) {
             Item viewItem = new Item();
             for (Map.Entry<String, String> entry : view.entrySet()) {
-                if (entry.getKey().equals(Constants.VIEW_ATTRIBUTES[3])) {
+                if (entry.getKey().equals(Constants.VIEW_DDL_PREFIX.concat(Constants.VIEW_ATTRIBUTES[3]))) {
                     viewItem.setAttribute(Constants.DDL, entry.getValue());
                 } else {
                     viewItem.setAttribute(entry.getKey(), entry.getValue());

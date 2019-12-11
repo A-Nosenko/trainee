@@ -50,6 +50,7 @@ public final class Constants {
     public static final String DATABASE_NAME = "database_name";
     public static final String VIEWS = "views";
     public static final String VIEW = "view";
+    public static final String VIEW_DDL_PREFIX = "CREATE VIEW v AS ";
     public static final String[] VIEW_ATTRIBUTES = {
         "TABLE_CATALOG", "TABLE_SCHEMA", "TABLE_NAME",
         "VIEW_DEFINITION", "CHECK_OPTION", "IS_UPDATABLE",
