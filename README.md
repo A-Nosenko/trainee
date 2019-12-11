@@ -31,7 +31,7 @@ Offline mode: User can press Load tree button to get saved in xml file tree.
 
 Received from xml nodes have yellow color.
 
-    ![node from xml](images_for_presentation/node_from_xml.png)
+   ![node from xml](images_for_presentation/node_from_xml.png)
 
 In case correct credentials input, user may connect to database and receive version of connection driver. 
     ![connection completed](images_for_presentation/connection_completed.png)
