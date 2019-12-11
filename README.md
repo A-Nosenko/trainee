@@ -131,5 +131,5 @@ pipeline {
 }
 ```
 
-There are bat files in project, that restarts application and you can rebuild project via Jenkins 
+There are bat files in project, that restarts application and you can automatically rebuild project via Jenkins 
 if repository receive commit.
