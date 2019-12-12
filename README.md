@@ -2,7 +2,7 @@
 Supports working with MySQL database. Intended to view database structure.
 
 ## Installation
-1. You must already have JDK and Maven installed on PC.
+1. You must already have JDK, Maven and Node.js installed on PC.
 1. Downloading project source code from GitLab repository.
 1. Starting backend server by command
 ```mvn spring-boot:run```
@@ -74,7 +74,107 @@ Also, user can:
     ![find](images_for_presentation/find.png)
     
 ## Development
+
+Application consists of two parts: 
+- Backend system, developed on Java and working on port 8080.
+- Frontend system, developed on JavaScript and working on port 3000.
+
+General application schema:
+![general](images_for_presentation/General.png)
+
+
+### React application consists of:
+
+- index.js:
+
+    ![index](images_for_presentation/js_diagrams/diagram_index.png)
+
+- App.js:
+
+    ![app](images_for_presentation/js_diagrams/diagram_app.png)
+
+- actions:
+
+    ![actions](images_for_presentation/js_diagrams/diagram_actions.png)
+
+- components:
+
+    ![component components](images_for_presentation/js_diagrams/diagram_component_components.png)
+
+    ![component connection_form](images_for_presentation/js_diagrams/diagram_component_connection_form.png)
+
+    ![component node](images_for_presentation/js_diagrams/diagram_component_node.png)
+
+    ![component node wrapper](images_for_presentation/js_diagrams/diagram_component_node_wrapper.png)
+
+    ![component searcher](images_for_presentation/js_diagrams/diagram_component_searcher.png)
+
+    ![component status_bar](images_for_presentation/js_diagrams/diagram_component_status_bar.png)
+
+    ![component table](images_for_presentation/js_diagrams/diagram_component_table.png)
+
+    ![component tree_view](images_for_presentation/js_diagrams/diagram_component_tree_view.png)
+
+- selectors:
+
+    ![selectors](images_for_presentation/js_diagrams/diagram_selectors.png)
     
+- reducers:
+
+    ![reducer root](images_for_presentation/js_diagrams/diagram_reducer_root.png)
+
+    ![reducer connection](images_for_presentation/js_diagrams/diagram_reducer_connection.png)
+    
+    ![reducer searcher](images_for_presentation/js_diagrams/diagram_reducer_searcher.png)
+    
+    ![reducer tree](images_for_presentation/js_diagrams/diagram_reducer_tree.png)
+    
+### Spring Boot application consists of:
+- class Start to run Spring Boot application:
+
+    ![Start](images_for_presentation/java_diagrams/diagram_Start.png)
+    
+- config package to configure beans:
+
+    ![config](images_for_presentation/java_diagrams/diagram_config.png)
+    
+- controller package to handle HTTP requests:
+
+    ![controller](images_for_presentation/java_diagrams/diagram_controller.png)
+    
+- database package to work with databases:
+
+    ![database](images_for_presentation/java_diagrams/diagram_database.png)
+    
+- exception package with custom Exception:
+
+    ![exception](images_for_presentation/java_diagrams/diagram_exception.png)       
+    
+- file work package with classes to read and write files:
+  
+    ![file work](images_for_presentation/java_diagrams/diagram_file_work.png)  
+    
+- literals package with application constants:
+    
+    ![literals](images_for_presentation/java_diagrams/diagram_literals.png)  
+    
+- model package with application model classes:   
+
+    ![model](images_for_presentation/java_diagrams/diagram_model.png)  
+    
+- parsing xml package with classes to read and write tree by xml files.
+     
+    ![parsing xml](images_for_presentation/java_diagrams/diagram_parsing_xml.png)
+    
+- service package:
+    
+    ![service](images_for_presentation/java_diagrams/diagram_service.png)  
+    
+- structure package with classes those describes application model at low level:
+    
+    ![structure](images_for_presentation/java_diagrams/diagram_structure.png)  
+    
+   
 ## Integration
 
 You can connect Jenkins to this project using next pipeline script:    
