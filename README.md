@@ -80,7 +80,7 @@ Application consists of two parts:
 - Frontend system, developed on JavaScript and working on port 3000.
 
 General application schema:
-![general](images_for_presentation/General.png)
+![general](images_for_presentation/general.png)
 
 
 ### React application consists of:
