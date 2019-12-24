@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import ConnectionForm from './ConnectionForm';
 import TreeView from './TreeView';
 import StatusBar from './StatusBar';
+import Breadcrumb from "./breadcrumb/Breadcrumb";
 
 const Header = () =>
     <header>
@@ -12,6 +13,8 @@ const Header = () =>
             <Link to="tree">Database Tree</Link>
             <Link to="about">About Program</Link>
         </nav>
+
+        <Breadcrumb/>
     </header>;
 
 export const Home = () =>
