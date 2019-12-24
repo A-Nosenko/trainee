@@ -9,6 +9,19 @@ class Breadcrumb extends React.Component {
        links: window.location.pathname.split("/").filter(link => link)
     };
 
+    build() {
+        let links = [];
+        links.push(<Item reference={"/"}
+                         marker={"Project"}
+                         isActive={!this.state.links || !this.state.links.length}/>);
+        if (!this.state.links || !this.state.links.length) {
+            return links;
+        }
+        for (let i = 0; i < this.state.links; i++) {
+
+        }
+    }
+
 
     render() {
         return(
