@@ -1,0 +1,9 @@
+
+breadcrumb-item {
+    background-color: #2e4405;
+    color: black;
+}
+
+.breadcrumb, .navbar-nav .nav-link {
+    color: red
+}
