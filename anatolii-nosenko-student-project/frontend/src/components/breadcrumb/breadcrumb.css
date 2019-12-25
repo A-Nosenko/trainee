@@ -1,9 +1,16 @@
 
-breadcrumb-item {
-    background-color: #2e4405;
-    color: black;
+/* .breadcrumb-item +  */
+.breadcrumb-item::before {
+    content: ">";
 }
 
-.breadcrumb, .navbar-nav .nav-link {
-    color: red
+.breadcrumb {
+    background-color: #1c415e !important;
 }
+
+.breadcrumb_container {
+    margin-left: 2%;
+    display: block;
+    float: left;
+}
+
