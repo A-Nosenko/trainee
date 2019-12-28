@@ -54,7 +54,7 @@ export const About = () =>
             </div>
             <div className='Center-container'>
                 <h2>Database Viewer 2019. Supports working with MySQL database.</h2>
-                <h2>Version 0.0.8</h2>
+                <h2>Version 0.0.8 == TESTING_TEST == </h2>
                 <h1>I am happy!!!</h1>
             </div>
         </div>
