@@ -1,3 +1,4 @@
 npm install --save-dev @fortawesome/fontawesome-free
-
+========================================================
 https://fontawesome.com/icons?d=gallery
+========================================================

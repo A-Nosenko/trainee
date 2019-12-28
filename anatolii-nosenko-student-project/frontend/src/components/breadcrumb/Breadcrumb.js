@@ -2,7 +2,6 @@ import React from 'react';
 import './breadcrumb.css'
 import Item from './Item'
 
-
 class Breadcrumb extends React.Component {
 
     state = {

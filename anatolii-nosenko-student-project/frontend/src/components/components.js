@@ -4,7 +4,8 @@ import ConnectionForm from './ConnectionForm';
 import TreeView from './TreeView';
 import StatusBar from './StatusBar';
 import Breadcrumb from "./breadcrumb/Breadcrumb";
-import './components.css'
+import './components.css';
+import AboutApp from "./about/aboutApp";
 
 const Header = () =>
     <div>
@@ -48,16 +49,7 @@ export const Tree = () =>
 export const About = () =>
     <div>
         <Header/>
-        <div>
-            <div className='button_container'>
-                <button className='btn btn-primary'><i className="fas fa-arrow-down"/> Download</button>
-            </div>
-            <div className='Center-container'>
-                <h2>Database Viewer 2019. Supports working with MySQL database.</h2>
-                <h2>Version 0.0.8</h2>
-                <h1>I am happy!!!</h1>
-            </div>
-        </div>
+        <AboutApp/>
     </div>;
 
 export const Error = () =>
