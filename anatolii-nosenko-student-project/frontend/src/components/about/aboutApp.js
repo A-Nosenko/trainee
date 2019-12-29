@@ -32,14 +32,25 @@ class AboutApp extends React.Component {
 
     download = () => {
         const currentRecords = this.reactTable.getResolvedState().sortedData;
-        let data_to_download = [];
-        for (let index = 0; index < currentRecords.length; index++) {
-            let record_to_download = {};
-            for (let colIndex = 0; colIndex < columns.length; colIndex++) {
-                record_to_download[columns[colIndex].Header] = currentRecords[index][columns[colIndex].accessor]
-            }
-            data_to_download.push(record_to_download)
-        }
+        console.log("===============");
+        console.log(currentRecords);
+
+        // let data_to_download = [];
+        // for (let index = 0; index < currentRecords.length; index++) {
+        //     let record_to_download = {};
+        //     for (let colIndex = 0; colIndex < columns.length; colIndex++) {
+        //         record_to_download[columns[colIndex].Header] = currentRecords[index][columns[colIndex].accessor]
+        //     }
+        //     data_to_download.push(record_to_download)
+        // }
+
+        //////////////////////////////////////////////////////////////////////
+        let data_to_download = currentRecords.map(record => record._original);
+        //////////////////////////////////////////////////////////////////////
+
+        console.log("---------------");
+        console.log(data_to_download);
+        console.log("===============");
         this.setState({dataToDownload: data_to_download}, () => {
             // click the CSVLink component to trigger the CSV download
             this.csvLink.link.click();
