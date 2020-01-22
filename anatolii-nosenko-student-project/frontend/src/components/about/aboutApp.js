@@ -4,12 +4,12 @@ import ReactTable from 'react-table';
 
 const columns = [
     {
-        Header: 'name',
-        accessor: 'name', // String-based value accessors!
+        Header: 'id',
+        accessor: 'id', // String-based value accessors!
     },
     {
-        Header: 'age',
-        accessor: 'age',
+        Header: 'data',
+        accessor: 'data',
 
     }];
 
@@ -20,15 +20,29 @@ class AboutApp extends React.Component {
         this.state = {
             tableProperties: {
                 allData: [
-                    {"name": "ramesh", "age": "12"},
-                    {"name": "bill", "age": "13"},
-                    {"name": "arun", "age": "9"},
-                    {"name": "kathy", "age": "21"}
+                    {"id": "0", "data": "123"},
                 ]
             },
             dataToDownload: []
         };
     }
+
+    loadData = () => {
+        console.log("== load data ==");
+        fetch('http://localhost:8080/readAll')
+            .then(response => response.body)
+            .then(body => {
+                // let nodes = JSON.parse(data.root);
+                const reader = body.getReader();
+                console.log(reader.read());
+
+            })
+            .catch((e) => {
+                    console.log(e.toString());
+                }
+            );
+
+    };
 
     download = () => {
         const currentRecords = this.reactTable.getResolvedState().sortedData;
@@ -60,6 +74,13 @@ class AboutApp extends React.Component {
     render() {
         return (
             <div>
+
+                <div className='button_container'>
+                    <button className='btn btn-primary' onClick={this.loadData}>
+                        Load data
+                    </button>
+                </div>
+
                 <div className='button_container'>
                     <button className='btn btn-primary' onClick={this.download}><i className="fas fa-arrow-down"/>
                         Download
@@ -82,11 +103,11 @@ class AboutApp extends React.Component {
                 />
 
 
-                <div className='Center-container'>
-                    <h2>Database Viewer 2019. Supports working with MySQL database.</h2>
-                    <h2>Version 0.0.8</h2>
-                    <h1>I am happy!!!</h1>
-                </div>
+                <ul>
+                    <li>Database Viewer 2019. Supports working with MySQL database.</li>
+                    <li>Version 0.0.8</li>
+                    <li>I am happy!!!</li>
+                </ul>
             </div>
         )
     }

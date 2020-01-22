@@ -32,4 +32,19 @@ public class NodesController {
 
         return nodeService.loadChildNodes(itemId);
     }
+
+    @GetMapping(value = "/openAll", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String openAll() {
+        LOGGER.info("Trying to load all nodes.");
+
+        return nodeService.loadAll();
+    }
+
+    @GetMapping(value = "/readAll", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String readAll() {
+        LOGGER.info("Trying to read all nodes.");
+
+        return nodeService.readAll();
+    }
+
 }

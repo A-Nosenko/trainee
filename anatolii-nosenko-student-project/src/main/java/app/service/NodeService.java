@@ -9,7 +9,9 @@ import app.structure.model.TreeNode;
 import com.google.gson.Gson;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,33 @@ public class NodeService {
 
     @Autowired
     private ConnectionHolder connectionHolder;
+
+    public String loadAll() {
+        treeHolder.getTreeModel().getRoot().initChildNodes(connectionHolder.getConnection(), false);
+
+        LOGGER.info("== ALL NODES COLLECTED ==");
+
+        return "== ALL NODES COLLECTED ==";
+    }
+
+    public String readAll() {
+        Gson gson = new Gson();
+        ArrayList<String> responses = new ArrayList<>();
+        Queue<TreeNode> nodes = new LinkedList();
+        nodes.offer(treeHolder.getTreeModel().getRoot());
+
+        while (!nodes.isEmpty()) {
+            TreeNode node = nodes.poll();
+            if (node != null) {
+                responses.add(gson.toJson(new NodePostDtoResponse(node)));
+                node.getChildTreeNodes().forEach(nodes::offer);
+            }
+        }
+
+        LOGGER.info("== SENDING ALL NODES ==");
+
+        return gson.toJson(responses);
+    }
 
     /**
      * Method to load nodes.
