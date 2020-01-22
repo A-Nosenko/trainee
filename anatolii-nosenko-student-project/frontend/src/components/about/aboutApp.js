@@ -71,7 +71,23 @@ class AboutApp extends React.Component {
         });
     };
 
+    mapArray = (dataArray) => {
+        let result = [];
+        dataArray.forEach(item => result.push([0, item]));
+        return result;
+    };
+
     render() {
+        let testData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+        for (let i = 0; i + 2 < testData.length; i++) {
+            console.log("============================");
+            let pack = {};
+            pack.data = this.mapArray([testData[i], testData[i + 1], testData[i + 2]]);
+            pack.testing = {"test" : true, "t" : 100500};
+            console.log(pack);
+        }
+
+
         return (
             <div>
 
